@@ -34,12 +34,14 @@ public class IndexPage {
     public WebElement adBannerIframe;
     @FindBy(css = ".swiper-wrapper.elementor-slides>div.swiper-slide")
     public List<WebElement> banners;
-    @FindBy(css = ".pp-slider-arrow.swiper-button-next>i")
+    @FindBy(css = ".pp-slider-arrow.swiper-button-next")
     public WebElement coursesNextButton;
-    @FindBy(css = ".pp-slider-arrow.swiper-button-prev>i")
+    @FindBy(css = ".pp-slider-arrow.swiper-button-prev")
     public WebElement coursesPrevButton;
-    @FindBy(css = ".swiper-container-horizontal.swiper-container-autoheight>div>div")
+    @FindBy(css = ".swiper-container-autoheight>div>div")
     public List<WebElement> courses;
+    @FindBy(css = ".swiper-container-autoheight>.swiper-wrapper>div.swiper-slide.swiper-slide-active")
+    public WebElement courseActiveSlide;
 
     public IndexPage(WebDriver browser) {
         this.browser = browser;

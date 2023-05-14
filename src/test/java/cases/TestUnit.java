@@ -6,11 +6,15 @@ import io.qameta.allure.junit4.DisplayName;
 import org.junit.*;
 import org.openqa.selenium.*;
 import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import pageObjects.*;
 import utils.ConfProperties;
 import utils.BrowserInit;
 
 import java.util.stream.IntStream;
+
+import static java.lang.Integer.parseInt;
 
 public class TestUnit {
     public WebDriver browser;
@@ -58,14 +62,23 @@ public class TestUnit {
             Assert.assertTrue(indexPage.banners.get(i+2).getAttribute("class").contains("swiper-slide-next"));
             action.dragAndDropBy(indexPage.sliderBanner, xNext, 0).perform();
         });
+
         browser.switchTo().frame(indexPage.adBannerIframe);
         indexPage.bannerClose2.click();
         browser.switchTo().defaultContent();
-        Assert.assertTrue(indexPage.courses.get(6).getAttribute("class").contains("swiper-slide-active"));
+
+        int indexOfActiveSlide = parseInt(indexPage.courseActiveSlide.getAttribute("data-swiper-slide-index"))+3;
+        Assert.assertTrue(indexPage.courses.get(indexOfActiveSlide).getAttribute("class").contains("swiper-slide-active"));
+        js.executeScript("window.scrollBy(0,-4000)");
+        js.executeScript("document.getElementsByClassName('.pp-slider-arrow.swiper-button-next').click();");
         action.moveToElement(indexPage.coursesNextButton).click().build().perform();
-        Assert.assertTrue(indexPage.courses.get(7).getAttribute("class").contains("swiper-slide-active"));
+        WebDriverWait wait = new WebDriverWait(browser, 10);
+        wait.until(ExpectedConditions.attributeContains(indexPage.courses.get(indexOfActiveSlide+1),"class","swiper-slide-active"));
+        Assert.assertTrue(indexPage.courses.get(indexOfActiveSlide+1).getAttribute("class").contains("swiper-slide-active"));
+        js.executeScript("document.getElementsByClassName('.pp-slider-arrow.swiper-button-prev').click();");
         action.moveToElement(indexPage.coursesPrevButton).click().build().perform();
-        Assert.assertTrue(indexPage.courses.get(8).getAttribute("class").contains("swiper-slide-active"));
+        wait.until(ExpectedConditions.attributeContains(indexPage.courses.get(indexOfActiveSlide),"class","swiper-slide-active"));
+        Assert.assertTrue(indexPage.courses.get(indexOfActiveSlide).getAttribute("class").contains("swiper-slide-active"));
 
     }
     @After
