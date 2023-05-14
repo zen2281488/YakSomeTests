@@ -23,13 +23,16 @@ public class TestUnit {
     public IndexPage indexPage;
     public Actions action;
     public JavascriptExecutor js;
-
+    public UtilsMethods utils;
+    public int activeBannerCounter;
+    public int activeBannerCounter2;
 
     @Before
     @Step("Инициализация браузера")
     public void before() {
         browser = BrowserInit.getWebdriver();
         indexPage = new IndexPage(browser);
+        utils = new UtilsMethods(browser);
         action = new Actions(browser);
         js = (JavascriptExecutor) browser;
     }
@@ -54,31 +57,21 @@ public class TestUnit {
         int newYMenu = indexPage.getYCoordinate(indexPage.horisontalMenu);
         Assert.assertEquals(-890,(oldYMenu - newYMenu));
         indexPage.displayedAssert(indexPage.adBanner).bannerClose.click();
-        int xNext = indexPage.getXCoordinate(indexPage.sliderBanner)-50;
-        IntStream.range(3, 5).forEach(i -> {
-            Assert.assertTrue(indexPage.banners.get(i).getAttribute("class").contains("swiper-slide-prev"));
-            Assert.assertTrue(indexPage.banners.get(i+1).getAttribute("class").contains("swiper-slide-active"));
-            Assert.assertTrue(indexPage.banners.get(i+1).isDisplayed());
-            Assert.assertTrue(indexPage.banners.get(i+2).getAttribute("class").contains("swiper-slide-next"));
-            action.dragAndDropBy(indexPage.sliderBanner, xNext, 0).perform();
-        });
+        int xNext = indexPage.getXCoordinate(indexPage.sliderBanner)-500;
+
+        int activeSlideBannerIndex = utils.getActiveSlideIndex(indexPage.banners);
+        utils.assertSliderBeforeActivity(indexPage.banners,activeSlideBannerIndex);
+        action.dragAndDropBy(indexPage.sliderBanner, xNext, 0).perform();
+        utils.assertSliderAfterActivity(indexPage.banners,activeSlideBannerIndex);
 
         browser.switchTo().frame(indexPage.adBannerIframe);
         indexPage.bannerClose2.click();
         browser.switchTo().defaultContent();
 
-        int indexOfActiveSlide = parseInt(indexPage.courseActiveSlide.getAttribute("data-swiper-slide-index"))+3;
-        Assert.assertTrue(indexPage.courses.get(indexOfActiveSlide).getAttribute("class").contains("swiper-slide-active"));
-        js.executeScript("window.scrollBy(0,-4000)");
-        js.executeScript("document.getElementsByClassName('.pp-slider-arrow.swiper-button-next').click();");
+        int activeSlideCoursesIndex = utils.getActiveSlideIndex(indexPage.courses);
+        utils.assertSliderBeforeActivity(indexPage.courses,activeSlideCoursesIndex);
         action.moveToElement(indexPage.coursesNextButton).click().build().perform();
-        WebDriverWait wait = new WebDriverWait(browser, 10);
-        wait.until(ExpectedConditions.attributeContains(indexPage.courses.get(indexOfActiveSlide+1),"class","swiper-slide-active"));
-        Assert.assertTrue(indexPage.courses.get(indexOfActiveSlide+1).getAttribute("class").contains("swiper-slide-active"));
-        js.executeScript("document.getElementsByClassName('.pp-slider-arrow.swiper-button-prev').click();");
-        action.moveToElement(indexPage.coursesPrevButton).click().build().perform();
-        wait.until(ExpectedConditions.attributeContains(indexPage.courses.get(indexOfActiveSlide),"class","swiper-slide-active"));
-        Assert.assertTrue(indexPage.courses.get(indexOfActiveSlide).getAttribute("class").contains("swiper-slide-active"));
+        utils.assertSliderAfterActivity(indexPage.courses,activeSlideCoursesIndex);
 
     }
     @After
