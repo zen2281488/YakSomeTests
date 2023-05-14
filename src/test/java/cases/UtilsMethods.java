@@ -1,8 +1,11 @@
 package cases;
 
 import org.junit.Assert;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
+import pageObjects.IndexPage;
 
 import java.util.List;
 import java.util.stream.IntStream;
@@ -39,4 +42,15 @@ public int getActiveSlideIndex(List<WebElement> elements) {
         Assert.assertTrue(elements.get(index+2).getAttribute("class").contains("swiper-slide-next"));
         return this;
     }
+
+    public static void sliderBannerActivate(Actions action){
+        action.moveByOffset(30, 80).build().perform();
+    }
+    public static void horisontalMenuAssertion(JavascriptExecutor js, IndexPage indexPage, WebElement horisontalMenu){
+        int oldYMenu = indexPage.getYCoordinate(horisontalMenu);
+        js.executeScript("window.scrollBy(0,1000)");
+        int newYMenu = indexPage.getYCoordinate(indexPage.horisontalMenu);
+        Assert.assertEquals(-890,(oldYMenu - newYMenu));
+    }
+
 }

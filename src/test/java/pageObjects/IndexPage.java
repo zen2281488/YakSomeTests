@@ -1,4 +1,5 @@
 package pageObjects;
+
 import org.junit.Assert;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -36,26 +37,25 @@ public class IndexPage {
     public List<WebElement> banners;
     @FindBy(css = ".pp-slider-arrow.swiper-button-next")
     public WebElement coursesNextButton;
-    @FindBy(css = ".pp-slider-arrow.swiper-button-prev")
-    public WebElement coursesPrevButton;
     @FindBy(css = ".swiper-container-autoheight>div>div")
     public List<WebElement> courses;
-    @FindBy(css = ".swiper-container-autoheight>.swiper-wrapper>div.swiper-slide.swiper-slide-active")
-    public WebElement courseActiveSlide;
 
     public IndexPage(WebDriver browser) {
         this.browser = browser;
         PageFactory.initElements(browser, this);
     }
+
     public IndexPage displayedAssert(WebElement element) {
         WebDriverWait wait = new WebDriverWait(browser, 15);
         Assert.assertTrue(wait.until(ExpectedConditions.visibilityOf(element)).isDisplayed());
         return this;
     }
+
     public int getYCoordinate(WebElement element) {
         return element.getLocation().getY();
     }
+
     public int getXCoordinate(WebElement element) {
         return element.getLocation().getX();
     }
-    }
+}
