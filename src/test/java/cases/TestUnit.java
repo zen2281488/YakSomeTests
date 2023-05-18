@@ -74,14 +74,14 @@ public class TestUnit {
         action.moveToElement(indexPage.resourcesButton).build().perform();
         indexPage.practiceSite1Button.click();
         indexPage.displayedAssert(practiceSite1.body);
-        Assert.assertEquals("https://www.way2automation.com/way2auto_jquery/index.php", browser.getCurrentUrl());
+        Assert.assertEquals(ConfProperties.getProperty("practice1ExpectedUrl"), browser.getCurrentUrl());
     }
 
     @Test
     @Issue("UI-WAY2 №3")
     @DisplayName("Проверка авторизации")
     public void testWay3() {
-        browser.get("https://www.way2automation.com/angularjs-protractor/registeration/#/login");
+        browser.get(ConfProperties.getProperty("practice2login"));
         practiceSite2.sendText(practiceSite2.usernameInput, ConfProperties.getProperty("p2username"))
                 .sendText(practiceSite2.passInput, ConfProperties.getProperty("p2pass"))
                 .sendText(practiceSite2.usernameDescriptionInput, ConfProperties.getProperty("p2username"))
