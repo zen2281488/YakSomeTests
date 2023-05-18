@@ -4,23 +4,24 @@ import io.qameta.allure.Issue;
 import io.qameta.allure.Step;
 import io.qameta.allure.junit4.DisplayName;
 import org.junit.After;
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.interactions.Actions;
 import pageObjects.IndexPage;
+import pageObjects.Way2autojquery;
 import utils.BrowserInit;
 import utils.ConfProperties;
 
 public class TestUnit {
-    public static ConfProperties pr;
     public WebDriver browser;
     public IndexPage indexPage;
     public Actions action;
     public JavascriptExecutor js;
     public UtilsMethods utils;
-
+    public Way2autojquery practiceSite1;
     @Before
     @Step("Инициализация браузера")
     public void before() {
@@ -29,11 +30,12 @@ public class TestUnit {
         utils = new UtilsMethods(browser);
         action = new Actions(browser);
         js = (JavascriptExecutor) browser;
+        practiceSite1= new Way2autojquery(browser);
     }
 
     @Test
     @Issue("UI-WAY2 №1")
-    @DisplayName("Проверка существования элементов")
+    @DisplayName("Проверка работоспособности и отображения элементов страницы.")
     public void testWay1() {
         browser.get(ConfProperties.getProperty("mainTestPage"));
         UtilsMethods.sliderBannerActivate(action);
@@ -58,6 +60,18 @@ public class TestUnit {
         utils.assertSliderAfterActivity(indexPage.courses, activeSlideCoursesIndex);
 
     }
+    @Test
+    @Issue("UI-WAY2 №2")
+    @DisplayName("Проверка перехода на страницу")
+    public void testWay2() {
+        browser.get(ConfProperties.getProperty("mainTestPage"));
+        action.moveToElement(indexPage.resourcesButton).build().perform();
+        indexPage.practiceSite1Button.click();
+        indexPage.displayedAssert(practiceSite1.body);
+        Assert.assertEquals("https://www.way2automation.com/way2auto_jquery/index.php",browser.getCurrentUrl());
+    }
+
+
 
     @After
     @Step("Очиска данных")

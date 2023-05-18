@@ -40,6 +40,12 @@ public class IndexPage {
     @FindBy(css = ".swiper-container-autoheight>div>div")
     public List<WebElement> courses;
 
+    @FindBy(css = "#menu-item-27617")
+    public WebElement resourcesButton;
+    @FindBy(css = "#menu-item-27618")
+    public WebElement practiceSite1Button;
+
+
     public IndexPage(WebDriver browser) {
         this.browser = browser;
         PageFactory.initElements(browser, this);
