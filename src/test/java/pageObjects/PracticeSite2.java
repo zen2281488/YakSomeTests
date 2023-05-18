@@ -1,9 +1,12 @@
 package pageObjects;
 
+import org.junit.Assert;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class PracticeSite2 {
         private final WebDriver browser;
@@ -29,5 +32,15 @@ public class PracticeSite2 {
             this.browser = browser;
             PageFactory.initElements(browser, this);
         }
+
+        public PracticeSite2 sendText(WebElement element,String text) {
+                element.sendKeys(text);
+                return this;
+        }
+        public PracticeSite2 buttonClick(WebElement element) {
+                element.click();
+                return this;
+        }
+
 
 }

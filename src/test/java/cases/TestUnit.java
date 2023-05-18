@@ -78,10 +78,10 @@ public class TestUnit {
     @DisplayName("Проверка авторизации")
     public void testWay3() {
         browser.get("https://www.way2automation.com/angularjs-protractor/registeration/#/login");
-        practiceSite2.usernameInput.sendKeys(ConfProperties.getProperty("p2username"));
-        practiceSite2.passInput.sendKeys(ConfProperties.getProperty("p2pass"));
-        practiceSite2.usernameDescriptionInput.sendKeys(ConfProperties.getProperty("p2username"));
-        practiceSite2.loginButton.click();
+        practiceSite2.sendText(practiceSite2.usernameInput,ConfProperties.getProperty("p2username"))
+                .sendText(practiceSite2.passInput,ConfProperties.getProperty("p2pass"))
+                .sendText(practiceSite2.usernameDescriptionInput,ConfProperties.getProperty("p2username"))
+                .buttonClick(practiceSite2.loginButton);
         Assert.assertEquals("You're logged in!!",practiceSite2.successlogtext.getText());
     }
 
