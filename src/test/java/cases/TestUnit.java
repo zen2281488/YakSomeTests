@@ -12,6 +12,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.interactions.Actions;
 import pageObjects.IndexPage;
 import pageObjects.Way2autojquery;
+import pageObjects.PracticeSite2;
 import utils.BrowserInit;
 import utils.ConfProperties;
 
@@ -22,6 +23,7 @@ public class TestUnit {
     public JavascriptExecutor js;
     public UtilsMethods utils;
     public Way2autojquery practiceSite1;
+    public PracticeSite2 practiceSite2;
     @Before
     @Step("Инициализация браузера")
     public void before() {
@@ -31,6 +33,7 @@ public class TestUnit {
         action = new Actions(browser);
         js = (JavascriptExecutor) browser;
         practiceSite1= new Way2autojquery(browser);
+        practiceSite2= new PracticeSite2(browser);
     }
 
     @Test
@@ -70,7 +73,17 @@ public class TestUnit {
         indexPage.displayedAssert(practiceSite1.body);
         Assert.assertEquals("https://www.way2automation.com/way2auto_jquery/index.php",browser.getCurrentUrl());
     }
-
+    @Test
+    @Issue("UI-WAY2 №3")
+    @DisplayName("Проверка авторизации")
+    public void testWay3() {
+        browser.get("https://www.way2automation.com/angularjs-protractor/registeration/#/login");
+        practiceSite2.usernameInput.sendKeys(ConfProperties.getProperty("p2username"));
+        practiceSite2.passInput.sendKeys(ConfProperties.getProperty("p2pass"));
+        practiceSite2.usernameDescriptionInput.sendKeys(ConfProperties.getProperty("p2username"));
+        practiceSite2.loginButton.click();
+        Assert.assertEquals("You're logged in!!",practiceSite2.successlogtext.getText());
+    }
 
 
     @After
