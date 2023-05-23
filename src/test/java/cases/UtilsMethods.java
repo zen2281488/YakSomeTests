@@ -5,7 +5,8 @@ import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
-import pageObjects.IndexPage;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.util.List;
 import java.util.stream.IntStream;
@@ -14,20 +15,23 @@ public class UtilsMethods {
 
     private final WebDriver browser;
     private int activeElementCounter;
+    public Actions action;
+    public WebDriverWait wait;
 
     public UtilsMethods(WebDriver browser) {
         this.browser = browser;
+        action = new Actions(browser);
+        wait = new WebDriverWait(browser, 15);
     }
-
-    public static void sliderBannerActivate(Actions action) {
+    public UtilsMethods  sliderBannerActivate() {
         action.moveByOffset(30, 80).build().perform();
+        return this;
     }
 
-    public static void horisontalMenuAssertion(JavascriptExecutor js, IndexPage indexPage, WebElement horisontalMenu) {
-        int oldYMenu = indexPage.getYCoordinate(horisontalMenu);
+    public UtilsMethods horisontalMenuAssertion(WebDriver browser, JavascriptExecutor js, WebElement stickedHorisontalMenu) {
         js.executeScript("window.scrollBy(0,1000)");
-        int newYMenu = indexPage.getYCoordinate(indexPage.horisontalMenu);
-        Assert.assertEquals(-890, (oldYMenu - newYMenu));
+        Assert.assertTrue(wait.until(ExpectedConditions.visibilityOf(stickedHorisontalMenu)).isDisplayed());
+        return this;
     }
 
     public int getActiveSlideIndex(List<WebElement> elements) {
@@ -55,4 +59,34 @@ public class UtilsMethods {
         return this;
     }
 
+    public UtilsMethods sendText(WebElement element, String text) {
+        element.sendKeys(text);
+        return this;
+    }
+
+    public UtilsMethods elementClick(WebElement element) {
+        element.click();
+        return this;
+    }
+
+    public UtilsMethods existAssert(WebElement element) {
+        Assert.assertTrue(wait.until(ExpectedConditions.visibilityOf(element)).isDisplayed());
+        return this;
+    }
+    public UtilsMethods slideSlider(WebElement element, int x, int y){
+        action.dragAndDropBy(element, x - 500, y).perform();
+        return this;
+    }
+    public UtilsMethods actionClick(WebElement element){
+        action.moveToElement(element).click().build().perform();
+        return this;
+    }
+
+    public UtilsMethods triggerDropdown(WebElement element){
+        action.moveToElement(element).build().perform();
+        return this;
+    }
+    public String getText(WebElement element){
+        return element.getText();
+    }
 }

@@ -29,15 +29,6 @@ public class PracticeSite2 {
         PageFactory.initElements(browser, this);
     }
 
-    public PracticeSite2 sendText(WebElement element, String text) {
-        element.sendKeys(text);
-        return this;
-    }
-
-    public PracticeSite2 buttonClick(WebElement element) {
-        element.click();
-        return this;
-    }
 
 
 }

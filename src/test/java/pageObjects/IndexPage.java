@@ -16,11 +16,12 @@ public class IndexPage {
     public WebElement headContacts;
     @FindBy(css = "iframe[data-test-id='ChatWidgetWindow-iframe']")
     public WebElement adBanner;
-
     @FindBy(css = "#post-17 > div > div > section.elementor-section.elementor-top-section.elementor-element.elementor-element-53d02b5a.elementor-section-boxed.elementor-section-height-default.elementor-section-height-default.lazyloaded > div.elementor-container.elementor-column-gap-default > div > div > div > div > div > div")
     public WebElement sliderBanner;
     @FindBy(css = "#ast-hf-menu-1:nth-of-type(1)")
     public WebElement horisontalMenu;
+    @FindBy(css = ".ast-sticky-shrunk.ast-header-sticked")
+    public WebElement stickedHorisontalMenu;
     @FindBy(css = ".elementor-element-5b4952c1")
     public WebElement certificatesBlock;
     @FindBy(css = ".swiper-container-autoheight>div")
@@ -29,10 +30,6 @@ public class IndexPage {
     public WebElement footer;
     @FindBy(css = ".dialog-lightbox-close-button")
     public WebElement bannerClose;
-    @FindBy(css = "div.content.jx_ui_Widget>div.meshim_widget_widgets_IconFont.icon_font.close")
-    public WebElement bannerClose2;
-    @FindBy(css = "body > div:nth-child(2) > iframe")
-    public WebElement adBannerIframe;
     @FindBy(css = ".swiper-wrapper.elementor-slides>div.swiper-slide")
     public List<WebElement> banners;
     @FindBy(css = ".pp-slider-arrow.swiper-button-next")
@@ -45,7 +42,6 @@ public class IndexPage {
     @FindBy(css = "#menu-item-27618")
     public WebElement practiceSite1Button;
 
-
     public IndexPage(WebDriver browser) {
         this.browser = browser;
         PageFactory.initElements(browser, this);
@@ -55,10 +51,6 @@ public class IndexPage {
         WebDriverWait wait = new WebDriverWait(browser, 15);
         Assert.assertTrue(wait.until(ExpectedConditions.visibilityOf(element)).isDisplayed());
         return this;
-    }
-
-    public int getYCoordinate(WebElement element) {
-        return element.getLocation().getY();
     }
 
     public int getXCoordinate(WebElement element) {
