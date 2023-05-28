@@ -40,15 +40,14 @@ public class Way2IndexPage {
     @FindBy(css = ".dialog-lightbox-close-button")
     public WebElement bannerClose;
 
-    @FindBy(css = ".swiper-wrapper.elementor-slides>div.swiper-slide")
+    @FindBy(css = ".swiper-wrapper.elementor-slides>.swiper-slide")
     public List<WebElement> banners;
 
     @FindBy(css = ".pp-slider-arrow.swiper-button-next")
     public WebElement coursesNextButton;
 
-    @FindBy(css = ".swiper-container-autoheight>div>div")
+    @FindBy(css = ".swiper-container-autoheight>.swiper-wrapper>.swiper-slide")
     public List<WebElement> courses;
-
     @FindBy(xpath = "//span[contains(text(), 'Resources')][1]")
     public WebElement resourcesButton;
 

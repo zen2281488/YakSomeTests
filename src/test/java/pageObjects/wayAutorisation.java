@@ -5,7 +5,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
-public class PracticeSite2 {
+public class wayAutorisation {
     private final WebDriver browser;
 
     @FindBy(css = "#username")
@@ -24,7 +24,7 @@ public class PracticeSite2 {
     public WebElement loginButton;
 
 
-    public PracticeSite2(WebDriver browser) {
+    public wayAutorisation(WebDriver browser) {
         this.browser = browser;
         PageFactory.initElements(browser, this);
     }

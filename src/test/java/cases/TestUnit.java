@@ -16,8 +16,8 @@ public class TestUnit {
     public WebDriver browser;
     public Way2IndexPage way2IndexPage;
     public UtilsMethods utils;
-    public Way2autojquery practiceSite1;
-    public PracticeSite2 practiceSite2;
+    public Way2autojquery wayAutojquery;
+    public wayAutorisation wayAutorisation;
     public Way2login waylogin;
     public SeleniumTutorialIndex seleniumTutorialIndex;
 
@@ -27,8 +27,8 @@ public class TestUnit {
         browser = BrowserInit.getWebdriver();
         way2IndexPage = new Way2IndexPage(browser);
         utils = new UtilsMethods(browser);
-        practiceSite1 = new Way2autojquery(browser);
-        practiceSite2 = new PracticeSite2(browser);
+        wayAutojquery = new Way2autojquery(browser);
+        wayAutorisation = new wayAutorisation(browser);
         waylogin=new Way2login(browser);
         seleniumTutorialIndex=new SeleniumTutorialIndex(browser);
     }
@@ -97,7 +97,7 @@ public class TestUnit {
         browser.get(ConfProperties.getProperty("mainTestPage"));
         utils.triggerDropdown(way2IndexPage.resourcesButton)
                 .elementClick(way2IndexPage.practiceSite1Button)
-                .existAssert(practiceSite1.body);
+                .existAssert(wayAutojquery.body);
         Assert.assertEquals(ConfProperties.getProperty("practice1ExpectedUrl"), browser.getCurrentUrl());
     }
 
@@ -106,11 +106,11 @@ public class TestUnit {
     @DisplayName("Проверка авторизации на сайте Practice Site 2")
     public void testWay8() {
         browser.get(ConfProperties.getProperty("practice2login"));
-        utils.sendText(practiceSite2.usernameInput, ConfProperties.getProperty("p2username"))
-                .sendText(practiceSite2.passInput, ConfProperties.getProperty("p2pass"))
-                .sendText(practiceSite2.usernameDescriptionInput, ConfProperties.getProperty("p2username"))
-                .elementClick(practiceSite2.loginButton);
-        Assert.assertEquals("You're logged in!!", utils.getText(practiceSite2.successlogtext));
+        utils.sendText(wayAutorisation.usernameInput, ConfProperties.getProperty("p2username"))
+                .sendText(wayAutorisation.passInput, ConfProperties.getProperty("p2pass"))
+                .sendText(wayAutorisation.usernameDescriptionInput, ConfProperties.getProperty("p2username"))
+                .elementClick(wayAutorisation.loginButton);
+        Assert.assertEquals("You're logged in!!", utils.getText(wayAutorisation.successlogtext));
     }
 //    @Test
 //    @Issue("UI-WAY2 №4")
