@@ -60,13 +60,4 @@ public class Way2IndexPage {
         PageFactory.initElements(browser, this);
     }
 
-    public Way2IndexPage displayedAssert(WebElement element) {
-        WebDriverWait wait = new WebDriverWait(browser, 15);
-        Assert.assertTrue(wait.until(ExpectedConditions.visibilityOf(element)).isDisplayed());
-        return this;
-    }
-
-    public int getXCoordinate(WebElement element) {
-        return element.getLocation().getX();
-    }
 }

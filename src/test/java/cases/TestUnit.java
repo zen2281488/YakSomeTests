@@ -50,7 +50,7 @@ public class TestUnit {
         utils.existAssert(way2IndexPage.adBanner).elementClick(way2IndexPage.bannerClose);
         int activeSlideBannerIndex = utils.getActiveSlideIndex(way2IndexPage.banners);
         utils.assertSliderBeforeActivity(way2IndexPage.banners, activeSlideBannerIndex)
-                .slideSlider(way2IndexPage.sliderBanner, way2IndexPage.getXCoordinate(way2IndexPage.sliderBanner), 0)
+                .slideSlider(way2IndexPage.sliderBanner, utils.getXCoordinate(way2IndexPage.sliderBanner), 0)
                 .assertSliderAfterActivity(way2IndexPage.banners, activeSlideBannerIndex);
     }
     @Test
@@ -59,7 +59,7 @@ public class TestUnit {
     public void testWay3() {
         browser.get(ConfProperties.getProperty("mainTestPage"));
         utils.sliderBannerActivate();
-        way2IndexPage.displayedAssert(way2IndexPage.horisontalMenu);
+        utils.existAssert(way2IndexPage.horisontalMenu);
         utils.horisontalMenuAssertion(browser, way2IndexPage.stickedHorisontalMenu);
     }
     @Test
@@ -67,7 +67,7 @@ public class TestUnit {
     @DisplayName("Проверка наличия и отображения блока с Сертификатами.")
     public void testWay4() {
         browser.get(ConfProperties.getProperty("mainTestPage"));
-        way2IndexPage.displayedAssert(way2IndexPage.certificatesBlock);
+        utils.existAssert(way2IndexPage.certificatesBlock);
     }
     @Test
     @Issue("UI-WAY2 №1")
@@ -88,7 +88,7 @@ public class TestUnit {
     @DisplayName("Проверка наличия и отображения Футера")
     public void testWay6() {
         browser.get(ConfProperties.getProperty("mainTestPage"));
-        way2IndexPage.displayedAssert(way2IndexPage.footer);
+        utils.existAssert(way2IndexPage.footer);
     }
     @Test
     @Issue("UI-WAY2 №2")

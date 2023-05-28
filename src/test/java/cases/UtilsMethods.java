@@ -1,5 +1,6 @@
 package cases;
 
+import io.qameta.allure.Step;
 import org.junit.Assert;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
@@ -45,7 +46,7 @@ public class UtilsMethods {
         });
         return activeElementCounter;
     }
-
+@Step("Проверка наличия классов Prev,Active,Next у слайдов до свайпа.")
     public UtilsMethods assertSliderBeforeActivity(List<WebElement> elements, int index) {
         Assert.assertTrue(elements.get(index - 1).getAttribute("class").contains("swiper-slide-prev"));
         Assert.assertTrue(elements.get(index).getAttribute("class").contains("swiper-slide-active"));
@@ -54,6 +55,7 @@ public class UtilsMethods {
         return this;
     }
 
+    @Step("Проверка наличия классов Prev,Active,Next у слайдов после свайпа.")
     public UtilsMethods assertSliderAfterActivity(List<WebElement> elements, int index) {
         Assert.assertTrue(elements.get(index).getAttribute("class").contains("swiper-slide-prev"));
         Assert.assertTrue(elements.get(index + 1).getAttribute("class").contains("swiper-slide-active"));
@@ -61,35 +63,47 @@ public class UtilsMethods {
         Assert.assertTrue(elements.get(index + 2).getAttribute("class").contains("swiper-slide-next"));
         return this;
     }
-
+    @Step("Вставка текста в элемент {element}")
     public UtilsMethods sendText(WebElement element, String text) {
         element.sendKeys(text);
         return this;
     }
 
+    @Step("Клик элемента {element}")
     public UtilsMethods elementClick(WebElement element) {
         element.click();
         return this;
     }
 
+    @Step("Проверка существования элемента {element}")
     public UtilsMethods existAssert(WebElement element) {
         Assert.assertTrue(wait.until(ExpectedConditions.visibilityOf(element)).isDisplayed());
         return this;
     }
+
+    @Step("Свайп элемента {element}")
     public UtilsMethods slideSlider(WebElement element, int x, int y){
         action.dragAndDropBy(element, x - 500, y).perform();
         return this;
     }
+
+    @Step("Клик по элементу {element}")
     public UtilsMethods actionClick(WebElement element){
         action.moveToElement(element).click().build().perform();
         return this;
     }
 
+    @Step("Наведение мыши на выпадающий список {element}")
     public UtilsMethods triggerDropdown(WebElement element){
         action.moveToElement(element).build().perform();
         return this;
     }
+    @Step("Получаем текст элемента {element}")
     public String getText(WebElement element){
         return element.getText();
+    }
+
+    public int getXCoordinate(WebElement element) {
+        return element.getLocation().getX();
     }
 }
