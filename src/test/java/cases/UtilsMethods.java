@@ -17,18 +17,21 @@ public class UtilsMethods {
     private int activeElementCounter;
     public Actions action;
     public WebDriverWait wait;
+    public JavascriptExecutor js;
+
 
     public UtilsMethods(WebDriver browser) {
         this.browser = browser;
         action = new Actions(browser);
         wait = new WebDriverWait(browser, 15);
+        js = (JavascriptExecutor) browser;
     }
     public UtilsMethods  sliderBannerActivate() {
         action.moveByOffset(30, 80).build().perform();
         return this;
     }
 
-    public UtilsMethods horisontalMenuAssertion(WebDriver browser, JavascriptExecutor js, WebElement stickedHorisontalMenu) {
+    public UtilsMethods horisontalMenuAssertion(WebDriver browser, WebElement stickedHorisontalMenu) {
         js.executeScript("window.scrollBy(0,1000)");
         Assert.assertTrue(wait.until(ExpectedConditions.visibilityOf(stickedHorisontalMenu)).isDisplayed());
         return this;

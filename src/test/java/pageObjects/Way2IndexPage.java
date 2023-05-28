@@ -10,44 +10,58 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.util.List;
 
-public class IndexPage {
+public class Way2IndexPage {
     private final WebDriver browser;
+
     @FindBy(css = "div.ast-above-header-wrap")
     public WebElement headContacts;
+
     @FindBy(css = "iframe[data-test-id='ChatWidgetWindow-iframe']")
     public WebElement adBanner;
-    @FindBy(css = "#post-17 > div > div > section.elementor-section.elementor-top-section.elementor-element.elementor-element-53d02b5a.elementor-section-boxed.elementor-section-height-default.elementor-section-height-default.lazyloaded > div.elementor-container.elementor-column-gap-default > div > div > div > div > div > div")
+
+    @FindBy(css = ".elementor-slides-wrapper.swiper-container-horizontal")
     public WebElement sliderBanner;
+
     @FindBy(css = "#ast-hf-menu-1:nth-of-type(1)")
     public WebElement horisontalMenu;
+
     @FindBy(css = ".ast-sticky-shrunk.ast-header-sticked")
     public WebElement stickedHorisontalMenu;
-    @FindBy(css = ".elementor-element-5b4952c1")
+
+    @FindBy(xpath = "//h1[contains(text(), 'Best Selenium Certification Course Online')][1]")
     public WebElement certificatesBlock;
-    @FindBy(css = ".swiper-container-autoheight>div")
+
+    @FindBy(css = ".swiper-container-initialized.swiper-container-horizontal.swiper-container-autoheight")
     public WebElement sliderCources;
+
     @FindBy(css = "[data-elementor-type='footer']")
     public WebElement footer;
+
     @FindBy(css = ".dialog-lightbox-close-button")
     public WebElement bannerClose;
+
     @FindBy(css = ".swiper-wrapper.elementor-slides>div.swiper-slide")
     public List<WebElement> banners;
+
     @FindBy(css = ".pp-slider-arrow.swiper-button-next")
     public WebElement coursesNextButton;
+
     @FindBy(css = ".swiper-container-autoheight>div>div")
     public List<WebElement> courses;
 
-    @FindBy(css = "#menu-item-27617")
+    @FindBy(xpath = "//span[contains(text(), 'Resources')][1]")
     public WebElement resourcesButton;
-    @FindBy(css = "#menu-item-27618")
+
+    @FindBy(xpath = "//span[contains(text(), 'Practice Site 1')][1]")
     public WebElement practiceSite1Button;
 
-    public IndexPage(WebDriver browser) {
+
+    public Way2IndexPage(WebDriver browser) {
         this.browser = browser;
         PageFactory.initElements(browser, this);
     }
 
-    public IndexPage displayedAssert(WebElement element) {
+    public Way2IndexPage displayedAssert(WebElement element) {
         WebDriverWait wait = new WebDriverWait(browser, 15);
         Assert.assertTrue(wait.until(ExpectedConditions.visibilityOf(element)).isDisplayed());
         return this;
