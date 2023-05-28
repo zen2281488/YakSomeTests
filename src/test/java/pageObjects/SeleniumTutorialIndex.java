@@ -8,8 +8,10 @@ import org.openqa.selenium.support.PageFactory;
 public class SeleniumTutorialIndex {
     private final WebDriver browser;
     @FindBy(css = "img.gravatar")
+
     public WebElement avatarImg;
     @FindBy(css = ".user-signout")
+
     public WebElement logoutHref;
 
     public SeleniumTutorialIndex(WebDriver browser) {
