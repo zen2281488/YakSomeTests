@@ -1,5 +1,7 @@
 package cases;
 
+import io.qameta.allure.Description;
+import io.qameta.allure.Epic;
 import io.qameta.allure.Issue;
 import io.qameta.allure.Step;
 import io.qameta.allure.junit4.DisplayName;
@@ -33,6 +35,8 @@ public class TestUnit {
         seleniumTutorialIndex=new SeleniumTutorialIndex(browser);
     }
 
+    @Epic("Проверка существования и отображения элементов")
+    @Description("Тест проверяет наличие блока Контактов в Хедере")
     @Test
     @Issue("UI-WAY2 №1")
     @DisplayName("Проверка наличия и отображения контактов в Хэдере")
@@ -40,6 +44,9 @@ public class TestUnit {
         browser.get(ConfProperties.getProperty("mainTestPage"));
         utils.existAssert(way2IndexPage.headContacts);
     }
+
+    @Epic("Проверка существования и отображения элементов, их работоспособности")
+    @Description("Тест проверяет отображение слайдера с баннерами. Свайпает слайдер и проверяет меняется ли класс слайдера на другой, для проверки смены активных слайдов")
     @Test
     @Issue("UI-WAY2 №1")
     @DisplayName("Проверка наличия и отображения баннера. Проверка его работоспособности.")
@@ -53,6 +60,9 @@ public class TestUnit {
                 .slideSlider(way2IndexPage.sliderBanner, utils.getXCoordinate(way2IndexPage.sliderBanner), 0)
                 .assertSliderAfterActivity(way2IndexPage.banners, activeSlideBannerIndex);
     }
+
+    @Epic("Проверка существования и отображения элементов, их работоспособности")
+    @Description("Тест проверяет наличие Горизонтального меню. Прокручивает страницу вниз, чтобы увидеть следует ли слайдер за пользователем.")
     @Test
     @Issue("UI-WAY2 №1")
     @DisplayName("Проверка наличия и отображения горизонтального меню. Проверка работы stick класса слайдера.")
@@ -63,6 +73,8 @@ public class TestUnit {
         utils.horisontalMenuAssertion(browser, way2IndexPage.stickedHorisontalMenu);
     }
 
+    @Epic("Проверка существования и отображения элементов")
+    @Description("Тест проверяет наличие и отображение блока с Сертификатами.")
     @Test
     @Issue("UI-WAY2 №1")
     @DisplayName("Проверка наличия и отображения блока с Сертификатами.")
@@ -71,6 +83,8 @@ public class TestUnit {
         utils.existAssert(way2IndexPage.certificatesBlock);
     }
 
+    @Epic("Проверка существования и отображения элементов, их работоспособности")
+    @Description("Тест проверяет отображение слайдера с курсами. Свайпает слайдер и проверяет меняется ли класс слайдера на другой, для проверки смены активных слайдов")
     @Test
     @Issue("UI-WAY2 №1")
     @DisplayName("Проверка наличия и отображения слайдера с курсами. Проверка работоспособности слайдера.")
@@ -86,6 +100,8 @@ public class TestUnit {
                 .assertSliderAfterActivity(way2IndexPage.courses, activeSlideCoursesIndex);
     }
 
+    @Epic("Проверка существования и отображения элементов")
+    @Description("Тест проверяет наличие и отображение Футера.")
     @Test
     @Issue("UI-WAY2 №1")
     @DisplayName("Проверка наличия и отображения Футера")
@@ -94,6 +110,8 @@ public class TestUnit {
         utils.existAssert(way2IndexPage.footer);
     }
 
+    @Epic("Проверка перехода на другие страницы, проверка авторизации")
+    @Description("Тест проверяет переходит ли на страницу PractiseSite1 если клинуть по соответствующей ссылке в выпадающем списке в хэдере.")
     @Test
     @Issue("UI-WAY2 №2")
     @DisplayName("Проверка перехода на страницу PracticeSite 1")
@@ -105,6 +123,8 @@ public class TestUnit {
         Assert.assertEquals(ConfProperties.getProperty("practice1ExpectedUrl"), browser.getCurrentUrl());
     }
 
+    @Epic("Проверка перехода на другие страницы, проверка авторизации")
+    @Description("Тест проверяет авторизацию на сайте Practice Site 2. Появляется ли текст о успешной авторизации после ввода учетных данных.")
     @Test
     @Issue("UI-WAY2 №3")
     @DisplayName("Проверка авторизации на сайте Practice Site 2")
@@ -117,6 +137,8 @@ public class TestUnit {
         Assert.assertEquals("You're logged in!!", utils.getText(wayAutorisation.successlogtext));
     }
 
+    @Epic("Проверка перехода на другие страницы, проверка авторизации, регистрации")
+    @Description("Тест проверяет проходит ли регистрация на сайте Way2 успешно, при вводе уникальных данных.")
     @Test
     @Issue("UI-WAY2 №4")
     @DisplayName("Проверка регистрации на сайте Way2")
@@ -133,6 +155,8 @@ public class TestUnit {
                 .elementClick(seleniumTutorialIndex.logoutHref);
     }
 
+    @Epic("Проверка перехода на другие страницы, проверка авторизации")
+    @Description("Тест проверяет проходит авторизация на сайте Way2 при вводе учетных данных пользователя.")
     @Test
     @Issue("UI-WAY2 №5")
     @DisplayName("Проверка авторизации на сайте Way2")
