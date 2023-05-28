@@ -62,6 +62,7 @@ public class TestUnit {
         utils.existAssert(way2IndexPage.horisontalMenu);
         utils.horisontalMenuAssertion(browser, way2IndexPage.stickedHorisontalMenu);
     }
+
     @Test
     @Issue("UI-WAY2 №1")
     @DisplayName("Проверка наличия и отображения блока с Сертификатами.")
@@ -69,6 +70,7 @@ public class TestUnit {
         browser.get(ConfProperties.getProperty("mainTestPage"));
         utils.existAssert(way2IndexPage.certificatesBlock);
     }
+
     @Test
     @Issue("UI-WAY2 №1")
     @DisplayName("Проверка наличия и отображения слайдера с курсами. Проверка работоспособности слайдера.")
@@ -83,6 +85,7 @@ public class TestUnit {
                 .actionClick(way2IndexPage.coursesNextButton)
                 .assertSliderAfterActivity(way2IndexPage.courses, activeSlideCoursesIndex);
     }
+
     @Test
     @Issue("UI-WAY2 №1")
     @DisplayName("Проверка наличия и отображения Футера")
@@ -90,6 +93,7 @@ public class TestUnit {
         browser.get(ConfProperties.getProperty("mainTestPage"));
         utils.existAssert(way2IndexPage.footer);
     }
+
     @Test
     @Issue("UI-WAY2 №2")
     @DisplayName("Проверка перехода на страницу PracticeSite 1")
@@ -112,31 +116,32 @@ public class TestUnit {
                 .elementClick(wayAutorisation.loginButton);
         Assert.assertEquals("You're logged in!!", utils.getText(wayAutorisation.successlogtext));
     }
-//    @Test
-//    @Issue("UI-WAY2 №4")
-//    @DisplayName("Проверка регистрации на сайте Way2")
-//    public void testWay9() {
-//        browser.get(ConfProperties.getProperty("loginWay2"));
-//        browser.manage().window().maximize();
-//        utils.elementClick(waylogin.signUpHref)
-//                .sendText(waylogin.fullNameInput,ConfProperties.getProperty("way2RegFullName"))
-//                .sendText(waylogin.emailSignInInput,ConfProperties.getProperty("way2RegEmail"))
-//                .sendText(waylogin.passwordInput,ConfProperties.getProperty("way2RegPassword"))
-//                .elementClick(waylogin.commitButton)
-//                .existAssert(seleniumTutorialIndex.avatarImg)
-//                .elementClick(seleniumTutorialIndex.avatarImg)
-//                .elementClick(seleniumTutorialIndex.logoutHref);
-//    }
-//
-//    @Test
-//    @Issue("UI-WAY2 №5")
-//    @DisplayName("Проверка авторизации на сайте Way2")
-//    public void testWay10() {
-//        browser.get(ConfProperties.getProperty("loginWay2"));
-//        utils.sendText(waylogin.emailLoginInput,ConfProperties.getProperty("way2LogEmail"))
-//                        .sendText(waylogin.passwordInput,ConfProperties.getProperty("way2LogPassword"))
-//                        .elementClick(waylogin.commitButton).existAssert(seleniumTutorialIndex.avatarImg);
-//    }
+
+    @Test
+    @Issue("UI-WAY2 №4")
+    @DisplayName("Проверка регистрации на сайте Way2")
+    public void testWay9() {
+        browser.get(ConfProperties.getProperty("loginWay2"));
+        browser.manage().window().maximize();
+        utils.elementClick(waylogin.signUpHref)
+                .sendText(waylogin.fullNameInput,ConfProperties.getProperty("way2RegFullName"))
+                .sendText(waylogin.emailSignInInput,ConfProperties.getProperty("way2RegEmail"))
+                .sendText(waylogin.passwordInput,ConfProperties.getProperty("way2RegPassword"))
+                .elementClick(waylogin.commitButton)
+                .existAssert(seleniumTutorialIndex.avatarImg)
+                .elementClick(seleniumTutorialIndex.avatarImg)
+                .elementClick(seleniumTutorialIndex.logoutHref);
+    }
+
+    @Test
+    @Issue("UI-WAY2 №5")
+    @DisplayName("Проверка авторизации на сайте Way2")
+    public void testWay10() {
+        browser.get(ConfProperties.getProperty("loginWay2"));
+        utils.sendText(waylogin.emailLoginInput,ConfProperties.getProperty("way2LogEmail"))
+                        .sendText(waylogin.passwordInput,ConfProperties.getProperty("way2LogPassword"))
+                        .elementClick(waylogin.commitButton).existAssert(seleniumTutorialIndex.avatarImg);
+    }
 
     @After
     @Step("Очиска данных")
