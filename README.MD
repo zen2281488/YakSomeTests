@@ -1,6 +1,6 @@
 Обучение SDET. Задача U1
 
-    Тест классы: src/test/java/cases
+    Тест классы: src/test/java/UITests
 
     Объекты элементов страниц: src/test/java/pageObjects
     
