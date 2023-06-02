@@ -7,8 +7,7 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import utils.ConfProperties;
 
-public class WayLogin {
-    private final WebDriver browser;
+public class WayLogin extends BasePage {
     @FindBy(css = "[href='/secure/673/identity/sign_up']")
     private WebElement signUpHref;
 
@@ -28,7 +27,7 @@ public class WayLogin {
     private WebElement emailLoginInput;
 
     public WayLogin(WebDriver browser) {
-        this.browser = browser;
+        super(browser);
         PageFactory.initElements(browser, this);
     }
 

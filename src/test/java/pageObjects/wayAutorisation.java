@@ -9,8 +9,7 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import utils.ConfProperties;
 
-public class wayAutorisation {
-    private final WebDriver browser;
+public class wayAutorisation extends BasePage {
 
     @FindBy(css = "#username")
     private WebElement usernameInput;
@@ -26,11 +25,10 @@ public class wayAutorisation {
 
     @FindBy(css = ".btn-danger")
     private WebElement loginButton;
-    private WebDriverWait wait;
 
-    public wayAutorisation(WebDriver browser, WebDriverWait wait) {
-        this.browser = browser;
-        this.wait = wait;
+
+    public wayAutorisation(WebDriver browser) {
+        super(browser);
         PageFactory.initElements(browser, this);
     }
 
@@ -59,8 +57,9 @@ public class wayAutorisation {
     }
 
     @Step("Текст о успешном входе в систему существует.")
-    public boolean successLogTextExist() {
-        return wait.until(ExpectedConditions.visibilityOf(successlogtext)).isDisplayed();
+    public wayAutorisation waitSuccessLoginText() {
+        wait.until(ExpectedConditions.visibilityOf(successlogtext)).isDisplayed();
+        return this;
     }
 
     @Step("Извлечение текста о входе в систему.")

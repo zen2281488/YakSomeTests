@@ -1,19 +1,15 @@
 package pageObjects;
 
 import io.qameta.allure.Step;
-import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.util.List;
 
-public class WayIndexPage {
-    private final WebDriver browser;
+public class WayIndexPage extends BasePage {
     @FindBy(css = "div.ast-above-header-wrap")
     private WebElement headContacts;
     @FindBy(css = "#elementor-popup-modal-26600 > div > div.dialog-message.dialog-lightbox-message")
@@ -42,37 +38,35 @@ public class WayIndexPage {
     private WebElement resourcesButton;
     @FindBy(xpath = "//span[contains(text(), 'Practice Site 1')][1]")
     private WebElement practiceSite1Button;
-    private Actions action;
-    private WebDriverWait wait;
-    private JavascriptExecutor js;
 
-    public WayIndexPage(WebDriver browser, Actions action, WebDriverWait wait, JavascriptExecutor js) {
-        this.browser = browser;
-        this.action = action;
-        this.wait = wait;
-        this.js = js;
+
+    public WayIndexPage(WebDriver browser) {
+        super(browser);
         PageFactory.initElements(browser, this);
-
     }
 
     @Step("Слайдер курсов существует.")
-    public boolean sliderCourcesExist() {
-        return wait.until(ExpectedConditions.visibilityOf(sliderCources)).isDisplayed();
+    public WayIndexPage waitSliderCources() {
+        wait.until(ExpectedConditions.visibilityOf(sliderCources)).isDisplayed();
+        return this;
     }
 
     @Step("Блок с сертификатами существует.")
-    public boolean certificatesBlockExist() {
-        return wait.until(ExpectedConditions.visibilityOf(certificatesBlock)).isDisplayed();
+    public WayIndexPage waitCertificatesBlock() {
+        wait.until(ExpectedConditions.visibilityOf(certificatesBlock)).isDisplayed();
+        return this;
     }
 
     @Step("Блок с контактами существует.")
-    public boolean contactsExist() {
-        return wait.until(ExpectedConditions.visibilityOf(headContacts)).isDisplayed();
+    public WayIndexPage waitContacts() {
+        wait.until(ExpectedConditions.visibilityOf(headContacts)).isDisplayed();
+        return this;
     }
 
     @Step("Горизонтальное меню существует.")
-    public boolean horisontalMenuExist() {
-        return wait.until(ExpectedConditions.visibilityOf(horisontalMenu)).isDisplayed();
+    public WayIndexPage waitHorisontalMenu() {
+        wait.until(ExpectedConditions.visibilityOf(horisontalMenu)).isDisplayed();
+        return this;
     }
 
     @Step("Активация слайдера баннеров")
@@ -82,39 +76,21 @@ public class WayIndexPage {
     }
 
     @Step("Слайдер баннеров существует.")
-    public boolean sliderBannerExist() {
-        return wait.until(ExpectedConditions.visibilityOf(sliderBanner)).isDisplayed();
+    public WayIndexPage waitSliderBanner() {
+        wait.until(ExpectedConditions.visibilityOf(sliderBanner)).isDisplayed();
+        return this;
     }
 
     @Step("Рекламный баннер существует.")
-    public boolean adBannerExist() {
-        return wait.until(ExpectedConditions.visibilityOf(adBanner)).isDisplayed();
+    public WayIndexPage waitAdBanner() {
+        wait.until(ExpectedConditions.visibilityOf(adBanner)).isDisplayed();
+        return this;
     }
 
     @Step("Нажатие на кнопку закрытия рекламного баннера.")
-    public void bannerCloseButtonClick() {
+    public WayIndexPage bannerCloseButtonClick() {
         bannerClose.click();
-    }
-
-    @Step("Класс Prev слайдера Баннеров существует.")
-    public boolean slidePrevClassExist(int activeSlideBannerIndex) {
-        return banners.get(activeSlideBannerIndex - 1).getAttribute("class").contains("swiper-slide-prev");
-
-    }
-
-    @Step("Класс Active слайдера Баннеров существует.")
-    public boolean slideActiveClassExist(int activeSlideBannerIndex) {
-        return banners.get(activeSlideBannerIndex).getAttribute("class").contains("swiper-slide-active");
-    }
-
-    @Step("Класс Next слайдера Баннеров существует.")
-    public boolean slideNextClassExist(int activeSlideBannerIndex) {
-        return banners.get(activeSlideBannerIndex + 1).getAttribute("class").contains("swiper-slide-next");
-    }
-
-    @Step("Активный слайд видим.")
-    public boolean slideExist(int activeSlideBannerIndex) {
-        return banners.get(activeSlideBannerIndex).isDisplayed();
+        return this;
     }
 
     @Step("Свайп слайдера баннеров.")
@@ -123,50 +99,71 @@ public class WayIndexPage {
     }
 
     @Step("Футер существует.")
-    public boolean footerExist() {
-        return wait.until(ExpectedConditions.visibilityOf(footer)).isDisplayed();
-    }
-
-    @Step("Класс Prev присутствует у слайдов после свайпа.")
-    public boolean afterActivitySlidePrevClassExist(int index) {
-        return banners.get(index).getAttribute("class").contains("swiper-slide-prev");
+    public WayIndexPage waitFooter() {
+        wait.until(ExpectedConditions.visibilityOf(footer)).isDisplayed();
+        return this;
     }
 
     @Step("Класс Active присутствует у слайдов после свайпа.")
-    public boolean afterActivitySlideActiveClassExist(int index) {
-        return banners.get(index + 1).getAttribute("class").contains("swiper-slide-active");
+    public WebElement activeSlide() {
+        return banners.stream()
+                .filter(element -> element.getAttribute("class").contains("swiper-slide-active"))
+                .findFirst()
+                .orElse(null);
     }
 
-    @Step("Активный слайд после свайпа виден.")
-    public boolean afterActivitySlideExist(int index) {
-        return banners.get(index + 1).isDisplayed();
+    @Step("Класс Active присутствует у слайдов после свайпа.")
+    public WebElement nextSlide() {
+        return banners.stream()
+                .filter(element -> element.getAttribute("class").contains("swiper-slide-next"))
+                .findFirst()
+                .orElse(null);
     }
 
-    @Step("Класс Next присутствует у слайдов после свайпа.")
-    public boolean afterActivitySlideNextClassExist(int index) {
-        return banners.get(index + 2).getAttribute("class").contains("swiper-slide-next");
+    @Step("Класс слайда содержит prev")
+    public boolean slideClassContainsPrev(WebElement activeSlide) {
+        return activeSlide.getAttribute("class").contains("prev");
     }
+
+    @Step("Класс слайда содержит active")
+    public boolean slideClassContainsActive(WebElement nextSlide) {
+        return nextSlide.getAttribute("class").contains("active");
+    }
+
+    @Step("Класс Active присутствует у слайдов блока с курсами после свайпа.")
+    public WebElement coursesActiveSlide() {
+        return courses.stream()
+                .filter(element -> element.getAttribute("class").contains("swiper-slide-active"))
+                .findFirst()
+                .orElse(null);
+    }
+
+    @Step("Класс Active присутствует у слайдов блока с курсами слайдов после свайпа.")
+    public WebElement coursesNextSlide() {
+        return courses.stream()
+                .filter(element -> element.getAttribute("class").contains("swiper-slide-next"))
+                .findFirst()
+                .orElse(null);
+    }
+
+    @Step("Класс у слайда блока с курсами содержит prev")
+    public boolean slideCoursesClassContainsPrev(WebElement activeSlide) {
+        return activeSlide.getAttribute("class").contains("prev");
+    }
+
+    @Step("Класс у слайда блока с курсами содержит active")
+    public boolean slideCoursesClassContainsActive(WebElement nextSlide) {
+        return nextSlide.getAttribute("class").contains("active");
+    }
+
+
     @Step("При прокрутке страницы Горизонтальное меню отображается.")
-    public boolean stickHorisontalMenu() {
+    public WayIndexPage waitStickHorisontalMenu() {
         js.executeScript("window.scrollBy(0,1000)");
-        return wait.until(ExpectedConditions.visibilityOf(stickedHorisontalMenu)).isDisplayed();
+        wait.until(ExpectedConditions.visibilityOf(stickedHorisontalMenu)).isDisplayed();
+        return this;
     }
 
-    @Step("Класс Prev присутствует у слайдов до свайпа.")
-    public boolean coursesPrevClassExist(int activeSlideBannerIndex) {
-        return courses.get(activeSlideBannerIndex - 1).getAttribute("class").contains("swiper-slide-prev");
-
-    }
-
-    @Step("Класс Active присутствует у слайдов до свайпа.")
-    public boolean coursesActiveClassExist(int activeSlideBannerIndex) {
-        return courses.get(activeSlideBannerIndex).getAttribute("class").contains("swiper-slide-active");
-    }
-
-    @Step("Класс Next присутствует у слайдов до свайпа.")
-    public boolean coursesNextClassExist(int activeSlideBannerIndex) {
-        return courses.get(activeSlideBannerIndex + 1).getAttribute("class").contains("swiper-slide-next");
-    }
 
     @Step("Клик по кнопке свайпа слайдера с курсами вправо.")
     public WayIndexPage nextCourseButtonClick() {
@@ -174,24 +171,6 @@ public class WayIndexPage {
         return this;
     }
 
-    @Step("Класс Prev присутствует у слайдов после свайпа.")
-    public boolean afterActivityCoursesPrevClassExist(int index) {
-        return courses.get(index).getAttribute("class").contains("swiper-slide-prev");
-    }
-    @Step("Класс Active присутствует у слайдов после свайпа.")
-    public boolean afterActivityCoursesActiveClassExist(int index) {
-        return courses.get(index + 1).getAttribute("class").contains("swiper-slide-active");
-    }
-
-    @Step("Активный слайд в слайдере с Курсами отображается.")
-    public boolean afterActivityCoursesExist(int index) {
-        return banners.get(index + 1).isDisplayed();
-    }
-
-    @Step("Класс Next присутствует у слайдов после свайпа.")
-    public boolean afterActivityCoursesNextClassExist(int index) {
-        return courses.get(index + 2).getAttribute("class").contains("swiper-slide-next");
-    }
 
     @Step("Наведение мыши на выпадающий список Resources")
     public WayIndexPage triggerDropdown() {

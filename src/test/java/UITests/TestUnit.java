@@ -9,10 +9,8 @@ import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
-import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.interactions.Actions;
-import org.openqa.selenium.support.ui.WebDriverWait;
+import org.openqa.selenium.WebElement;
 import pageObjects.*;
 import utils.BrowserInit;
 import utils.ConfProperties;
@@ -26,22 +24,17 @@ public class TestUnit {
     private wayAutorisation wayAutorisation;
     private WayLogin waylogin;
     private SeleniumTutorialIndex seleniumTutorialIndex;
-    private Actions action;
-    private WebDriverWait wait;
-    private JavascriptExecutor js;
+
     @Before
     @Step("Инициализация браузера")
     public void before() {
         browser = BrowserInit.getWebdriver();
-        action = new Actions(browser);
-        wait = new WebDriverWait(browser, 15);
-        js = (JavascriptExecutor) browser;
-        wayIndexPage = new WayIndexPage(browser,action,wait,js);
+        wayIndexPage = new WayIndexPage(browser);
         utils = new UtilsMethods();
-        wayAutojquery = new WayAutojquery(browser,wait);
-        wayAutorisation = new wayAutorisation(browser,wait);
-        waylogin=new WayLogin(browser);
-        seleniumTutorialIndex=new SeleniumTutorialIndex(browser,wait);
+        wayAutojquery = new WayAutojquery(browser);
+        wayAutorisation = new wayAutorisation(browser);
+        waylogin = new WayLogin(browser);
+        seleniumTutorialIndex = new SeleniumTutorialIndex(browser);
     }
 
     @Epic("Проверка существования и отображения элементов")
@@ -49,9 +42,9 @@ public class TestUnit {
     @Test
     @Issue("UI-WAY2 №1")
     @DisplayName("Проверка наличия и отображения контактов в Хэдере")
-    public void testWay1() {
+    public void headerVisibilityTest() {
         browser.get(ConfProperties.getProperty("mainTestPage"));
-        Assert.assertTrue(wayIndexPage.contactsExist());
+        wayIndexPage.waitContacts();
     }
 
     @Epic("Проверка существования и отображения элементов, их работоспособности")
@@ -59,22 +52,15 @@ public class TestUnit {
     @Test
     @Issue("UI-WAY2 №1")
     @DisplayName("Проверка наличия и отображения баннера. Проверка его работоспособности.")
-    public void testWay2() {
+    public void swiperBannerTest() {
         browser.get(ConfProperties.getProperty("mainTestPage"));
-        wayIndexPage.sliderBannerActivate();
-        Assert.assertTrue(wayIndexPage.adBannerExist());
-        wayIndexPage.bannerCloseButtonClick();
-        Assert.assertTrue(wayIndexPage.sliderBannerExist());
-        int activeSlideBannerIndex = utils.getActiveSlideIndex(wayIndexPage.banners);
-        Assert.assertTrue(wayIndexPage.slideExist(activeSlideBannerIndex));
-        Assert.assertTrue(wayIndexPage.slidePrevClassExist(activeSlideBannerIndex));
-        Assert.assertTrue(wayIndexPage.slideActiveClassExist(activeSlideBannerIndex));
-        Assert.assertTrue(wayIndexPage.slideNextClassExist(activeSlideBannerIndex));
+        wayIndexPage.sliderBannerActivate().waitAdBanner().bannerCloseButtonClick().waitSliderBanner();
+        WebElement activeSlide = wayIndexPage.activeSlide();
+        WebElement nextSlide = wayIndexPage.nextSlide();
         wayIndexPage.slideSlider();
-        Assert.assertTrue(wayIndexPage.afterActivitySlideExist(activeSlideBannerIndex));
-        Assert.assertTrue(wayIndexPage.afterActivitySlidePrevClassExist(activeSlideBannerIndex));
-        Assert.assertTrue(wayIndexPage.afterActivitySlideNextClassExist(activeSlideBannerIndex));
-        Assert.assertTrue(wayIndexPage.afterActivitySlideActiveClassExist(activeSlideBannerIndex));
+        Assert.assertTrue(wayIndexPage.slideClassContainsActive(nextSlide));
+        Assert.assertTrue(wayIndexPage.slideClassContainsPrev(activeSlide));
+
     }
 
     @Epic("Проверка существования и отображения элементов, их работоспособности")
@@ -82,11 +68,9 @@ public class TestUnit {
     @Test
     @Issue("UI-WAY2 №1")
     @DisplayName("Проверка наличия и отображения горизонтального меню. Проверка работы stick класса слайдера.")
-    public void testWay3() {
+    public void horizontalMenuVisibilityTest() {
         browser.get(ConfProperties.getProperty("mainTestPage"));
-        wayIndexPage.sliderBannerActivate();
-        Assert.assertTrue(wayIndexPage.horisontalMenuExist());
-        Assert.assertTrue(wayIndexPage.stickHorisontalMenu());
+        wayIndexPage.sliderBannerActivate().waitHorisontalMenu().waitStickHorisontalMenu();
     }
 
     @Epic("Проверка существования и отображения элементов")
@@ -94,9 +78,9 @@ public class TestUnit {
     @Test
     @Issue("UI-WAY2 №1")
     @DisplayName("Проверка наличия и отображения блока с Сертификатами.")
-    public void testWay4() {
+    public void certificatesBlockVisibilityTest() {
         browser.get(ConfProperties.getProperty("mainTestPage"));
-        Assert.assertTrue(wayIndexPage.certificatesBlockExist());
+        wayIndexPage.waitCertificatesBlock();
     }
 
     @Epic("Проверка существования и отображения элементов, их работоспособности")
@@ -104,19 +88,14 @@ public class TestUnit {
     @Test
     @Issue("UI-WAY2 №1")
     @DisplayName("Проверка наличия и отображения слайдера с курсами. Проверка работоспособности слайдера.")
-    public void testWay5() {
+    public void swiperCoursesTest() {
         browser.get(ConfProperties.getProperty("mainTestPage"));
-        wayIndexPage.sliderBannerActivate();
-        Assert.assertTrue(wayIndexPage.sliderCourcesExist());
-        int activeSlideCoursesIndex = utils.getActiveSlideIndex(wayIndexPage.courses);
-        Assert.assertTrue(wayIndexPage.coursesPrevClassExist(activeSlideCoursesIndex));
-        Assert.assertTrue(wayIndexPage.coursesActiveClassExist(activeSlideCoursesIndex));
-        Assert.assertTrue(wayIndexPage.coursesNextClassExist(activeSlideCoursesIndex));
+        wayIndexPage.sliderBannerActivate().waitSliderCources();
+        WebElement activeCoursesSlide = wayIndexPage.coursesActiveSlide();
+        WebElement nextCoursesSlide = wayIndexPage.coursesNextSlide();
         wayIndexPage.nextCourseButtonClick();
-        Assert.assertTrue(wayIndexPage.afterActivityCoursesExist(activeSlideCoursesIndex));
-        Assert.assertTrue(wayIndexPage.afterActivityCoursesPrevClassExist(activeSlideCoursesIndex));
-        Assert.assertTrue(wayIndexPage.afterActivityCoursesNextClassExist(activeSlideCoursesIndex));
-        Assert.assertTrue(wayIndexPage.afterActivityCoursesActiveClassExist(activeSlideCoursesIndex));
+        Assert.assertTrue(wayIndexPage.slideCoursesClassContainsActive(nextCoursesSlide));
+        Assert.assertTrue(wayIndexPage.slideCoursesClassContainsPrev(activeCoursesSlide));
     }
 
     @Epic("Проверка существования и отображения элементов")
@@ -124,9 +103,9 @@ public class TestUnit {
     @Test
     @Issue("UI-WAY2 №1")
     @DisplayName("Проверка наличия и отображения Футера")
-    public void testWay6() {
+    public void footerVisibilityTest() {
         browser.get(ConfProperties.getProperty("mainTestPage"));
-        Assert.assertTrue(wayIndexPage.footerExist());
+        wayIndexPage.waitFooter();
     }
 
     @Epic("Проверка перехода на другие страницы, проверка авторизации")
@@ -134,10 +113,10 @@ public class TestUnit {
     @Test
     @Issue("UI-WAY2 №2")
     @DisplayName("Проверка перехода на страницу PracticeSite 1")
-    public void testWay7() {
+    public void wayPracticeSiteEntranceTest() {
         browser.get(ConfProperties.getProperty("mainTestPage"));
         wayIndexPage.triggerDropdown().practiseSiteButtonClick();
-        Assert.assertTrue(wayAutojquery.bodyExistAssert());
+        wayAutojquery.waitBody();
         Assert.assertEquals(ConfProperties.getProperty("practice1ExpectedUrl"), browser.getCurrentUrl());
     }
 
@@ -146,10 +125,9 @@ public class TestUnit {
     @Test
     @Issue("UI-WAY2 №3")
     @DisplayName("Проверка авторизации на сайте Practice Site 2")
-    public void testWay8() {
+    public void practiceSiteAuthorizationTest() {
         browser.get(ConfProperties.getProperty("practice2login"));
-        wayAutorisation.sendUsername().sendPassword().sendUserDescription().clickSubmitButton();
-        Assert.assertTrue(wayAutorisation.successLogTextExist());
+        wayAutorisation.sendUsername().sendPassword().sendUserDescription().clickSubmitButton().waitSuccessLoginText();
         Assert.assertEquals("You're logged in!!", wayAutorisation.getSuccessLogText());
     }
 
@@ -158,12 +136,11 @@ public class TestUnit {
     @Test
     @Issue("UI-WAY2 №4")
     @DisplayName("Проверка регистрации на сайте Way2")
-    public void testWay9() {
+    public void wayRegistrationTest() {
         browser.get(ConfProperties.getProperty("loginWay2"));
         browser.manage().window().maximize();
         waylogin.signUpHrefClick().sendFullName().sendEmail().sendPassword().clickCommit();
-        Assert.assertTrue(seleniumTutorialIndex.avatarImgExist());
-        seleniumTutorialIndex.clickAvatarImg().clickLogoutHref();
+        seleniumTutorialIndex.waitAvatarImg().clickAvatarImg().clickLogoutHref();
     }
 
     @Epic("Проверка перехода на другие страницы, проверка авторизации")
@@ -171,10 +148,10 @@ public class TestUnit {
     @Test
     @Issue("UI-WAY2 №5")
     @DisplayName("Проверка авторизации на сайте Way2")
-    public void testWay10() {
+    public void wayAuthorizationTest() {
         browser.get(ConfProperties.getProperty("loginWay2"));
         waylogin.loginSendEmail().loginSendPassword().clickCommit();
-        Assert.assertTrue(seleniumTutorialIndex.avatarImgExist());
+        seleniumTutorialIndex.waitAvatarImg();
     }
 
     @After
