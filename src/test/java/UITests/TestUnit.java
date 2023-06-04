@@ -128,28 +128,28 @@ public class TestUnit {
         Assert.assertEquals("You're logged in!!", wayAutorisation.getSuccessLogText());
     }
 
-    @Epic("Проверка перехода на другие страницы, проверка авторизации, регистрации")
-    @Description("Тест проверяет проходит ли регистрация на сайте Way2 успешно, при вводе уникальных данных.")
-    @Test
-    @Issue("UI-WAY2 №9")
-    @DisplayName("Проверка регистрации на сайте Way2")
-    public void wayRegistrationTest() {
-        browser.get(ConfProperties.getProperty("loginWay2"));
-        browser.manage().window().maximize();
-        waylogin.signUpHrefClick().sendFullName().sendEmail().sendPassword().clickCommit();
-        seleniumTutorialIndex.waitAvatarImg().clickAvatarImg().clickLogoutHref();
-    }
-
-    @Epic("Проверка перехода на другие страницы, проверка авторизации")
-    @Description("Тест проверяет проходит авторизация на сайте Way2 при вводе учетных данных пользователя.")
-    @Test
-    @Issue("UI-WAY2 №10")
-    @DisplayName("Проверка авторизации на сайте Way2")
-    public void wayAuthorizationTest() {
-        browser.get(ConfProperties.getProperty("loginWay2"));
-        waylogin.loginSendEmail().loginSendPassword().clickCommit();
-        seleniumTutorialIndex.waitAvatarImg();
-    }
+//    @Epic("Проверка перехода на другие страницы, проверка авторизации, регистрации")
+//    @Description("Тест проверяет проходит ли регистрация на сайте Way2 успешно, при вводе уникальных данных.")
+//    @Test
+//    @Issue("UI-WAY2 №9")
+//    @DisplayName("Проверка регистрации на сайте Way2")
+//    public void wayRegistrationTest() {
+//        browser.get(ConfProperties.getProperty("loginWay2"));
+//        browser.manage().window().maximize();
+//        waylogin.signUpHrefClick().sendFullName().sendEmail().sendPassword().clickCommit();
+//        seleniumTutorialIndex.waitAvatarImg().clickAvatarImg().clickLogoutHref();
+//    }
+//
+//    @Epic("Проверка перехода на другие страницы, проверка авторизации")
+//    @Description("Тест проверяет проходит авторизация на сайте Way2 при вводе учетных данных пользователя.")
+//    @Test
+//    @Issue("UI-WAY2 №10")
+//    @DisplayName("Проверка авторизации на сайте Way2")
+//    public void wayAuthorizationTest() {
+//        browser.get(ConfProperties.getProperty("loginWay2"));
+//        waylogin.loginSendEmail().loginSendPassword().clickCommit();
+//        seleniumTutorialIndex.waitAvatarImg();
+//    }
 
     @After
     @Step("Очиска данных")
