@@ -6,10 +6,9 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
 import utils.ConfProperties;
 
-public class wayAutorisation extends BasePage {
+public class WayAutorisation extends BasePage {
 
     @FindBy(css = "#username")
     private WebElement usernameInput;
@@ -27,37 +26,37 @@ public class wayAutorisation extends BasePage {
     private WebElement loginButton;
 
 
-    public wayAutorisation(WebDriver browser) {
+    public WayAutorisation(WebDriver browser) {
         super(browser);
         PageFactory.initElements(browser, this);
     }
 
     @Step("Отправка текста в поле Username.")
-    public wayAutorisation sendUsername() {
+    public WayAutorisation sendUsername() {
         usernameInput.sendKeys(ConfProperties.getProperty("p2username"));
         return this;
     }
 
     @Step("Отправка текста в поле Password.")
-    public wayAutorisation sendPassword() {
+    public WayAutorisation sendPassword() {
         passInput.sendKeys(ConfProperties.getProperty("p2pass"));
         return this;
     }
 
     @Step("Отправка текста в поле User Description.")
-    public wayAutorisation sendUserDescription() {
+    public WayAutorisation sendUserDescription() {
         usernameDescriptionInput.sendKeys(ConfProperties.getProperty("p2username"));
         return this;
     }
 
     @Step("Клик по кнопке Submit")
-    public wayAutorisation clickSubmitButton() {
+    public WayAutorisation clickSubmitButton() {
         loginButton.click();
         return this;
     }
 
     @Step("Текст о успешном входе в систему существует.")
-    public wayAutorisation waitSuccessLoginText() {
+    public WayAutorisation waitSuccessLoginText() {
         wait.until(ExpectedConditions.visibilityOf(successlogtext)).isDisplayed();
         return this;
     }

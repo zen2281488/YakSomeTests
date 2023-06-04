@@ -14,14 +14,12 @@ import org.openqa.selenium.WebElement;
 import pageObjects.*;
 import utils.BrowserInit;
 import utils.ConfProperties;
-import utils.UtilsMethods;
 
 public class TestUnit {
     private WebDriver browser;
     private WayIndexPage wayIndexPage;
-    private UtilsMethods utils;
     private WayAutojquery wayAutojquery;
-    private wayAutorisation wayAutorisation;
+    private WayAutorisation wayAutorisation;
     private WayLogin waylogin;
     private SeleniumTutorialIndex seleniumTutorialIndex;
 
@@ -30,9 +28,8 @@ public class TestUnit {
     public void before() {
         browser = BrowserInit.getWebdriver();
         wayIndexPage = new WayIndexPage(browser);
-        utils = new UtilsMethods();
         wayAutojquery = new WayAutojquery(browser);
-        wayAutorisation = new wayAutorisation(browser);
+        wayAutorisation = new WayAutorisation(browser);
         waylogin = new WayLogin(browser);
         seleniumTutorialIndex = new SeleniumTutorialIndex(browser);
     }
@@ -50,7 +47,7 @@ public class TestUnit {
     @Epic("Проверка существования и отображения элементов, их работоспособности")
     @Description("Тест проверяет отображение слайдера с баннерами. Свайпает слайдер и проверяет меняется ли класс слайдера на другой, для проверки смены активных слайдов")
     @Test
-    @Issue("UI-WAY2 №1")
+    @Issue("UI-WAY2 №2")
     @DisplayName("Проверка наличия и отображения баннера. Проверка его работоспособности.")
     public void swiperBannerTest() {
         browser.get(ConfProperties.getProperty("mainTestPage"));
@@ -66,7 +63,7 @@ public class TestUnit {
     @Epic("Проверка существования и отображения элементов, их работоспособности")
     @Description("Тест проверяет наличие Горизонтального меню. Прокручивает страницу вниз, чтобы увидеть следует ли слайдер за пользователем.")
     @Test
-    @Issue("UI-WAY2 №1")
+    @Issue("UI-WAY2 №3")
     @DisplayName("Проверка наличия и отображения горизонтального меню. Проверка работы stick класса слайдера.")
     public void horizontalMenuVisibilityTest() {
         browser.get(ConfProperties.getProperty("mainTestPage"));
@@ -76,7 +73,7 @@ public class TestUnit {
     @Epic("Проверка существования и отображения элементов")
     @Description("Тест проверяет наличие и отображение блока с Сертификатами.")
     @Test
-    @Issue("UI-WAY2 №1")
+    @Issue("UI-WAY2 №4")
     @DisplayName("Проверка наличия и отображения блока с Сертификатами.")
     public void certificatesBlockVisibilityTest() {
         browser.get(ConfProperties.getProperty("mainTestPage"));
@@ -86,7 +83,7 @@ public class TestUnit {
     @Epic("Проверка существования и отображения элементов, их работоспособности")
     @Description("Тест проверяет отображение слайдера с курсами. Свайпает слайдер и проверяет меняется ли класс слайдера на другой, для проверки смены активных слайдов")
     @Test
-    @Issue("UI-WAY2 №1")
+    @Issue("UI-WAY2 №5")
     @DisplayName("Проверка наличия и отображения слайдера с курсами. Проверка работоспособности слайдера.")
     public void swiperCoursesTest() {
         browser.get(ConfProperties.getProperty("mainTestPage"));
@@ -101,7 +98,7 @@ public class TestUnit {
     @Epic("Проверка существования и отображения элементов")
     @Description("Тест проверяет наличие и отображение Футера.")
     @Test
-    @Issue("UI-WAY2 №1")
+    @Issue("UI-WAY2 №6")
     @DisplayName("Проверка наличия и отображения Футера")
     public void footerVisibilityTest() {
         browser.get(ConfProperties.getProperty("mainTestPage"));
@@ -111,7 +108,7 @@ public class TestUnit {
     @Epic("Проверка перехода на другие страницы, проверка авторизации")
     @Description("Тест проверяет переходит ли на страницу PractiseSite1 если клинуть по соответствующей ссылке в выпадающем списке в хэдере.")
     @Test
-    @Issue("UI-WAY2 №2")
+    @Issue("UI-WAY2 №7")
     @DisplayName("Проверка перехода на страницу PracticeSite 1")
     public void wayPracticeSiteEntranceTest() {
         browser.get(ConfProperties.getProperty("mainTestPage"));
@@ -123,7 +120,7 @@ public class TestUnit {
     @Epic("Проверка перехода на другие страницы, проверка авторизации")
     @Description("Тест проверяет авторизацию на сайте Practice Site 2. Появляется ли текст о успешной авторизации после ввода учетных данных.")
     @Test
-    @Issue("UI-WAY2 №3")
+    @Issue("UI-WAY2 №8")
     @DisplayName("Проверка авторизации на сайте Practice Site 2")
     public void practiceSiteAuthorizationTest() {
         browser.get(ConfProperties.getProperty("practice2login"));
@@ -134,7 +131,7 @@ public class TestUnit {
     @Epic("Проверка перехода на другие страницы, проверка авторизации, регистрации")
     @Description("Тест проверяет проходит ли регистрация на сайте Way2 успешно, при вводе уникальных данных.")
     @Test
-    @Issue("UI-WAY2 №4")
+    @Issue("UI-WAY2 №9")
     @DisplayName("Проверка регистрации на сайте Way2")
     public void wayRegistrationTest() {
         browser.get(ConfProperties.getProperty("loginWay2"));
@@ -146,7 +143,7 @@ public class TestUnit {
     @Epic("Проверка перехода на другие страницы, проверка авторизации")
     @Description("Тест проверяет проходит авторизация на сайте Way2 при вводе учетных данных пользователя.")
     @Test
-    @Issue("UI-WAY2 №5")
+    @Issue("UI-WAY2 №10")
     @DisplayName("Проверка авторизации на сайте Way2")
     public void wayAuthorizationTest() {
         browser.get(ConfProperties.getProperty("loginWay2"));
