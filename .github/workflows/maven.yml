@@ -45,7 +45,7 @@ jobs:
           allure_history: allure-history
 
       - name: Set permissions for Allure
-        run: sudo chmod -R 777 /home/runner/work/SDETEdu/SDETEdu/target/
+        run: sudo chmod -R 777 /home/runner/work/SDETedu/SDETedu/target/
 
       - name: Compile allure Reports
         run: mvn allure:report
