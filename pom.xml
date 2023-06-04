@@ -60,7 +60,7 @@
                         </property>
                     </properties>
                     <systemPropertyVariables>
-                        <allure.results.directory>${project.build.directory}/allure-results</allure.results.directory>
+                        <allure.results.directory>${project.build.directory}/target/allure-results</allure.results.directory>
                     </systemPropertyVariables>
                 </configuration>
                 <dependencies>
@@ -77,7 +77,7 @@
                 <version>2.10.0</version>
                 <configuration>
                     <reportVersion>${allure.version}</reportVersion>
-                    <resultsDirectory>${project.build.directory}/allure-results</resultsDirectory>
+                    <resultsDirectory>${project.build.directory}/target/allure-results</resultsDirectory>
                 </configuration>
             </plugin>
             <plugin>
@@ -92,7 +92,7 @@
                             <goal>copy-resources</goal>
                         </goals>
                         <configuration>
-                            <outputDirectory>${project.build.directory}/allure-results</outputDirectory>
+                            <outputDirectory>${project.build.directory}/target/allure-results</outputDirectory>
                             <resources>
                                 <resource>
                                     <directory>${basedir}</directory>
