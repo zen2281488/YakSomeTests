@@ -45,7 +45,7 @@ public class WayLogin extends BasePage {
 
     @Step("Отправка текста в поле Password.")
     public WayLogin sendPassword() {
-        passwordInput.sendKeys(ConfProperties.getProperty("way2RegPassword"));
+        passwordInput.sendKeys(ConfProperties.getProperty("way2LogPassword"));
         return this;
     }
 

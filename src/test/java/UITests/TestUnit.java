@@ -52,12 +52,11 @@ public class TestUnit {
     public void swiperBannerTest() {
         browser.get(ConfProperties.getProperty("mainTestPage"));
         wayIndexPage.sliderBannerActivate().waitAdBanner().bannerCloseButtonClick().waitSliderBanner();
-        WebElement activeSlide = wayIndexPage.activeSlide();
-        WebElement nextSlide = wayIndexPage.nextSlide();
+        var activeSwiper = wayIndexPage.getActiveSwiper();
+        var nextSwiper = wayIndexPage.getNextSwiper();
         wayIndexPage.slideSlider();
-        Assert.assertTrue(wayIndexPage.slideClassContainsActive(nextSlide));
-        Assert.assertTrue(wayIndexPage.slideClassContainsPrev(activeSlide));
-
+        Assert.assertTrue(activeSwiper.isPrev());
+        Assert.assertTrue(nextSwiper.isActive());
     }
 
     @Epic("Проверка существования и отображения элементов, их работоспособности")
@@ -88,11 +87,11 @@ public class TestUnit {
     public void swiperCoursesTest() {
         browser.get(ConfProperties.getProperty("mainTestPage"));
         wayIndexPage.sliderBannerActivate().waitSliderCources();
-        WebElement activeCoursesSlide = wayIndexPage.coursesActiveSlide();
-        WebElement nextCoursesSlide = wayIndexPage.coursesNextSlide();
+        var activeCourse = wayIndexPage.getActiveCourse();
+        var nextCourse = wayIndexPage.getNextCourse();
         wayIndexPage.nextCourseButtonClick();
-        Assert.assertTrue(wayIndexPage.slideCoursesClassContainsActive(nextCoursesSlide));
-        Assert.assertTrue(wayIndexPage.slideCoursesClassContainsPrev(activeCoursesSlide));
+        Assert.assertTrue(activeCourse.isPrev());
+        Assert.assertTrue(nextCourse.isActive());
     }
 
     @Epic("Проверка существования и отображения элементов")
@@ -140,16 +139,16 @@ public class TestUnit {
 //        seleniumTutorialIndex.waitAvatarImg().clickAvatarImg().clickLogoutHref();
 //    }
 //
-//    @Epic("Проверка перехода на другие страницы, проверка авторизации")
-//    @Description("Тест проверяет проходит авторизация на сайте Way2 при вводе учетных данных пользователя.")
-//    @Test
-//    @Issue("UI-WAY2 №10")
-//    @DisplayName("Проверка авторизации на сайте Way2")
-//    public void wayAuthorizationTest() {
-//        browser.get(ConfProperties.getProperty("loginWay2"));
-//        waylogin.loginSendEmail().loginSendPassword().clickCommit();
-//        seleniumTutorialIndex.waitAvatarImg();
-//    }
+    @Epic("Проверка перехода на другие страницы, проверка авторизации")
+    @Description("Тест проверяет проходит авторизация на сайте Way2 при вводе учетных данных пользователя.")
+    @Test
+    @Issue("UI-WAY2 №10")
+    @DisplayName("Проверка авторизации на сайте Way2")
+    public void wayAuthorizationTest() {
+        browser.get(ConfProperties.getProperty("loginWay2"));
+        waylogin.loginSendEmail().loginSendPassword().clickCommit();
+        seleniumTutorialIndex.waitAvatarImg();
+    }
 
     @After
     @Step("Очиска данных")

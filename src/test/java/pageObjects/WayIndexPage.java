@@ -8,11 +8,12 @@ import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class WayIndexPage extends BasePage {
     @FindBy(css = "div.ast-above-header-wrap")
     private WebElement headContacts;
-    @FindBy(css = "#elementor-popup-modal-26600 > div > div.dialog-message.dialog-lightbox-message")
+    @FindBy(css = ".dialog-lightbox-message")
     private WebElement adBanner;
     @FindBy(css = ".elementor-slides-wrapper.swiper-container-horizontal")
     private WebElement sliderBanner;
@@ -183,5 +184,28 @@ public class WayIndexPage extends BasePage {
         practiceSite1Button.click();
         return this;
     }
+    public Swiper getActiveSwiper() {
+        return getSwipers().stream().filter(Swiper::isActive).findFirst().orElseThrow();
+    }
 
+
+    public Swiper getNextSwiper() {
+        return getSwipers().stream().filter(Swiper::isNext).findFirst().orElseThrow();
+    }
+
+    private List<Swiper> getSwipers() {
+        return banners.stream().map(Swiper::new).collect(Collectors.toList());
+    }
+
+    public Swiper getActiveCourse() {
+        return getCourses().stream().filter(Swiper::isActive).findFirst().orElseThrow();
+    }
+
+    public Swiper getNextCourse() {
+        return getCourses().stream().filter(Swiper::isNext).findFirst().orElseThrow();
+    }
+
+    private List<Swiper> getCourses() {
+        return courses.stream().map(Swiper::new).collect(Collectors.toList());
+    }
 }
