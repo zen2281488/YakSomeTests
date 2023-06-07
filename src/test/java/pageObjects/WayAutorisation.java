@@ -27,7 +27,6 @@ public class WayAutorisation extends BasePage {
 
     public WayAutorisation(WebDriver browser) {
         super(browser);
-        PageFactory.initElements(browser, this);
     }
 
     @Step("Отправка текста в поле Username.")

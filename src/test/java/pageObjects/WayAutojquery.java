@@ -13,7 +13,6 @@ public class WayAutojquery extends BasePage {
 
     public WayAutojquery(WebDriver browser) {
         super(browser);
-        PageFactory.initElements(browser, this);
     }
 
     @Step("Body существует.")

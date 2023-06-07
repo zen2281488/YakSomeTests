@@ -13,7 +13,6 @@ public class SeleniumTutorialIndex extends BasePage {
 
     public SeleniumTutorialIndex(WebDriver browser) {
         super(browser);
-        PageFactory.initElements(browser, this);
     }
 
     @Step("Аватар существует.")

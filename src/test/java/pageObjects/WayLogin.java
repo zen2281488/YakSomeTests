@@ -19,7 +19,6 @@ public class WayLogin extends BasePage {
 
     public WayLogin(WebDriver browser) {
         super(browser);
-        PageFactory.initElements(browser, this);
     }
 
     @Step("Клик по кнопке Commit")

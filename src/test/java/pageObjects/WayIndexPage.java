@@ -55,7 +55,6 @@ public class WayIndexPage extends BasePage {
 
     public WayIndexPage(WebDriver browser) {
         super(browser);
-        PageFactory.initElements(browser, this);
     }
 
     @Step("Слайдер курсов существует.")
