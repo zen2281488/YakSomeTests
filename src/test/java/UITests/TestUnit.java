@@ -1,20 +1,17 @@
 package UITests;
 
-import io.qameta.allure.Description;
-import io.qameta.allure.Epic;
-import io.qameta.allure.Issue;
-import io.qameta.allure.Step;
+import io.qameta.allure.*;
 import io.qameta.allure.junit4.DisplayName;
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
 import pageObjects.*;
 import utils.BrowserInit;
 import utils.ConfProperties;
 
+@Epic("Проверка существования и отображения элементов")
 public class TestUnit {
     private WebDriver browser;
     private WayIndexPage wayIndexPage;
@@ -34,77 +31,81 @@ public class TestUnit {
         seleniumTutorialIndex = new SeleniumTutorialIndex(browser);
     }
 
-    @Epic("Проверка существования и отображения элементов")
+    @Feature("Тест существования и отображения элементов.")
     @Description("Тест проверяет наличие блока Контактов в Хедере")
     @Test
     @Issue("UI-WAY2 №1")
     @DisplayName("Проверка наличия и отображения контактов в Хэдере")
     public void headerVisibilityTest() {
         browser.get(ConfProperties.getProperty("mainTestPage"));
-        wayIndexPage.waitContacts();
+        Assert.assertTrue("Конейнер с Контактами не отображается или отсутствует.",wayIndexPage.waitContacts());
     }
 
-    @Epic("Проверка существования и отображения элементов, их работоспособности")
+    @Feature("Тест существования и отображения элементов, их работоспособности.")
     @Description("Тест проверяет отображение слайдера с баннерами. Свайпает слайдер и проверяет меняется ли класс слайдера на другой, для проверки смены активных слайдов")
     @Test
     @Issue("UI-WAY2 №2")
     @DisplayName("Проверка наличия и отображения баннера. Проверка его работоспособности.")
     public void swiperBannerTest() {
         browser.get(ConfProperties.getProperty("mainTestPage"));
-        wayIndexPage.sliderBannerActivate().waitAdBanner().bannerCloseButtonClick().waitSliderBanner();
+        wayIndexPage.sliderBannerActivate().waitAdBanner().bannerCloseButtonClick();
+        Assert.assertTrue("Слайдер с Баннерами не отображается, или не существует.",wayIndexPage.waitSliderBanner());
         var activeSwiper = wayIndexPage.getActiveSwiper();
         var nextSwiper = wayIndexPage.getNextSwiper();
         wayIndexPage.slideSlider();
-        Assert.assertTrue(activeSwiper.isPrev());
-        Assert.assertTrue(nextSwiper.isActive());
+        Assert.assertTrue("Активный слайд не изменил свой класс на prev",activeSwiper.isPrev());
+        Assert.assertTrue("Следующий слайд не изменил свой класс на active",nextSwiper.isActive());
     }
 
-    @Epic("Проверка существования и отображения элементов, их работоспособности")
+    @Feature("Тест существования и отображения элементов, их работоспособности.")
     @Description("Тест проверяет наличие Горизонтального меню. Прокручивает страницу вниз, чтобы увидеть следует ли слайдер за пользователем.")
     @Test
     @Issue("UI-WAY2 №3")
     @DisplayName("Проверка наличия и отображения горизонтального меню. Проверка работы stick класса слайдера.")
     public void horizontalMenuVisibilityTest() {
         browser.get(ConfProperties.getProperty("mainTestPage"));
-        wayIndexPage.sliderBannerActivate().waitHorisontalMenu().waitStickHorisontalMenu();
+        wayIndexPage.sliderBannerActivate();
+        Assert.assertTrue("Хэдер не отображается, или не существует.",wayIndexPage.waitHorisontalMenu());
+        Assert.assertTrue("Хэдер не следует за пользователем",wayIndexPage.waitStickHorisontalMenu());
     }
 
-    @Epic("Проверка существования и отображения элементов")
+    @Feature("Тест существования и отображения элементов.")
     @Description("Тест проверяет наличие и отображение блока с Сертификатами.")
     @Test
     @Issue("UI-WAY2 №4")
     @DisplayName("Проверка наличия и отображения блока с Сертификатами.")
     public void certificatesBlockVisibilityTest() {
         browser.get(ConfProperties.getProperty("mainTestPage"));
-        wayIndexPage.waitCertificatesBlock();
+        Assert.assertTrue("Блок с Сертификатами не отображается либо не существует.",wayIndexPage.waitCertificatesBlock());
     }
 
-    @Epic("Проверка существования и отображения элементов, их работоспособности")
+    @Feature("Тест существования и отображения элементов, их работоспособности.")
     @Description("Тест проверяет отображение слайдера с курсами. Свайпает слайдер и проверяет меняется ли класс слайдера на другой, для проверки смены активных слайдов")
     @Test
     @Issue("UI-WAY2 №5")
     @DisplayName("Проверка наличия и отображения слайдера с курсами. Проверка работоспособности слайдера.")
     public void swiperCoursesTest() {
         browser.get(ConfProperties.getProperty("mainTestPage"));
-        wayIndexPage.sliderBannerActivate().waitSliderCources();
+        wayIndexPage.sliderBannerActivate();
+        Assert.assertTrue("Слайдер с Курсами не отображается либо не существует.",wayIndexPage.waitSliderCources());
         var activeCourse = wayIndexPage.getActiveCourse();
         var nextCourse = wayIndexPage.getNextCourse();
         wayIndexPage.nextCourseButtonClick();
-        Assert.assertTrue(activeCourse.isPrev());
-        Assert.assertTrue(nextCourse.isActive());
+        Assert.assertTrue("Активный слайд слайдера с курсами не изменил свой класс на prev",activeCourse.isPrev());
+        Assert.assertTrue("Следующий слайд слайдера с курсами не изменил свой класс на active",nextCourse.isActive());
     }
 
-    @Epic("Проверка существования и отображения элементов")
+    @Feature("Тест существования и отображения элементов.")
     @Description("Тест проверяет наличие и отображение Футера.")
     @Test
     @Issue("UI-WAY2 №6")
     @DisplayName("Проверка наличия и отображения Футера")
     public void footerVisibilityTest() {
         browser.get(ConfProperties.getProperty("mainTestPage"));
-        wayIndexPage.waitFooter();
+        Assert.assertTrue("Футер не отображается или не существует.",wayIndexPage.waitFooter());
     }
 
-    @Epic("Проверка перехода на другие страницы, проверка авторизации")
+    @Feature("Тест перехода на другие страницы.")
     @Description("Тест проверяет переходит ли на страницу PractiseSite1 если клинуть по соответствующей ссылке в выпадающем списке в хэдере.")
     @Test
     @Issue("UI-WAY2 №7")
@@ -112,42 +113,30 @@ public class TestUnit {
     public void wayPracticeSiteEntranceTest() {
         browser.get(ConfProperties.getProperty("mainTestPage"));
         wayIndexPage.triggerDropdown().practiseSiteButtonClick();
-        wayAutojquery.waitBody();
-        Assert.assertEquals(ConfProperties.getProperty("practice1ExpectedUrl"), browser.getCurrentUrl());
+        Assert.assertTrue("Содержание страницы не загрузилось.",wayAutojquery.waitBody());
+        Assert.assertEquals("URL Страницы на которую был совершен переход, не совпадает с ожидаемым.",ConfProperties.getProperty("practice1ExpectedUrl"), browser.getCurrentUrl());
     }
 
-    @Epic("Проверка перехода на другие страницы, проверка авторизации")
+    @Feature("Тест авторизации.")
     @Description("Тест проверяет авторизацию на сайте Practice Site 2. Появляется ли текст о успешной авторизации после ввода учетных данных.")
     @Test
     @Issue("UI-WAY2 №8")
     @DisplayName("Проверка авторизации на сайте Practice Site 2")
     public void practiceSiteAuthorizationTest() {
         browser.get(ConfProperties.getProperty("practice2login"));
-        wayAutorisation.sendUsername().sendPassword().sendUserDescription().clickSubmitButton().waitSuccessLoginText();
-        Assert.assertEquals("You're logged in!!", wayAutorisation.getSuccessLogText());
+        wayAutorisation.sendUsername(ConfProperties.getProperty("p2username")).sendPassword(ConfProperties.getProperty("p2pass")).sendUserDescription(ConfProperties.getProperty("p2username")).clickSubmitButton().waitSuccessLoginText();
+        Assert.assertEquals("Текст уведомления о успешной авторизации не совпадает с ожидаемым.","You're logged in!!", wayAutorisation.getSuccessLogText());
     }
 
-//    @Epic("Проверка перехода на другие страницы, проверка авторизации, регистрации")
-//    @Description("Тест проверяет проходит ли регистрация на сайте Way2 успешно, при вводе уникальных данных.")
-//    @Test
-//    @Issue("UI-WAY2 №9")
-//    @DisplayName("Проверка регистрации на сайте Way2")
-//    public void wayRegistrationTest() {
-//        browser.get(ConfProperties.getProperty("loginWay2"));
-//        browser.manage().window().maximize();
-//        waylogin.signUpHrefClick().sendFullName().sendEmail().sendPassword().clickCommit();
-//        seleniumTutorialIndex.waitAvatarImg().clickAvatarImg().clickLogoutHref();
-//    }
-//
-    @Epic("Проверка перехода на другие страницы, проверка авторизации")
-    @Description("Тест проверяет проходит авторизация на сайте Way2 при вводе учетных данных пользователя.")
+    @Feature("Тест авторизации.")
+    @Description("Тест проверяет успешно ли проходит авторизация на сайте Way2 при вводе учетных данных пользователя.")
     @Test
     @Issue("UI-WAY2 №10")
     @DisplayName("Проверка авторизации на сайте Way2")
     public void wayAuthorizationTest() {
         browser.get(ConfProperties.getProperty("loginWay2"));
         waylogin.loginSendEmail().loginSendPassword().clickCommit();
-        seleniumTutorialIndex.waitAvatarImg();
+        Assert.assertTrue("Аватар не был загружен, авторизация не прошла успешно.",seleniumTutorialIndex.waitAvatarImg());
     }
 
     @After

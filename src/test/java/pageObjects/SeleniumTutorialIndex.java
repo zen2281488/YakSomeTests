@@ -11,30 +11,13 @@ public class SeleniumTutorialIndex extends BasePage {
     @FindBy(css = "img.gravatar")
     private WebElement avatarImg;
 
-    @FindBy(css = ".user-signout")
-    private WebElement logoutHref;
-
-
     public SeleniumTutorialIndex(WebDriver browser) {
         super(browser);
         PageFactory.initElements(browser, this);
     }
 
-    @Step("Клик по Аватару.")
-    public SeleniumTutorialIndex clickAvatarImg() {
-        avatarImg.click();
-        return this;
-    }
-
-    @Step("Клик на ссылку Logout.")
-    public SeleniumTutorialIndex clickLogoutHref() {
-        logoutHref.click();
-        return this;
-    }
-
     @Step("Аватар существует.")
-    public SeleniumTutorialIndex waitAvatarImg() {
-        wait.until(ExpectedConditions.visibilityOf(avatarImg)).isDisplayed();
-        return this;
+    public boolean waitAvatarImg() {
+        return wait.until(ExpectedConditions.visibilityOf(avatarImg)).isDisplayed();
     }
 }

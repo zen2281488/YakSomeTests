@@ -11,15 +11,13 @@ public class WayAutojquery extends BasePage {
     @FindBy(css = "body")
     private WebElement body;
 
-
     public WayAutojquery(WebDriver browser) {
         super(browser);
         PageFactory.initElements(browser, this);
     }
 
     @Step("Body существует.")
-    public WayAutojquery waitBody() {
-        wait.until(ExpectedConditions.visibilityOf(body)).isDisplayed();
-        return this;
+    public boolean waitBody() {
+        return wait.until(ExpectedConditions.visibilityOf(body)).isDisplayed();
     }
 }

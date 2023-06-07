@@ -6,7 +6,6 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
-import utils.ConfProperties;
 
 public class WayAutorisation extends BasePage {
 
@@ -32,20 +31,20 @@ public class WayAutorisation extends BasePage {
     }
 
     @Step("Отправка текста в поле Username.")
-    public WayAutorisation sendUsername() {
-        usernameInput.sendKeys(ConfProperties.getProperty("p2username"));
+    public WayAutorisation sendUsername(String text) {
+        usernameInput.sendKeys(text);
         return this;
     }
 
     @Step("Отправка текста в поле Password.")
-    public WayAutorisation sendPassword() {
-        passInput.sendKeys(ConfProperties.getProperty("p2pass"));
+    public WayAutorisation sendPassword(String text) {
+        passInput.sendKeys(text);
         return this;
     }
 
     @Step("Отправка текста в поле User Description.")
-    public WayAutorisation sendUserDescription() {
-        usernameDescriptionInput.sendKeys(ConfProperties.getProperty("p2username"));
+    public WayAutorisation sendUserDescription(String text) {
+        usernameDescriptionInput.sendKeys(text);
         return this;
     }
 

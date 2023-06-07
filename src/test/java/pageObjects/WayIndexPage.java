@@ -13,33 +13,45 @@ import java.util.stream.Collectors;
 public class WayIndexPage extends BasePage {
     @FindBy(css = "div.ast-above-header-wrap")
     private WebElement headContacts;
+
     @FindBy(css = ".dialog-lightbox-message")
     private WebElement adBanner;
+
     @FindBy(css = ".elementor-slides-wrapper.swiper-container-horizontal")
     private WebElement sliderBanner;
+
     @FindBy(css = "#ast-hf-menu-1:nth-of-type(1)")
     private WebElement horisontalMenu;
+
     @FindBy(css = ".ast-sticky-shrunk.ast-header-sticked")
     private WebElement stickedHorisontalMenu;
+
     @FindBy(xpath = "//h1[contains(text(), 'Best Selenium Certification Course Online')][1]")
     private WebElement certificatesBlock;
-    @FindBy(css = ".swiper-container-initialized.swiper-container-horizontal.swiper-container-autoheight")
+
+    @FindBy(css = ".swiper-container-autoheight")
     private WebElement sliderCources;
+
     @FindBy(css = "[data-elementor-type='footer']")
     private WebElement footer;
+
     @FindBy(css = ".dialog-lightbox-close-button")
     private WebElement bannerClose;
+
     @FindBy(css = ".swiper-wrapper.elementor-slides>.swiper-slide")
     private List<WebElement> banners;
+
     @FindBy(css = ".pp-slider-arrow.swiper-button-next")
     private WebElement coursesNextButton;
+
     @FindBy(css = ".swiper-container-autoheight>.swiper-wrapper>.swiper-slide")
     private List<WebElement> courses;
+
     @FindBy(xpath = "//span[contains(text(), 'Resources')][1]")
     private WebElement resourcesButton;
+
     @FindBy(xpath = "//span[contains(text(), 'Practice Site 1')][1]")
     private WebElement practiceSite1Button;
-
 
     public WayIndexPage(WebDriver browser) {
         super(browser);
@@ -47,27 +59,23 @@ public class WayIndexPage extends BasePage {
     }
 
     @Step("Слайдер курсов существует.")
-    public WayIndexPage waitSliderCources() {
-        wait.until(ExpectedConditions.visibilityOf(sliderCources)).isDisplayed();
-        return this;
+    public boolean waitSliderCources() {
+        return wait.until(ExpectedConditions.visibilityOf(sliderCources)).isDisplayed();
     }
 
     @Step("Блок с сертификатами существует.")
-    public WayIndexPage waitCertificatesBlock() {
-        wait.until(ExpectedConditions.visibilityOf(certificatesBlock)).isDisplayed();
-        return this;
+    public boolean waitCertificatesBlock() {
+        return wait.until(ExpectedConditions.visibilityOf(certificatesBlock)).isDisplayed();
     }
 
     @Step("Блок с контактами существует.")
-    public WayIndexPage waitContacts() {
-        wait.until(ExpectedConditions.visibilityOf(headContacts)).isDisplayed();
-        return this;
+    public boolean waitContacts() {
+        return wait.until(ExpectedConditions.visibilityOf(headContacts)).isDisplayed();
     }
 
     @Step("Горизонтальное меню существует.")
-    public WayIndexPage waitHorisontalMenu() {
-        wait.until(ExpectedConditions.visibilityOf(horisontalMenu)).isDisplayed();
-        return this;
+    public boolean waitHorisontalMenu() {
+        return wait.until(ExpectedConditions.visibilityOf(horisontalMenu)).isDisplayed();
     }
 
     @Step("Активация слайдера баннеров")
@@ -77,9 +85,8 @@ public class WayIndexPage extends BasePage {
     }
 
     @Step("Слайдер баннеров существует.")
-    public WayIndexPage waitSliderBanner() {
-        wait.until(ExpectedConditions.visibilityOf(sliderBanner)).isDisplayed();
-        return this;
+    public boolean waitSliderBanner() {
+        return wait.until(ExpectedConditions.visibilityOf(sliderBanner)).isDisplayed();
     }
 
     @Step("Рекламный баннер существует.")
@@ -100,78 +107,21 @@ public class WayIndexPage extends BasePage {
     }
 
     @Step("Футер существует.")
-    public WayIndexPage waitFooter() {
-        wait.until(ExpectedConditions.visibilityOf(footer)).isDisplayed();
-        return this;
+    public boolean waitFooter() {
+        return wait.until(ExpectedConditions.visibilityOf(footer)).isDisplayed();
     }
-
-    @Step("Класс Active присутствует у слайдов после свайпа.")
-    public WebElement activeSlide() {
-        return banners.stream()
-                .filter(element -> element.getAttribute("class").contains("swiper-slide-active"))
-                .findFirst()
-                .orElse(null);
-    }
-
-    @Step("Класс Active присутствует у слайдов после свайпа.")
-    public WebElement nextSlide() {
-        return banners.stream()
-                .filter(element -> element.getAttribute("class").contains("swiper-slide-next"))
-                .findFirst()
-                .orElse(null);
-    }
-
-    @Step("Класс слайда содержит prev")
-    public boolean slideClassContainsPrev(WebElement activeSlide) {
-        return activeSlide.getAttribute("class").contains("prev");
-    }
-
-    @Step("Класс слайда содержит active")
-    public boolean slideClassContainsActive(WebElement nextSlide) {
-        return nextSlide.getAttribute("class").contains("active");
-    }
-
-    @Step("Класс Active присутствует у слайдов блока с курсами после свайпа.")
-    public WebElement coursesActiveSlide() {
-        return courses.stream()
-                .filter(element -> element.getAttribute("class").contains("swiper-slide-active"))
-                .findFirst()
-                .orElse(null);
-    }
-
-    @Step("Класс Active присутствует у слайдов блока с курсами слайдов после свайпа.")
-    public WebElement coursesNextSlide() {
-        return courses.stream()
-                .filter(element -> element.getAttribute("class").contains("swiper-slide-next"))
-                .findFirst()
-                .orElse(null);
-    }
-
-    @Step("Класс у слайда блока с курсами содержит prev")
-    public boolean slideCoursesClassContainsPrev(WebElement activeSlide) {
-        return activeSlide.getAttribute("class").contains("prev");
-    }
-
-    @Step("Класс у слайда блока с курсами содержит active")
-    public boolean slideCoursesClassContainsActive(WebElement nextSlide) {
-        return nextSlide.getAttribute("class").contains("active");
-    }
-
 
     @Step("При прокрутке страницы Горизонтальное меню отображается.")
-    public WayIndexPage waitStickHorisontalMenu() {
+    public boolean waitStickHorisontalMenu() {
         js.executeScript("window.scrollBy(0,1000)");
-        wait.until(ExpectedConditions.visibilityOf(stickedHorisontalMenu)).isDisplayed();
-        return this;
+        return wait.until(ExpectedConditions.visibilityOf(stickedHorisontalMenu)).isDisplayed();
     }
-
 
     @Step("Клик по кнопке свайпа слайдера с курсами вправо.")
     public WayIndexPage nextCourseButtonClick() {
         action.moveToElement(coursesNextButton).click().build().perform();
         return this;
     }
-
 
     @Step("Наведение мыши на выпадающий список Resources")
     public WayIndexPage triggerDropdown() {
@@ -184,11 +134,13 @@ public class WayIndexPage extends BasePage {
         practiceSite1Button.click();
         return this;
     }
+
+    @Step("Получение активного слайда слайдера с Баннерами.")
     public Swiper getActiveSwiper() {
         return getSwipers().stream().filter(Swiper::isActive).findFirst().orElseThrow();
     }
 
-
+    @Step("Получение следующего слайда слайдера с Баннерами.")
     public Swiper getNextSwiper() {
         return getSwipers().stream().filter(Swiper::isNext).findFirst().orElseThrow();
     }
@@ -197,10 +149,12 @@ public class WayIndexPage extends BasePage {
         return banners.stream().map(Swiper::new).collect(Collectors.toList());
     }
 
+    @Step("Получение активного слайда слайдера с курсами.")
     public Swiper getActiveCourse() {
         return getCourses().stream().filter(Swiper::isActive).findFirst().orElseThrow();
     }
 
+    @Step("Получение следующего слайда слайдера с курсами.")
     public Swiper getNextCourse() {
         return getCourses().stream().filter(Swiper::isNext).findFirst().orElseThrow();
     }
