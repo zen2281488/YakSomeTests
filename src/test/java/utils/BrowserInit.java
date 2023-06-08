@@ -20,7 +20,7 @@ public class BrowserInit {
         options.addArguments("--no-sandbox");
         options.addArguments("--disable-dev-shm-usage");
         options.addArguments("--headless");
-        options.addArguments("window-size=1920,1080");
+        options.addArguments("window-size=1220,880");
         WebDriver driver;
         driver = new ChromeDriver(options);
         driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
