@@ -11,7 +11,7 @@ import pageObjects.*;
 import utils.BrowserInit;
 import utils.ConfProperties;
 
-@Epic("Проверка существования и отображения элементов")
+@Epic("Тесты Авторизации, отображения и работоспособности элементов страницы.")
 public class TestUnit {
     private WebDriver browser;
     private WayIndexPage wayIndexPage;
@@ -135,7 +135,7 @@ public class TestUnit {
     @DisplayName("Проверка авторизации на сайте Way2")
     public void wayAuthorizationTest() {
         browser.get(ConfProperties.getProperty("loginWay2"));
-        waylogin.loginSendEmail().loginSendPassword().clickCommit();
+        waylogin.loginSendEmail(ConfProperties.getProperty("way2LogEmail")).loginSendPassword(ConfProperties.getProperty("way2LogPassword")).clickCommit();
         Assert.assertTrue("Аватар не был загружен, авторизация не прошла успешно.",seleniumTutorialIndex.waitAvatarImg());
     }
 

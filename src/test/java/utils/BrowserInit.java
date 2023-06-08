@@ -17,10 +17,7 @@ public class BrowserInit {
 
     public static WebDriver getWebdriver() {
         ChromeOptions options = new ChromeOptions();
-        options.addArguments("--no-sandbox");
-        options.addArguments("--disable-dev-shm-usage");
-        options.addArguments("--headless");
-        options.addArguments("window-size=1220,880");
+
         WebDriver driver;
         driver = new ChromeDriver(options);
         driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
