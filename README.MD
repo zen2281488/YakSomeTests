@@ -1,3 +1,5 @@
+https://zen2281488.github.io/SDETedu/ Allure Reports
+
 Обучение SDET. Задача U1
 
     Тест классы: src/test/java/UITests
@@ -101,3 +103,4 @@
 
     Постусловия:
         •	Закрыть браузер
+       
