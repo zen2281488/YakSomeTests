@@ -88,8 +88,8 @@ public class TestUnit {
         browser.get(ConfProperties.getProperty("mainTestPage"));
         wayIndexPage.sliderBannerActivate();
         Assert.assertTrue("Слайдер с Курсами не отображается либо не существует.",wayIndexPage.sliderCourcesDisplayed());
-        var activeCourse = wayIndexPage.getActiveCourse();
-        var nextCourse = wayIndexPage.getNextCourse();
+        Swiper activeCourse = wayIndexPage.getActiveCourse();
+        Swiper nextCourse = wayIndexPage.getNextCourse();
         wayIndexPage.nextCourseButtonClick();
         Assert.assertTrue("Активный слайд слайдера с курсами не изменил свой класс на prev",activeCourse.isPrev());
         Assert.assertTrue("Следующий слайд слайдера с курсами не изменил свой класс на active",nextCourse.isActive());
