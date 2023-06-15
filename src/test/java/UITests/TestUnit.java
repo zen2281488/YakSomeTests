@@ -50,8 +50,8 @@ public class TestUnit {
         browser.get(ConfProperties.getProperty("mainTestPage"));
         wayIndexPage.sliderBannerActivate().waitAdBanner().bannerCloseButtonClick();
         Assert.assertTrue("Слайдер с Баннерами не отображается, или не существует.",wayIndexPage.sliderBannerDisplayed());
-        var activeSwiper = wayIndexPage.getActiveSwiper();
-        var nextSwiper = wayIndexPage.getNextSwiper();
+        Swiper activeSwiper = wayIndexPage.getActiveSwiper();
+        Swiper nextSwiper = wayIndexPage.getNextSwiper();
         wayIndexPage.slideSlider();
         Assert.assertTrue("Активный слайд не изменил свой класс на prev",activeSwiper.isPrev());
         Assert.assertTrue("Следующий слайд не изменил свой класс на active",nextSwiper.isActive());
