@@ -38,7 +38,7 @@ public class TestUnit {
     @DisplayName("Проверка наличия и отображения контактов в Хэдере")
     public void headerVisibilityTest() {
         browser.get(ConfProperties.getProperty("mainTestPage"));
-        Assert.assertTrue("Конейнер с Контактами не отображается или отсутствует.",wayIndexPage.waitContacts());
+        Assert.assertTrue("Конейнер с Контактами не отображается или отсутствует.",wayIndexPage.contactsDisplayed());
     }
 
     @Feature("Тест существования и отображения элементов, их работоспособности.")
@@ -49,7 +49,7 @@ public class TestUnit {
     public void swiperBannerTest() {
         browser.get(ConfProperties.getProperty("mainTestPage"));
         wayIndexPage.sliderBannerActivate().waitAdBanner().bannerCloseButtonClick();
-        Assert.assertTrue("Слайдер с Баннерами не отображается, или не существует.",wayIndexPage.waitSliderBanner());
+        Assert.assertTrue("Слайдер с Баннерами не отображается, или не существует.",wayIndexPage.sliderBannerDisplayed());
         var activeSwiper = wayIndexPage.getActiveSwiper();
         var nextSwiper = wayIndexPage.getNextSwiper();
         wayIndexPage.slideSlider();
@@ -65,8 +65,8 @@ public class TestUnit {
     public void horizontalMenuVisibilityTest() {
         browser.get(ConfProperties.getProperty("mainTestPage"));
         wayIndexPage.sliderBannerActivate();
-        Assert.assertTrue("Хэдер не отображается, или не существует.",wayIndexPage.waitHorisontalMenu());
-        Assert.assertTrue("Хэдер не следует за пользователем",wayIndexPage.waitStickHorisontalMenu());
+        Assert.assertTrue("Хэдер не отображается, или не существует.",wayIndexPage.horisontalMenuDisplayed());
+        Assert.assertTrue("Хэдер не следует за пользователем",wayIndexPage.stickHorisontalMenuDisplayed());
     }
 
     @Feature("Тест существования и отображения элементов.")
@@ -76,7 +76,7 @@ public class TestUnit {
     @DisplayName("Проверка наличия и отображения блока с Сертификатами.")
     public void certificatesBlockVisibilityTest() {
         browser.get(ConfProperties.getProperty("mainTestPage"));
-        Assert.assertTrue("Блок с Сертификатами не отображается либо не существует.",wayIndexPage.waitCertificatesBlock());
+        Assert.assertTrue("Блок с Сертификатами не отображается либо не существует.",wayIndexPage.certificatesBlockDisplayed());
     }
 
     @Feature("Тест существования и отображения элементов, их работоспособности.")
@@ -87,7 +87,7 @@ public class TestUnit {
     public void swiperCoursesTest() {
         browser.get(ConfProperties.getProperty("mainTestPage"));
         wayIndexPage.sliderBannerActivate();
-        Assert.assertTrue("Слайдер с Курсами не отображается либо не существует.",wayIndexPage.waitSliderCources());
+        Assert.assertTrue("Слайдер с Курсами не отображается либо не существует.",wayIndexPage.sliderCourcesDisplayed());
         var activeCourse = wayIndexPage.getActiveCourse();
         var nextCourse = wayIndexPage.getNextCourse();
         wayIndexPage.nextCourseButtonClick();
@@ -102,7 +102,7 @@ public class TestUnit {
     @DisplayName("Проверка наличия и отображения Футера")
     public void footerVisibilityTest() {
         browser.get(ConfProperties.getProperty("mainTestPage"));
-        Assert.assertTrue("Футер не отображается или не существует.",wayIndexPage.waitFooter());
+        Assert.assertTrue("Футер не отображается или не существует.",wayIndexPage.footerDisplayed());
     }
 
     @Feature("Тест перехода на другие страницы.")
@@ -113,7 +113,7 @@ public class TestUnit {
     public void wayPracticeSiteEntranceTest() {
         browser.get(ConfProperties.getProperty("mainTestPage"));
         wayIndexPage.triggerDropdown().practiseSiteButtonClick();
-        Assert.assertTrue("Содержание страницы не загрузилось.",wayAutojquery.waitBody());
+        Assert.assertTrue("Содержание страницы не загрузилось.",wayAutojquery.bodyDisplayed());
         Assert.assertEquals("URL Страницы на которую был совершен переход, не совпадает с ожидаемым.",ConfProperties.getProperty("practice1ExpectedUrl"), browser.getCurrentUrl());
     }
 
@@ -136,7 +136,7 @@ public class TestUnit {
     public void wayAuthorizationTest() {
         browser.get(ConfProperties.getProperty("loginWay2"));
         waylogin.loginSendEmail(ConfProperties.getProperty("way2LogEmail")).loginSendPassword(ConfProperties.getProperty("way2LogPassword")).clickCommit();
-        Assert.assertTrue("Аватар не был загружен, авторизация не прошла успешно.",seleniumTutorialIndex.waitAvatarImg());
+        Assert.assertTrue("Аватар не был загружен, авторизация не прошла успешно.",seleniumTutorialIndex.avatarImgDisplayed());
     }
 
     @After

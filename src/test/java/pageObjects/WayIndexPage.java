@@ -4,7 +4,6 @@ import io.qameta.allure.Step;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 
 import java.util.List;
@@ -58,22 +57,22 @@ public class WayIndexPage extends BasePage {
     }
 
     @Step("Слайдер курсов существует.")
-    public boolean waitSliderCources() {
+    public boolean sliderCourcesDisplayed() {
         return wait.until(ExpectedConditions.visibilityOf(sliderCources)).isDisplayed();
     }
 
     @Step("Блок с сертификатами существует.")
-    public boolean waitCertificatesBlock() {
+    public boolean certificatesBlockDisplayed() {
         return wait.until(ExpectedConditions.visibilityOf(certificatesBlock)).isDisplayed();
     }
 
     @Step("Блок с контактами существует.")
-    public boolean waitContacts() {
+    public boolean contactsDisplayed() {
         return wait.until(ExpectedConditions.visibilityOf(headContacts)).isDisplayed();
     }
 
     @Step("Горизонтальное меню существует.")
-    public boolean waitHorisontalMenu() {
+    public boolean horisontalMenuDisplayed() {
         return wait.until(ExpectedConditions.visibilityOf(horisontalMenu)).isDisplayed();
     }
 
@@ -84,13 +83,13 @@ public class WayIndexPage extends BasePage {
     }
 
     @Step("Слайдер баннеров существует.")
-    public boolean waitSliderBanner() {
+    public boolean sliderBannerDisplayed() {
         return wait.until(ExpectedConditions.visibilityOf(sliderBanner)).isDisplayed();
     }
 
     @Step("Рекламный баннер существует.")
     public WayIndexPage waitAdBanner() {
-        wait.until(ExpectedConditions.visibilityOf(adBanner)).isDisplayed();
+        wait.until(ExpectedConditions.visibilityOf(adBanner));
         return this;
     }
 
@@ -106,12 +105,12 @@ public class WayIndexPage extends BasePage {
     }
 
     @Step("Футер существует.")
-    public boolean waitFooter() {
+    public boolean footerDisplayed() {
         return wait.until(ExpectedConditions.visibilityOf(footer)).isDisplayed();
     }
 
     @Step("При прокрутке страницы Горизонтальное меню отображается.")
-    public boolean waitStickHorisontalMenu() {
+    public boolean stickHorisontalMenuDisplayed() {
         js.executeScript("window.scrollBy(0,1000)");
         return wait.until(ExpectedConditions.visibilityOf(stickedHorisontalMenu)).isDisplayed();
     }
