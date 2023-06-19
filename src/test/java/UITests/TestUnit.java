@@ -33,6 +33,7 @@ public class TestUnit {
 
     @Feature("Тест существования и отображения элементов.")
     @Description("Тест проверяет наличие блока Контактов в Хедере")
+    @Severity(value = SeverityLevel.NORMAL)
     @Test
     @Issue("UI-WAY2 №1")
     @DisplayName("Проверка наличия и отображения контактов в Хэдере")
@@ -43,6 +44,7 @@ public class TestUnit {
 
     @Feature("Тест существования и отображения элементов, их работоспособности.")
     @Description("Тест проверяет отображение слайдера с баннерами. Свайпает слайдер и проверяет меняется ли класс слайдера на другой, для проверки смены активных слайдов")
+    @Severity(value = SeverityLevel.NORMAL)
     @Test
     @Issue("UI-WAY2 №2")
     @DisplayName("Проверка наличия и отображения баннера. Проверка его работоспособности.")
@@ -59,6 +61,7 @@ public class TestUnit {
 
     @Feature("Тест существования и отображения элементов, их работоспособности.")
     @Description("Тест проверяет наличие Горизонтального меню. Прокручивает страницу вниз, чтобы увидеть следует ли слайдер за пользователем.")
+    @Severity(value = SeverityLevel.NORMAL)
     @Test
     @Issue("UI-WAY2 №3")
     @DisplayName("Проверка наличия и отображения горизонтального меню. Проверка работы stick класса слайдера.")
@@ -71,6 +74,7 @@ public class TestUnit {
 
     @Feature("Тест существования и отображения элементов.")
     @Description("Тест проверяет наличие и отображение блока с Сертификатами.")
+    @Severity(value = SeverityLevel.NORMAL)
     @Test
     @Issue("UI-WAY2 №4")
     @DisplayName("Проверка наличия и отображения блока с Сертификатами.")
@@ -81,6 +85,7 @@ public class TestUnit {
 
     @Feature("Тест существования и отображения элементов, их работоспособности.")
     @Description("Тест проверяет отображение слайдера с курсами. Свайпает слайдер и проверяет меняется ли класс слайдера на другой, для проверки смены активных слайдов")
+    @Severity(value = SeverityLevel.NORMAL)
     @Test
     @Issue("UI-WAY2 №5")
     @DisplayName("Проверка наличия и отображения слайдера с курсами. Проверка работоспособности слайдера.")
@@ -97,6 +102,7 @@ public class TestUnit {
 
     @Feature("Тест существования и отображения элементов.")
     @Description("Тест проверяет наличие и отображение Футера.")
+    @Severity(value = SeverityLevel.NORMAL)
     @Test
     @Issue("UI-WAY2 №6")
     @DisplayName("Проверка наличия и отображения Футера")
@@ -107,6 +113,7 @@ public class TestUnit {
 
     @Feature("Тест перехода на другие страницы.")
     @Description("Тест проверяет переходит ли на страницу PractiseSite1 если клинуть по соответствующей ссылке в выпадающем списке в хэдере.")
+    @Severity(value = SeverityLevel.NORMAL)
     @Test
     @Issue("UI-WAY2 №7")
     @DisplayName("Проверка перехода на страницу PracticeSite 1")
@@ -119,6 +126,7 @@ public class TestUnit {
 
     @Feature("Тест авторизации.")
     @Description("Тест проверяет авторизацию на сайте Practice Site 2. Появляется ли текст о успешной авторизации после ввода учетных данных.")
+    @Severity(value = SeverityLevel.CRITICAL)
     @Test
     @Issue("UI-WAY2 №8")
     @DisplayName("Проверка авторизации на сайте Practice Site 2")
@@ -130,6 +138,7 @@ public class TestUnit {
 
     @Feature("Тест авторизации.")
     @Description("Тест проверяет успешно ли проходит авторизация на сайте Way2 при вводе учетных данных пользователя.")
+    @Severity(value = SeverityLevel.CRITICAL)
     @Test
     @Issue("UI-WAY2 №10")
     @DisplayName("Проверка авторизации на сайте Way2")

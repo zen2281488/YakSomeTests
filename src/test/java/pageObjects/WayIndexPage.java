@@ -156,7 +156,6 @@ public class WayIndexPage extends BasePage {
     public Swiper getNextCourse() {
         return getCourses().stream().filter(Swiper::isNext).findFirst().orElseThrow();
     }
-
     private List<Swiper> getCourses() {
         return courses.stream().map(Swiper::new).collect(Collectors.toList());
     }
