@@ -11,7 +11,7 @@ import pageObjects.*;
 import utils.BrowserInit;
 import utils.ConfProperties;
 
-@Epic("Тесты Авторизации, отображения и работоспособности элементов страницы.")
+@Epic("Тесты Авторизации.")
 public class AuthTest {
     private WebDriver browser;
     private WayAutorisation wayAutorisation;

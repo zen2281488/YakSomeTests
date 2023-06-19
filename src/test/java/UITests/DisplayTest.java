@@ -11,7 +11,7 @@ import pageObjects.*;
 import utils.BrowserInit;
 import utils.ConfProperties;
 
-@Epic("Тесты Авторизации, отображения и работоспособности элементов страницы.")
+@Epic("Тесты отображения элементов страницы.")
 public class DisplayTest {
     private WebDriver browser;
     private WayIndexPage wayIndexPage;
