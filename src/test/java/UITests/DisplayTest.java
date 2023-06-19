@@ -7,7 +7,7 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.openqa.selenium.WebDriver;
-import pageObjects.*;
+import pageObjects.WayIndexPage;
 import utils.BrowserInit;
 import utils.ConfProperties;
 

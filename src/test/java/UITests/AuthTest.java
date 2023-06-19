@@ -7,7 +7,9 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.openqa.selenium.WebDriver;
-import pageObjects.*;
+import pageObjects.SeleniumTutorialIndex;
+import pageObjects.WayAutorisation;
+import pageObjects.WayLogin;
 import utils.BrowserInit;
 import utils.ConfProperties;
 
@@ -55,4 +57,5 @@ public class AuthTest {
     @Step("Очиска данных")
     public void after() {
         BrowserInit.closeWebdriver();
-    }}
+    }
+}

@@ -7,7 +7,9 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.openqa.selenium.WebDriver;
-import pageObjects.*;
+import pageObjects.Swiper;
+import pageObjects.WayAutojquery;
+import pageObjects.WayIndexPage;
 import utils.BrowserInit;
 import utils.ConfProperties;
 
@@ -91,4 +93,5 @@ public class WorkTest {
     @Step("Очиска данных")
     public void after() {
         BrowserInit.closeWebdriver();
-    }}
+    }
+}
