@@ -74,7 +74,7 @@ public class WorkTest {
     }
 
 
-    @Feature("Тест перехода на другие страницы.")
+    @Feature("Тест работоспособности переходов на другие страницы.")
     @Description("Тест проверяет переходит ли на страницу PractiseSite1 если клинуть по соответствующей ссылке в выпадающем списке в хэдере.")
     @Severity(value = SeverityLevel.NORMAL)
     @Test
