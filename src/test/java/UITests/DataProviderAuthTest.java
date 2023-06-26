@@ -2,7 +2,6 @@ package UITests;
 
 import org.junit.Assert;
 import org.openqa.selenium.WebDriver;
-import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 import pageObjects.SeleniumTutorialIndex;
 import pageObjects.WayAutorisation;
@@ -10,7 +9,7 @@ import pageObjects.WayLogin;
 import utils.BrowserInit;
 import utils.ConfProperties;
 
-public class DataProviderLoginTest {
+public class DataProviderAuthTest {
     private WebDriver browser;
     private WayAutorisation wayAutorisation;
     private WayLogin waylogin;
