@@ -1,5 +1,7 @@
 package UITests;
 
+import io.qameta.allure.Epic;
+import io.qameta.allure.Feature;
 import org.junit.Assert;
 import org.openqa.selenium.WebDriver;
 import org.testng.annotations.Test;
@@ -15,6 +17,8 @@ public class DataProviderAuthTest {
     private WayLogin waylogin;
     private SeleniumTutorialIndex seleniumTutorialIndex;
 
+    @Epic("Тесты Авторизации.")
+    @Feature("Задание U3 тест авторизации с использованием DataProvider")
     @Test(dataProvider = "loginData",dataProviderClass = utils.DataProviderUserData.class)
     public void testLogin(String username, String password) {
         browser = BrowserInit.getWebdriver();
