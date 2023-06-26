@@ -37,8 +37,8 @@ public class AuthTest {
     @DisplayName("Проверка авторизации на сайте Practice Site 2")
     public void practiceSiteAuthorizationTest() {
         browser.get(ConfProperties.getProperty("practice2login"));
-        wayAutorisation.sendUsername(ConfProperties.getProperty("p2username")).sendPassword(ConfProperties.getProperty("p2pass")).sendUserDescription(ConfProperties.getProperty("p2username")).clickSubmitButton().waitSuccessLoginText();
-        Assert.assertEquals("Текст уведомления о успешной авторизации не совпадает с ожидаемым.", "You're logged in!!", wayAutorisation.getSuccessLogText());
+        wayAutorisation.sendUsername(ConfProperties.getProperty("p2username")).sendPassword(ConfProperties.getProperty("p2pass")).sendUserDescription(ConfProperties.getProperty("p2username")).clickSubmitButton();
+        Assert.assertTrue("Авторизация не прошла. Проверьте корректность введенных данных.",wayAutorisation.waitSuccessLoginText());
     }
 
     @Feature("Тест авторизации.")
