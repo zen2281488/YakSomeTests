@@ -10,14 +10,13 @@ import pageObjects.WayAutorisation;
 import pageObjects.WayLogin;
 import utils.BrowserInit;
 import utils.ConfProperties;
-
+@Epic("Тесты Авторизации.")
 public class DataProviderAuthTest {
     private WebDriver browser;
     private WayAutorisation wayAutorisation;
     private WayLogin waylogin;
     private SeleniumTutorialIndex seleniumTutorialIndex;
 
-    @Epic("Тесты Авторизации.")
     @Feature("Задание U3 тест авторизации с использованием DataProvider")
     @Test(dataProvider = "loginData",dataProviderClass = utils.DataProviderUserData.class)
     public void testLogin(String username, String password) {
