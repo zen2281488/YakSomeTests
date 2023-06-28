@@ -18,7 +18,7 @@ public class DataProviderAuthTest {
     private WayAutorisation wayAutorisation;
 
     @BeforeMethod
-    @Step("Инициализация браузера, и элементов страницы.")
+    @Step("Инициализация браузера")
     public void setUp() {
         browser = BrowserInit.getWebdriver();
         wayAutorisation = new WayAutorisation(browser);
@@ -33,7 +33,7 @@ public class DataProviderAuthTest {
     }
 
     @AfterMethod
-    @Step("Закрытие браузера.")
+    @Step("Очиска данных.")
     public void clear() {
         browser.quit();
     }
