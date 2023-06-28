@@ -13,6 +13,7 @@ import utils.BrowserInit;
 import utils.ConfProperties;
 
 @Epic("Тесты Авторизации.")
+@Feature("Задание U3 тест авторизации с использованием DataProvider")
 public class DataProviderAuthTest {
     private WebDriver browser;
     private WayAutorisation wayAutorisation;
@@ -24,7 +25,6 @@ public class DataProviderAuthTest {
         wayAutorisation = new WayAutorisation(browser);
     }
 
-    @Feature("Задание U3 тест авторизации с использованием DataProvider")
     @Test(dataProvider = "loginData", dataProviderClass = utils.DataProviderUserData.class)
     public void testLogin(String username, String password) {
         browser.get(ConfProperties.getProperty("practice2login"));
