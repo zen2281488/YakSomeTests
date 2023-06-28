@@ -14,6 +14,7 @@ import utils.BrowserInit;
 import utils.ConfProperties;
 
 @Epic("Тесты Авторизации.")
+@Feature("Тест авторизации.")
 public class AuthTest {
     private WebDriver browser;
     private WayAutorisation wayAutorisation;
@@ -29,7 +30,7 @@ public class AuthTest {
         seleniumTutorialIndex = new SeleniumTutorialIndex(browser);
     }
 
-    @Feature("Тест авторизации.")
+
     @Description("Тест проверяет авторизацию на сайте Practice Site 2. Появляется ли текст о успешной авторизации после ввода учетных данных.")
     @Severity(value = SeverityLevel.CRITICAL)
     @Test
@@ -41,7 +42,7 @@ public class AuthTest {
         Assert.assertTrue("Авторизация не прошла. Проверьте корректность введенных данных.",wayAutorisation.waitSuccessLoginText());
     }
 
-    @Feature("Тест авторизации.")
+
     @Description("Тест проверяет успешно ли проходит авторизация на сайте Way2 при вводе учетных данных пользователя.")
     @Severity(value = SeverityLevel.CRITICAL)
     @Test
