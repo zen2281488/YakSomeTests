@@ -10,9 +10,15 @@ import org.openqa.selenium.WebDriver;
 import pageObjects.SeleniumTutorialIndex;
 import pageObjects.WayAutorisation;
 import pageObjects.WayLogin;
+import ru.yandex.qatools.ashot.AShot;
+import ru.yandex.qatools.ashot.shooting.ShootingStrategies;
 import utils.BrowserInit;
 import utils.ConfProperties;
+import org.junit.jupiter.api.*;
+import org.junit.jupiter.api.extension.ExtendWith;
+import utils.TestWatcherPlugin;
 
+@ExtendWith(TestWatcherPlugin.class)
 @Epic("Тесты Авторизации.")
 @Feature("Тест авторизации.")
 public class AuthTest {
@@ -20,6 +26,7 @@ public class AuthTest {
     private WayAutorisation wayAutorisation;
     private WayLogin waylogin;
     private SeleniumTutorialIndex seleniumTutorialIndex;
+    private AShot ashot;
 
     @Before
     @Step("Инициализация браузера")
@@ -28,6 +35,7 @@ public class AuthTest {
         wayAutorisation = new WayAutorisation(browser);
         waylogin = new WayLogin(browser);
         seleniumTutorialIndex = new SeleniumTutorialIndex(browser);
+        ashot = new AShot().shootingStrategy(ShootingStrategies.viewportPasting(100));
     }
 
 
@@ -53,7 +61,9 @@ public class AuthTest {
         waylogin.loginSendEmail(ConfProperties.getProperty("way2LogEmail")).loginSendPassword(ConfProperties.getProperty("way2LogPassword")).clickCommit();
         Assert.assertTrue("Аватар не был загружен, авторизация не прошла успешно.", seleniumTutorialIndex.avatarImgDisplayed());
     }
-
+    public WebDriver getDriver() {
+        return browser;
+    }
     @After
     @Step("Очиска данных")
     public void after() {
