@@ -15,7 +15,7 @@ public class SeleniumTutorialIndex extends BasePage {
         super(browser);
     }
 
-    @Step("Аватар существует.")
+    @Step("Ожидание появления аватара")
     public boolean avatarImgExist() {
         try {
             wait.until(ExpectedConditions.visibilityOf(avatarImg));
