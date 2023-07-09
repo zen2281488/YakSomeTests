@@ -1,23 +1,29 @@
 package utils;
+
+import io.qameta.allure.Attachment;
 import org.openqa.selenium.WebDriver;
 import ru.yandex.qatools.ashot.AShot;
 import ru.yandex.qatools.ashot.Screenshot;
-import ru.yandex.qatools.ashot.shooting.ShootingStrategies;
+
 import javax.imageio.ImageIO;
-import java.io.File;
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
+
 public class ScreenShot {
-
-    public static void captureScreenshot(WebDriver driver) {
+    @Attachment(type = "image/png")
+    public static byte[] captureScreenshot(WebDriver driver) {
         Screenshot screenshot = new AShot()
-                .shootingStrategy(ShootingStrategies.viewportPasting(100))
                 .takeScreenshot(driver);
-
         try {
-            File screenshotFile = new File("screenshots", "screenshot.png");
-            ImageIO.write(screenshot.getImage(), "png", screenshotFile);
+            ByteArrayOutputStream screenOutput = new ByteArrayOutputStream();
+            ImageIO.write(screenshot.getImage(), "png", screenOutput);
+            return screenOutput.toByteArray();
         } catch (IOException e) {
             e.printStackTrace();
+            return null;
         }
+
     }
+
+
 }

@@ -3,11 +3,12 @@ package UITests;
 import io.qameta.allure.Epic;
 import io.qameta.allure.Feature;
 import io.qameta.allure.Step;
-import org.junit.Assert;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.MethodSource;
 import org.openqa.selenium.WebDriver;
-import org.testng.annotations.AfterMethod;
-import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.Test;
 import pageObjects.WayAutorisation;
 import utils.BrowserInit;
 import utils.ConfProperties;
@@ -18,21 +19,22 @@ public class DataProviderAuthTest {
     private WebDriver browser;
     private WayAutorisation wayAutorisation;
 
-    @BeforeMethod
+    @BeforeEach
     @Step("Инициализация браузера")
     public void setUp() {
         browser = BrowserInit.getWebdriver();
         wayAutorisation = new WayAutorisation(browser);
     }
 
-    @Test(dataProvider = "loginData", dataProviderClass = utils.DataProviderUserData.class)
+    @ParameterizedTest
+    @MethodSource("utils.DataProviderUserData#getLogData")
     public void testLogin(String username, String password) {
         browser.get(ConfProperties.getProperty("practice2login"));
         wayAutorisation.sendUsername(username).sendPassword(password).sendUserDescription(password).clickSubmitButton();
-        Assert.assertTrue("Авторизация не прошла. Проверьте корректность введенных данных.", wayAutorisation.waitSuccessLoginText());
+        Assertions.assertTrue(wayAutorisation.waitSuccessLoginText(), "Авторизация не прошла. Проверьте корректность введенных данных.");
     }
 
-    @AfterMethod
+    @AfterEach
     @Step("Очиска данных.")
     public void clear() {
         browser.quit();

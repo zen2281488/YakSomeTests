@@ -1,11 +1,7 @@
 package UITests;
 
 import io.qameta.allure.*;
-import io.qameta.allure.junit4.DisplayName;
-import org.junit.After;
-import org.junit.Assert;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.*;
 import org.openqa.selenium.WebDriver;
 import pageObjects.WayIndexPage;
 import utils.BrowserInit;
@@ -16,7 +12,7 @@ public class DisplayTest {
     private WebDriver browser;
     private WayIndexPage wayIndexPage;
 
-    @Before
+    @BeforeEach
     @Step("Инициализация браузера")
     public void before() {
         browser = BrowserInit.getWebdriver();
@@ -31,7 +27,7 @@ public class DisplayTest {
     @DisplayName("Проверка наличия и отображения контактов в Хэдере")
     public void headerVisibilityTest() {
         browser.get(ConfProperties.getProperty("mainTestPage"));
-        Assert.assertTrue("Конейнер с Контактами не отображается или отсутствует.", wayIndexPage.contactsDisplayed());
+        Assertions.assertTrue(wayIndexPage.contactsDisplayed(), "Конейнер с Контактами не отображается или отсутствует.");
     }
 
 
@@ -43,7 +39,7 @@ public class DisplayTest {
     @DisplayName("Проверка наличия и отображения блока с Сертификатами.")
     public void certificatesBlockVisibilityTest() {
         browser.get(ConfProperties.getProperty("mainTestPage"));
-        Assert.assertTrue("Блок с Сертификатами не отображается либо не существует.", wayIndexPage.certificatesBlockDisplayed());
+        Assertions.assertTrue(wayIndexPage.certificatesBlockDisplayed(), "Блок с Сертификатами не отображается либо не существует.");
     }
 
 
@@ -55,11 +51,11 @@ public class DisplayTest {
     @DisplayName("Проверка наличия и отображения Футера")
     public void footerVisibilityTest() {
         browser.get(ConfProperties.getProperty("mainTestPage"));
-        Assert.assertTrue("Футер не отображается или не существует.", wayIndexPage.footerDisplayed());
+        Assertions.assertTrue(wayIndexPage.footerDisplayed(), "Футер не отображается или не существует.");
     }
 
 
-    @After
+    @AfterEach
     @Step("Очиска данных")
     public void after() {
         BrowserInit.closeWebdriver();

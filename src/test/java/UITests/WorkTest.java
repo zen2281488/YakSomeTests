@@ -1,11 +1,7 @@
 package UITests;
 
 import io.qameta.allure.*;
-import io.qameta.allure.junit4.DisplayName;
-import org.junit.After;
-import org.junit.Assert;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.*;
 import org.openqa.selenium.WebDriver;
 import pageObjects.Swiper;
 import pageObjects.WayAutojquery;
@@ -19,7 +15,7 @@ public class WorkTest {
     private WayIndexPage wayIndexPage;
     private WayAutojquery wayAutojquery;
 
-    @Before
+    @BeforeEach
     @Step("Инициализация браузера")
     public void before() {
         browser = BrowserInit.getWebdriver();
@@ -36,12 +32,12 @@ public class WorkTest {
     public void swiperBannerTest() {
         browser.get(ConfProperties.getProperty("mainTestPage"));
         wayIndexPage.sliderBannerActivate().waitAdBanner().bannerCloseButtonClick();
-        Assert.assertTrue("Слайдер с Баннерами не отображается, или не существует.", wayIndexPage.sliderBannerDisplayed());
+        Assertions.assertTrue(wayIndexPage.sliderBannerDisplayed(), "Слайдер с Баннерами не отображается, или не существует.");
         Swiper activeSwiper = wayIndexPage.getActiveSwiper();
         Swiper nextSwiper = wayIndexPage.getNextSwiper();
         wayIndexPage.slideSlider();
-        Assert.assertTrue("Активный слайд не изменил свой класс на prev", activeSwiper.isPrev());
-        Assert.assertTrue("Следующий слайд не изменил свой класс на active", nextSwiper.isActive());
+        Assertions.assertTrue(activeSwiper.isPrev(), "Активный слайд не изменил свой класс на prev");
+        Assertions.assertTrue(nextSwiper.isActive(), "Следующий слайд не изменил свой класс на active");
     }
 
     @Feature("Тест существования и отображения элементов, их работоспособности.")
@@ -53,8 +49,8 @@ public class WorkTest {
     public void horizontalMenuVisibilityTest() {
         browser.get(ConfProperties.getProperty("mainTestPage"));
         wayIndexPage.sliderBannerActivate();
-        Assert.assertTrue("Хэдер не отображается, или не существует.", wayIndexPage.horisontalMenuDisplayed());
-        Assert.assertTrue("Хэдер не следует за пользователем", wayIndexPage.stickHorisontalMenuDisplayed());
+        Assertions.assertTrue(wayIndexPage.horisontalMenuDisplayed(), "Хэдер не отображается, или не существует.");
+        Assertions.assertTrue(wayIndexPage.stickHorisontalMenuDisplayed(), "Хэдер не следует за пользователем");
     }
 
 
@@ -67,12 +63,12 @@ public class WorkTest {
     public void swiperCoursesTest() {
         browser.get(ConfProperties.getProperty("mainTestPage"));
         wayIndexPage.sliderBannerActivate();
-        Assert.assertTrue("Слайдер с Курсами не отображается либо не существует.", wayIndexPage.sliderCourcesDisplayed());
+        Assertions.assertTrue(wayIndexPage.sliderCourcesDisplayed(), "Слайдер с Курсами не отображается либо не существует.");
         Swiper activeCourse = wayIndexPage.getActiveCourse();
         Swiper nextCourse = wayIndexPage.getNextCourse();
         wayIndexPage.nextCourseButtonClick();
-        Assert.assertTrue("Активный слайд слайдера с курсами не изменил свой класс на prev", activeCourse.isPrev());
-        Assert.assertTrue("Следующий слайд слайдера с курсами не изменил свой класс на active", nextCourse.isActive());
+        Assertions.assertTrue(activeCourse.isPrev(), "Активный слайд слайдера с курсами не изменил свой класс на prev");
+        Assertions.assertTrue(nextCourse.isActive(), "Следующий слайд слайдера с курсами не изменил свой класс на active");
     }
 
 
@@ -85,11 +81,11 @@ public class WorkTest {
     public void wayPracticeSiteEntranceTest() {
         browser.get(ConfProperties.getProperty("mainTestPage"));
         wayIndexPage.triggerDropdown().practiseSiteButtonClick();
-        Assert.assertTrue("Содержание страницы не загрузилось.", wayAutojquery.bodyDisplayed());
-        Assert.assertEquals("URL Страницы на которую был совершен переход, не совпадает с ожидаемым.", ConfProperties.getProperty("practice1ExpectedUrl"), browser.getCurrentUrl());
+        Assertions.assertTrue(wayAutojquery.bodyDisplayed(), "Содержание страницы не загрузилось.");
+        Assertions.assertEquals(ConfProperties.getProperty("practice1ExpectedUrl"), browser.getCurrentUrl(), "URL Страницы на которую был совершен переход, не совпадает с ожидаемым.");
     }
 
-    @After
+    @AfterEach
     @Step("Очиска данных")
     public void after() {
         BrowserInit.closeWebdriver();

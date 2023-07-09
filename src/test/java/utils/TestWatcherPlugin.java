@@ -1,4 +1,5 @@
 package utils;
+
 import UITests.AuthTest;
 import org.junit.jupiter.api.extension.ExtensionContext;
 import org.junit.jupiter.api.extension.TestWatcher;
