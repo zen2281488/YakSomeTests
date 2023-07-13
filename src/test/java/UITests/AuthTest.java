@@ -7,8 +7,6 @@ import org.openqa.selenium.WebDriver;
 import pageObjects.SeleniumTutorialIndex;
 import pageObjects.WayAutorisation;
 import pageObjects.WayLogin;
-import ru.yandex.qatools.ashot.AShot;
-import ru.yandex.qatools.ashot.shooting.ShootingStrategies;
 import utils.BrowserInit;
 import utils.ConfProperties;
 import utils.TestWatcherPlugin;
@@ -23,6 +21,12 @@ public class AuthTest {
     private WayLogin waylogin;
     private SeleniumTutorialIndex seleniumTutorialIndex;
 
+    @AfterAll
+    @Step("Очиска данных")
+    public static void after() {
+        BrowserInit.closeWebdriver();
+    }
+
     @BeforeEach
     @Step("Инициализация браузера")
     public void before() {
@@ -31,7 +35,6 @@ public class AuthTest {
         waylogin = new WayLogin(browser);
         seleniumTutorialIndex = new SeleniumTutorialIndex(browser);
     }
-
 
     @Description("Тест проверяет авторизацию на сайте Practice Site 2. Появляется ли текст о успешной авторизации после ввода учетных данных.")
     @Severity(value = SeverityLevel.CRITICAL)
@@ -43,7 +46,6 @@ public class AuthTest {
         wayAutorisation.sendUsername(ConfProperties.getProperty("p2username")).sendPassword(ConfProperties.getProperty("p2pass")).sendUserDescription(ConfProperties.getProperty("p2username")).clickSubmitButton();
         Assertions.assertTrue(wayAutorisation.waitSuccessLoginText(), "Авторизация не прошла. Проверьте корректность введенных данных.");
     }
-
 
     @Description("Тест проверяет успешно ли проходит авторизация на сайте Way2 при вводе учетных данных пользователя.")
     @Severity(value = SeverityLevel.CRITICAL)
@@ -58,11 +60,5 @@ public class AuthTest {
 
     public WebDriver getDriver() {
         return browser;
-    }
-
-    @AfterAll
-    @Step("Очиска данных")
-    public static void after() {
-        BrowserInit.closeWebdriver();
     }
 }
