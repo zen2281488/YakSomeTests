@@ -17,7 +17,7 @@ import java.util.Set;
 @Epic("Тесты Авторизации.")
 @Feature("Тест авторизации.")
 public class CookieAuthTest {
-    private static final String COOKIE_FILE_PATH = "cookies.txt";
+    private static final String COOKIE_FILE_PATH = ConfProperties.getProperty("COOKIE_FILE_PATH");
     private static WebDriver driver;
     private static SqlExIndexPage sqlExIndexPage;
 
@@ -37,7 +37,7 @@ public class CookieAuthTest {
     @Severity(SeverityLevel.CRITICAL)
     @Description("Тест авторизации пользователя и сохранение куков в файл")
     public void testLoginAndSaveCookiesToFile() {
-        driver.get("https://www.sql-ex.ru/");
+        driver.get(ConfProperties.getProperty("sqlExPath"));
         if (!CookieUtils.cookieExist(COOKIE_FILE_PATH)) {
             sqlExIndexPage
                     .sendUsername(ConfProperties.getProperty("sqlExLogin"))
@@ -52,11 +52,8 @@ public class CookieAuthTest {
             }
             driver.navigate().refresh();
         }
-        Assertions.assertEquals(ConfProperties.getProperty("nickname"), sqlExIndexPage.getLoginText());
+        Assertions.assertEquals(ConfProperties.getProperty("nickname"), sqlExIndexPage.getLoginText(),"Вход не был совершен.");
 
     }
 
-    public WebDriver getDriver() {
-        return driver;
-    }
 }

@@ -60,6 +60,22 @@ public class CookieUtils {
             return false;
         }
     }
+
+
+    public static class SerializableCookie {
+        private final String name;
+        private final String value;
+
+        public SerializableCookie(Cookie cookie) {
+            this.name = cookie.getName();
+            this.value = cookie.getValue();
+        }
+
+        public Cookie toCookie() {
+            return new Cookie(this.name, this.value);
+        }
+
+    }
 }
 
 
