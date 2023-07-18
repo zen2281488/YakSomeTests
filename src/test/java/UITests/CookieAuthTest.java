@@ -3,15 +3,12 @@ package UITests;
 import io.qameta.allure.*;
 import org.junit.jupiter.api.*;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.openqa.selenium.Cookie;
 import org.openqa.selenium.WebDriver;
 import pageObjects.SqlExIndexPage;
 import utils.BrowserInit;
 import utils.ConfProperties;
 import utils.CookieUtils;
 import utils.TestWatcherPlugin;
-
-import java.util.Set;
 
 @ExtendWith(TestWatcherPlugin.class)
 @Epic("Тесты Авторизации.")
@@ -33,9 +30,9 @@ public class CookieAuthTest {
     }
 
     @Test
-    @DisplayName("Авторизация и сохранение куков в файл")
+    @DisplayName("Авторизация и сохранение куков в файл,с последующим чтением из него")
     @Severity(SeverityLevel.CRITICAL)
-    @Description("Тест авторизации пользователя и сохранение куков в файл")
+    @Description("Тест авторизации пользователя и сохранение куков в файл, чтение куков из файла при повторном тестировании")
     public void testLoginAndSaveCookiesToFile() {
         driver.get(ConfProperties.getProperty("sqlExPath"));
         if (!CookieUtils.cookieExist(COOKIE_FILE_PATH)) {
@@ -43,16 +40,12 @@ public class CookieAuthTest {
                     .sendUsername(ConfProperties.getProperty("sqlExLogin"))
                     .sendPassword(ConfProperties.getProperty("sqlExPass"))
                     .clickSubmitButton();
-            Set<Cookie> cookies = driver.manage().getCookies();
-            CookieUtils.saveCookiesToFile(cookies, COOKIE_FILE_PATH);
+            CookieUtils.saveCookiesToFile(driver.manage().getCookies(), COOKIE_FILE_PATH);
         } else {
-            Set<Cookie> cookiess = CookieUtils.loadCookiesFromFile(COOKIE_FILE_PATH);
-            for (Cookie cookie : cookiess) {
-                driver.manage().addCookie(cookie);
-            }
+            CookieUtils.addCookie(driver, CookieUtils.loadCookiesFromFile(COOKIE_FILE_PATH));
             driver.navigate().refresh();
         }
-        Assertions.assertEquals(ConfProperties.getProperty("nickname"), sqlExIndexPage.getLoginText(),"Вход не был совершен.");
+        Assertions.assertEquals(ConfProperties.getProperty("nickname"), sqlExIndexPage.getLoginText(), "Вход не был совершен.");
 
     }
 

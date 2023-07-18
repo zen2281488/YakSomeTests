@@ -3,6 +3,7 @@ package utils;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import org.openqa.selenium.Cookie;
+import org.openqa.selenium.WebDriver;
 
 import java.io.FileReader;
 import java.io.FileWriter;
@@ -60,7 +61,11 @@ public class CookieUtils {
             return false;
         }
     }
-
+public static void addCookie(WebDriver driver, Set<Cookie> cookiess){
+    for (Cookie cookie : cookiess) {
+        driver.manage().addCookie(cookie);
+    }
+}
 
     public static class SerializableCookie {
         private final String name;
