@@ -31,7 +31,7 @@ public class JavaScriptExecutorTest {
     @Test
     @Issue("UI-WAY2 №1")
     @DisplayName("Тестирование Фокуса и Наличие и отсутствие скролла")
-    public void focusRemoveTest() {
+    public void javaScriptExecutorTest() {
         browser.get(ConfProperties.getProperty("sqlExPath"));
         sqlExIndexPage.clickUsernameInput().removeFocusLoginInput();
         Assertions.assertTrue(sqlExIndexPage.isUsernameInputNotFocused(), "Фокус с поля Username не был снят");
