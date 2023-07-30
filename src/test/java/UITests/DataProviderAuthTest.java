@@ -6,8 +6,6 @@ import io.qameta.allure.Step;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.parallel.Execution;
-import org.junit.jupiter.api.parallel.ExecutionMode;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.MethodSource;
 import org.openqa.selenium.WebDriver;
@@ -17,7 +15,6 @@ import utils.ConfProperties;
 
 @Epic("Тесты Авторизации.")
 @Feature("Задание U3 тест авторизации с использованием DataProvider")
-@Execution(ExecutionMode.CONCURRENT)
 public class DataProviderAuthTest {
     private WebDriver browser;
     private WayAutorisation wayAutorisation;

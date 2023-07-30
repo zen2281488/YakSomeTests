@@ -2,8 +2,6 @@ package UITests;
 
 import io.qameta.allure.*;
 import org.junit.jupiter.api.*;
-import org.junit.jupiter.api.parallel.Execution;
-import org.junit.jupiter.api.parallel.ExecutionMode;
 import org.openqa.selenium.WebDriver;
 import pageObjects.Swiper;
 import pageObjects.WayAutojquery;
@@ -12,7 +10,6 @@ import utils.BrowserInit;
 import utils.ConfProperties;
 
 @Epic("Тесты работоспособности элементов.")
-@Execution(ExecutionMode.CONCURRENT)
 public class WorkTest {
     private WebDriver browser;
     private WayIndexPage wayIndexPage;

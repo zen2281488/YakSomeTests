@@ -2,15 +2,12 @@ package UITests;
 
 import io.qameta.allure.*;
 import org.junit.jupiter.api.*;
-import org.junit.jupiter.api.parallel.Execution;
-import org.junit.jupiter.api.parallel.ExecutionMode;
 import org.openqa.selenium.WebDriver;
 import pageObjects.WayIndexPage;
 import utils.BrowserInit;
 import utils.ConfProperties;
 
 @Epic("Тесты отображения элементов страницы.")
-@Execution(ExecutionMode.CONCURRENT)
 public class DisplayTest {
     private WebDriver browser;
     private WayIndexPage wayIndexPage;

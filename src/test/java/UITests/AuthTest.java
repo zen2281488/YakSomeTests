@@ -3,8 +3,6 @@ package UITests;
 import io.qameta.allure.*;
 import org.junit.jupiter.api.*;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.junit.jupiter.api.parallel.Execution;
-import org.junit.jupiter.api.parallel.ExecutionMode;
 import org.openqa.selenium.WebDriver;
 import pageObjects.SeleniumTutorialIndex;
 import pageObjects.WayAutorisation;
@@ -16,7 +14,6 @@ import utils.TestWatcherPlugin;
 @ExtendWith(TestWatcherPlugin.class)
 @Epic("Тесты Авторизации.")
 @Feature("Тест авторизации.")
-@Execution(ExecutionMode.CONCURRENT)
 public class AuthTest {
     private WebDriver browser;
     private WayAutorisation wayAutorisation;
