@@ -2,20 +2,24 @@ package UITests;
 
 import io.qameta.allure.*;
 import org.junit.jupiter.api.*;
+import org.junit.jupiter.api.parallel.Execution;
+import org.junit.jupiter.api.parallel.ExecutionMode;
 import org.openqa.selenium.WebDriver;
 import pageObjects.SqlExIndexPage;
 import utils.BrowserInit;
 import utils.ConfProperties;
 
-@Epic("Тесты работоспособности элементов.")
 
+@Epic("Тесты работоспособности элементов.")
+@Execution(ExecutionMode.CONCURRENT)
 public class JavaScriptExecutorTest {
-    private static WebDriver browser;
+    private WebDriver browser;
     private SqlExIndexPage sqlExIndexPage;
 
-    @AfterAll
-    public static void tearDown() {
-        browser.quit();
+    @AfterEach
+    @Step("Очиска данных")
+    public void after() {
+        BrowserInit.closeWebdriver();
     }
 
     @BeforeEach

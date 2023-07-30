@@ -3,6 +3,8 @@ package UITests;
 import io.qameta.allure.*;
 import org.junit.jupiter.api.*;
 import org.junit.jupiter.api.extension.ExtendWith;
+import org.junit.jupiter.api.parallel.Execution;
+import org.junit.jupiter.api.parallel.ExecutionMode;
 import org.openqa.selenium.WebDriver;
 import pageObjects.SqlExIndexPage;
 import utils.BrowserInit;
@@ -13,20 +15,23 @@ import utils.TestWatcherPlugin;
 @ExtendWith(TestWatcherPlugin.class)
 @Epic("Тесты Авторизации.")
 @Feature("Тест авторизации.")
+@Execution(ExecutionMode.CONCURRENT)
 public class CookieAuthTest {
-    private static final String COOKIE_FILE_PATH = ConfProperties.getProperty("COOKIE_FILE_PATH");
-    private static WebDriver driver;
-    private static SqlExIndexPage sqlExIndexPage;
+    private final String COOKIE_FILE_PATH = ConfProperties.getProperty("COOKIE_FILE_PATH");
+    private WebDriver driver;
+    private SqlExIndexPage sqlExIndexPage;
 
-    @BeforeAll
-    public static void setupDriver() {
+
+    @BeforeEach
+    public void before() {
         driver = BrowserInit.getWebdriver();
         sqlExIndexPage = new SqlExIndexPage(driver);
     }
 
-    @AfterAll
-    public static void tearDown() {
-        driver.quit();
+    @AfterEach
+    @Step("Очиска данных")
+    public void after() {
+        BrowserInit.closeWebdriver();
     }
 
     @Test

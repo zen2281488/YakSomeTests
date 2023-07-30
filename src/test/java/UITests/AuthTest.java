@@ -3,6 +3,8 @@ package UITests;
 import io.qameta.allure.*;
 import org.junit.jupiter.api.*;
 import org.junit.jupiter.api.extension.ExtendWith;
+import org.junit.jupiter.api.parallel.Execution;
+import org.junit.jupiter.api.parallel.ExecutionMode;
 import org.openqa.selenium.WebDriver;
 import pageObjects.SeleniumTutorialIndex;
 import pageObjects.WayAutorisation;
@@ -14,18 +16,12 @@ import utils.TestWatcherPlugin;
 @ExtendWith(TestWatcherPlugin.class)
 @Epic("Тесты Авторизации.")
 @Feature("Тест авторизации.")
-
+@Execution(ExecutionMode.CONCURRENT)
 public class AuthTest {
     private WebDriver browser;
     private WayAutorisation wayAutorisation;
     private WayLogin waylogin;
     private SeleniumTutorialIndex seleniumTutorialIndex;
-
-    @AfterAll
-    @Step("Очиска данных")
-    public static void after() {
-        BrowserInit.closeWebdriver();
-    }
 
     @BeforeEach
     @Step("Инициализация браузера")
@@ -58,7 +54,9 @@ public class AuthTest {
         Assertions.assertTrue(seleniumTutorialIndex.avatarImgExist(), "Аватар не был загружен, авторизация не прошла успешно.");
     }
 
-    public WebDriver getDriver() {
-        return browser;
+    @AfterEach
+    @Step("Очиска данных")
+    public void after() {
+        BrowserInit.closeWebdriver();
     }
 }
