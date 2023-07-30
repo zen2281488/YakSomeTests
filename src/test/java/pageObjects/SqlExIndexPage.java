@@ -1,11 +1,9 @@
 package pageObjects;
 
 import io.qameta.allure.Step;
-import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.ui.ExpectedConditions;
 
 public class SqlExIndexPage extends BasePage {
 
@@ -26,8 +24,7 @@ public class SqlExIndexPage extends BasePage {
 
     @Step("Отправка текста в поле Login")
     public String getLoginText() {
-        String login = loginString.getText();
-        return login;
+        return loginString.getText();
     }
 
     @Step("Отправка текста в поле Login")
@@ -48,13 +45,30 @@ public class SqlExIndexPage extends BasePage {
         return this;
     }
 
-public boolean logged(){
-    try {
-        wait.until(ExpectedConditions.visibilityOf(loginString));
-        return true;
-    } catch (TimeoutException e) {
-        return false;
+    @Step("Убираем фокус с поля ввода")
+    public SqlExIndexPage removeFocusLoginInput() {
+        js.executeScript("arguments[0].blur();", usernameInput);
+        return this;
     }
 
-}
+    @Step("Клик по полю Username")
+    public SqlExIndexPage clickUsernameInput() {
+        usernameInput.click();
+        return this;
+    }
+
+    @Step("Поле Username не в фокусе")
+    public boolean isUsernameInputNotFocused() {
+        return !usernameInput.equals(js.executeScript("return document.activeElement;"));
+    }
+
+    @Step("Вертикальный скролл присутствует")
+    public boolean isVerticalScrollPresent() {
+        return (boolean) js.executeScript("return document.documentElement.scrollHeight > document.documentElement.clientHeight;");
+    }
+
+    @Step("Горизонтальный скролл отсутствует")
+    public boolean isHorizontalScrollNotPresent() {
+        return !(boolean) js.executeScript("return document.documentElement.scrollWidth > document.documentElement.clientWidth;");
+    }
 }

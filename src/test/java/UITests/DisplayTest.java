@@ -30,7 +30,6 @@ public class DisplayTest {
         Assertions.assertTrue(wayIndexPage.contactsDisplayed(), "Конейнер с Контактами не отображается или отсутствует.");
     }
 
-
     @Feature("Тест существования и отображения элементов.")
     @Description("Тест проверяет наличие и отображение блока с Сертификатами.")
     @Severity(value = SeverityLevel.NORMAL)
@@ -42,7 +41,6 @@ public class DisplayTest {
         Assertions.assertTrue(wayIndexPage.certificatesBlockDisplayed(), "Блок с Сертификатами не отображается либо не существует.");
     }
 
-
     @Feature("Тест существования и отображения элементов.")
     @Description("Тест проверяет наличие и отображение Футера.")
     @Severity(value = SeverityLevel.NORMAL)
@@ -53,7 +51,6 @@ public class DisplayTest {
         browser.get(ConfProperties.getProperty("mainTestPage"));
         Assertions.assertTrue(wayIndexPage.footerDisplayed(), "Футер не отображается или не существует.");
     }
-
 
     @AfterEach
     @Step("Очиска данных")
