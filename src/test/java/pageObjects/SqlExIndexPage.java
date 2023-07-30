@@ -71,5 +71,4 @@ public class SqlExIndexPage extends BasePage {
     public boolean isHorizontalScrollNotPresent() {
         return !(boolean) js.executeScript("return document.documentElement.scrollWidth > document.documentElement.clientWidth;");
     }
-
 }

@@ -37,7 +37,5 @@ public class JavaScriptExecutorTest {
         Assertions.assertTrue(sqlExIndexPage.isUsernameInputNotFocused(), "Фокус с поля Username не был снят");
         Assertions.assertTrue(sqlExIndexPage.isVerticalScrollPresent(), "Вертикального скролла нет на этой странице");
         Assertions.assertTrue(sqlExIndexPage.isHorizontalScrollNotPresent(), "На этой странице появился горизонтальный скролл");
-
     }
-
 }

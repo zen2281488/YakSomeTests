@@ -53,7 +53,6 @@ public class WorkTest {
         Assertions.assertTrue(wayIndexPage.stickHorisontalMenuDisplayed(), "Хэдер не следует за пользователем");
     }
 
-
     @Feature("Тест существования и отображения элементов, их работоспособности.")
     @Description("Тест проверяет отображение слайдера с курсами. Свайпает слайдер и проверяет меняется ли класс слайдера на другой, для проверки смены активных слайдов")
     @Severity(value = SeverityLevel.NORMAL)
@@ -70,7 +69,6 @@ public class WorkTest {
         Assertions.assertTrue(activeCourse.isPrev(), "Активный слайд слайдера с курсами не изменил свой класс на prev");
         Assertions.assertTrue(nextCourse.isActive(), "Следующий слайд слайдера с курсами не изменил свой класс на active");
     }
-
 
     @Feature("Тест работоспособности переходов на другие страницы.")
     @Description("Тест проверяет переходит ли на страницу PractiseSite1 если клинуть по соответствующей ссылке в выпадающем списке в хэдере.")

@@ -25,7 +25,6 @@ public class WayAutorisation extends BasePage {
     @FindBy(css = ".btn-danger")
     private WebElement loginButton;
 
-
     public WayAutorisation(WebDriver browser) {
         super(browser);
     }

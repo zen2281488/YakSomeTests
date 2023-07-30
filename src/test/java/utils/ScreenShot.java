@@ -21,8 +21,5 @@ public class ScreenShot {
             e.printStackTrace();
             return null;
         }
-
     }
-
-
 }

@@ -39,5 +39,4 @@ public class WayLogin extends BasePage {
         passwordInput.sendKeys(text);
         return this;
     }
-
 }

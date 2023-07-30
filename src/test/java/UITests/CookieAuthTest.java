@@ -46,7 +46,5 @@ public class CookieAuthTest {
             driver.navigate().refresh();
         }
         Assertions.assertEquals(ConfProperties.getProperty("nickname"), sqlExIndexPage.getLoginText(), "Вход не был совершен.");
-
     }
-
 }
