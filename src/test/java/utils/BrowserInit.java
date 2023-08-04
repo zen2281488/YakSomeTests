@@ -1,30 +1,31 @@
 package utils;
 
-import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.remote.RemoteWebDriver;
 
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.concurrent.TimeUnit;
 
 public class BrowserInit {
     private static final ThreadLocal<WebDriver> webdriver = new ThreadLocal<>();
 
-    static {
-        WebDriverManager.chromedriver().setup();
-        System.setProperty("webdriver.http.factory", "jdk-http-client");
-    }
-
     public static WebDriver getWebdriver() {
         if (webdriver.get() == null) {
+            String hubUrl = "http://localhost:4444/wd/hub";
             ChromeOptions options = new ChromeOptions();
             options.addArguments("--no-sandbox");
             options.addArguments("--disable-dev-shm-usage");
             options.addArguments("--headless");
             options.addArguments("window-size=1220,880");
-            WebDriver driver = new ChromeDriver(options);
-            driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-            webdriver.set(driver);
+            try {
+                WebDriver driver = new RemoteWebDriver(new URL(hubUrl), options);
+                driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+                webdriver.set(driver);
+            } catch (MalformedURLException e) {
+                e.printStackTrace();
+            }
         }
         return webdriver.get();
     }
