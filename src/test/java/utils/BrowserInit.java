@@ -13,14 +13,13 @@ public class BrowserInit {
 
     public static WebDriver getWebdriver() {
         if (webdriver.get() == null) {
-            String hubUrl = "http://localhost:4444/wd/hub";
             ChromeOptions options = new ChromeOptions();
             options.addArguments("--no-sandbox");
             options.addArguments("--disable-dev-shm-usage");
             options.addArguments("--headless");
             options.addArguments("window-size=1220,880");
             try {
-                WebDriver driver = new RemoteWebDriver(new URL(hubUrl), options);
+                WebDriver driver = new RemoteWebDriver(new URL(ConfProperties.getProperty("hubUrl")), options);
                 driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
                 webdriver.set(driver);
             } catch (MalformedURLException e) {
