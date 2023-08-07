@@ -1,27 +1,14 @@
 package UITests;
 
 import io.qameta.allure.*;
-import org.junit.jupiter.api.*;
-import org.openqa.selenium.WebDriver;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
 import pageObjects.Swiper;
-import pageObjects.WayAutojquery;
-import pageObjects.WayIndexPage;
-import utils.BrowserInit;
 import utils.ConfProperties;
 
 @Epic("Тесты работоспособности элементов.")
-public class WorkTest {
-    private WebDriver browser;
-    private WayIndexPage wayIndexPage;
-    private WayAutojquery wayAutojquery;
-
-    @BeforeEach
-    @Step("Инициализация браузера")
-    public void before() {
-        browser = BrowserInit.getWebdriver();
-        wayIndexPage = new WayIndexPage(browser);
-        wayAutojquery = new WayAutojquery(browser);
-    }
+public class WorkTest extends BaseTest {
 
     @Feature("Тест существования и отображения элементов, их работоспособности.")
     @Description("Тест проверяет отображение слайдера с баннерами. Свайпает слайдер и проверяет меняется ли класс слайдера на другой, для проверки смены активных слайдов")
@@ -30,7 +17,7 @@ public class WorkTest {
     @Issue("UI-WAY2 №2")
     @DisplayName("Проверка наличия и отображения баннера. Проверка его работоспособности.")
     public void swiperBannerTest() {
-        browser.get(ConfProperties.getProperty("mainTestPage"));
+        driver.get(ConfProperties.getProperty("mainTestPage"));
         wayIndexPage.sliderBannerActivate().waitAdBanner().bannerCloseButtonClick();
         Assertions.assertTrue(wayIndexPage.sliderBannerDisplayed(), "Слайдер с Баннерами не отображается, или не существует.");
         Swiper activeSwiper = wayIndexPage.getActiveSwiper();
@@ -47,7 +34,7 @@ public class WorkTest {
     @Issue("UI-WAY2 №3")
     @DisplayName("Проверка наличия и отображения горизонтального меню. Проверка работы stick класса слайдера.")
     public void horizontalMenuVisibilityTest() {
-        browser.get(ConfProperties.getProperty("mainTestPage"));
+        driver.get(ConfProperties.getProperty("mainTestPage"));
         wayIndexPage.sliderBannerActivate();
         Assertions.assertTrue(wayIndexPage.horisontalMenuDisplayed(), "Хэдер не отображается, или не существует.");
         Assertions.assertTrue(wayIndexPage.stickHorisontalMenuDisplayed(), "Хэдер не следует за пользователем");
@@ -60,7 +47,7 @@ public class WorkTest {
     @Issue("UI-WAY2 №5")
     @DisplayName("Проверка наличия и отображения слайдера с курсами. Проверка работоспособности слайдера.")
     public void swiperCoursesTest() {
-        browser.get(ConfProperties.getProperty("mainTestPage"));
+        driver.get(ConfProperties.getProperty("mainTestPage"));
         wayIndexPage.sliderBannerActivate();
         Assertions.assertTrue(wayIndexPage.sliderCourcesDisplayed(), "Слайдер с Курсами не отображается либо не существует.");
         Swiper activeCourse = wayIndexPage.getActiveCourse();
@@ -77,15 +64,9 @@ public class WorkTest {
     @Issue("UI-WAY2 №7")
     @DisplayName("Проверка перехода на страницу PracticeSite 1")
     public void wayPracticeSiteEntranceTest() {
-        browser.get(ConfProperties.getProperty("mainTestPage"));
+        driver.get(ConfProperties.getProperty("mainTestPage"));
         wayIndexPage.triggerDropdown().practiseSiteButtonClick();
         Assertions.assertTrue(wayAutojquery.bodyDisplayed(), "Содержание страницы не загрузилось.");
-        Assertions.assertEquals(ConfProperties.getProperty("practice1ExpectedUrl"), browser.getCurrentUrl(), "URL Страницы на которую был совершен переход, не совпадает с ожидаемым.");
-    }
-
-    @AfterEach
-    @Step("Очиска данных")
-    public void after() {
-        BrowserInit.closeWebdriver();
+        Assertions.assertEquals(ConfProperties.getProperty("practice1ExpectedUrl"), driver.getCurrentUrl(), "URL Страницы на которую был совершен переход, не совпадает с ожидаемым.");
     }
 }
