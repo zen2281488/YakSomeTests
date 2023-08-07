@@ -2,13 +2,25 @@ package UITests;
 
 import io.qameta.allure.*;
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import pageObjects.Swiper;
+import pageObjects.WayAutojquery;
+import pageObjects.WayIndexPage;
 import utils.ConfProperties;
 
 @Epic("Тесты работоспособности элементов.")
 public class WorkTest extends BaseTest {
+    private WayIndexPage wayIndexPage;
+    private WayAutojquery wayAutojquery;
+
+    @BeforeEach
+    @Step("Инициализация страниц")
+    public void before() {
+        wayIndexPage = new WayIndexPage(driver);
+        wayAutojquery = new WayAutojquery(driver);
+    }
 
     @Feature("Тест существования и отображения элементов, их работоспособности.")
     @Description("Тест проверяет отображение слайдера с баннерами. Свайпает слайдер и проверяет меняется ли класс слайдера на другой, для проверки смены активных слайдов")

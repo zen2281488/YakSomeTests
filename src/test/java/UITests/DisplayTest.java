@@ -2,12 +2,22 @@ package UITests;
 
 import io.qameta.allure.*;
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import pageObjects.WayIndexPage;
 import utils.ConfProperties;
 
 @Epic("Тесты отображения элементов страницы.")
 public class DisplayTest extends BaseTest {
+    private WayIndexPage wayIndexPage;
+
+    @BeforeEach
+    @Step("Инициализация страниц")
+    public void before() {
+        wayIndexPage = new WayIndexPage(driver);
+    }
+
     @Feature("Тест существования и отображения элементов.")
     @Description("Тест проверяет наличие блока Контактов в Хедере")
     @Severity(value = SeverityLevel.NORMAL)

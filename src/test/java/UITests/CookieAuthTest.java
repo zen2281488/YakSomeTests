@@ -2,9 +2,11 @@ package UITests;
 
 import io.qameta.allure.*;
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
+import pageObjects.SqlExIndexPage;
 import utils.ConfProperties;
 import utils.CookieUtils;
 import utils.TestWatcherPlugin;
@@ -14,6 +16,13 @@ import utils.TestWatcherPlugin;
 @Feature("Тест авторизации.")
 public class CookieAuthTest extends BaseTest {
     private final String COOKIE_FILE_PATH = ConfProperties.getProperty("COOKIE_FILE_PATH");
+    private SqlExIndexPage sqlExIndexPage;
+
+    @BeforeEach
+    @Step("Инициализация страниц")
+    public void before() {
+        sqlExIndexPage = new SqlExIndexPage(driver);
+    }
 
     @Test
     @DisplayName("Авторизация и сохранение куков в файл,с последующим чтением из него")

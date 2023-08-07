@@ -2,13 +2,22 @@ package UITests;
 
 import io.qameta.allure.*;
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import pageObjects.SqlExIndexPage;
 import utils.ConfProperties;
 
 
 @Epic("Тесты работоспособности элементов.")
 public class JavaScriptExecutorTest extends BaseTest {
+    private SqlExIndexPage sqlExIndexPage;
+
+    @BeforeEach
+    @Step("Инициализация страниц")
+    public void before() {
+        sqlExIndexPage = new SqlExIndexPage(driver);
+    }
 
     @Feature("Тест с использованием JavaScriptExecutor.")
     @Description("Тест проверяет наличие вертикального скролла и отсутствие горизонтального, проверяет снимается ли фокус с поля ввода Username")
