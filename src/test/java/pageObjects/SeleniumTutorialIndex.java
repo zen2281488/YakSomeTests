@@ -1,6 +1,7 @@
 package pageObjects;
 
 import io.qameta.allure.Step;
+import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -14,8 +15,13 @@ public class SeleniumTutorialIndex extends BasePage {
         super(browser);
     }
 
-    @Step("Аватар существует.")
-    public boolean avatarImgDisplayed() {
-        return wait.until(ExpectedConditions.visibilityOf(avatarImg)).isDisplayed();
+    @Step("Ожидание появления аватара")
+    public boolean avatarImgExist() {
+        try {
+            wait.until(ExpectedConditions.visibilityOf(avatarImg));
+            return true;
+        } catch (TimeoutException e) {
+            return false;
+        }
     }
 }

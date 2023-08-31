@@ -1,30 +1,31 @@
 package utils;
 
-import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.remote.RemoteWebDriver;
 
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.concurrent.TimeUnit;
 
 public class BrowserInit {
     private static final ThreadLocal<WebDriver> webdriver = new ThreadLocal<>();
 
-    static {
-        WebDriverManager.chromedriver().setup();
-        System.setProperty("webdriver.http.factory", "jdk-http-client");
-    }
-
     public static WebDriver getWebdriver() {
-        ChromeOptions options = new ChromeOptions();
-        options.addArguments("--no-sandbox");
-        options.addArguments("--disable-dev-shm-usage");
-        options.addArguments("--headless");
-        options.addArguments("window-size=1220,880");
-        WebDriver driver;
-        driver = new ChromeDriver(options);
-        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-        webdriver.set(driver);
+        if (webdriver.get() == null) {
+            ChromeOptions options = new ChromeOptions();
+            options.addArguments("--no-sandbox");
+            options.addArguments("--disable-dev-shm-usage");
+            options.addArguments("--headless");
+            options.addArguments("window-size=1220,880");
+            try {
+                WebDriver driver = new RemoteWebDriver(new URL(ConfProperties.getProperty("hubUrl")), options);
+                driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+                webdriver.set(driver);
+            } catch (MalformedURLException e) {
+                e.printStackTrace();
+            }
+        }
         return webdriver.get();
     }
 

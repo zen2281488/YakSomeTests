@@ -1,6 +1,7 @@
 package pageObjects;
 
 import io.qameta.allure.Step;
+import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -19,10 +20,10 @@ public class WayAutorisation extends BasePage {
 
     @FindBy(css = "p:nth-child(2)")
     private WebElement successlogtext;
-
+    @FindBy(css = ".alert.alert-danger")
+    private WebElement errorlogtext;
     @FindBy(css = ".btn-danger")
     private WebElement loginButton;
-
 
     public WayAutorisation(WebDriver browser) {
         super(browser);
@@ -53,9 +54,13 @@ public class WayAutorisation extends BasePage {
     }
 
     @Step("Текст о успешном входе в систему существует.")
-    public WayAutorisation waitSuccessLoginText() {
-        wait.until(ExpectedConditions.visibilityOf(successlogtext));
-        return this;
+    public boolean waitSuccessLoginText() {
+        try {
+            wait.until(ExpectedConditions.visibilityOf(successlogtext));
+            return true;
+        } catch (TimeoutException e) {
+            return false;
+        }
     }
 
     @Step("Извлечение текста о входе в систему.")
