@@ -18,7 +18,7 @@ public class TestWatcherPlugin implements TestWatcher {
 
     private WebDriver getWebDriverFromTestInstance(Object testInstance) {
         try {
-            Field driverField = testInstance.getClass().getDeclaredField("browser");
+            Field driverField = testInstance.getClass().getDeclaredField("driver");
             driverField.setAccessible(true);
             return (WebDriver) driverField.get(testInstance);
         } catch (NoSuchFieldException | IllegalAccessException e) {

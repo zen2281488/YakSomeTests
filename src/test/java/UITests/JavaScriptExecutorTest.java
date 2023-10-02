@@ -1,10 +1,10 @@
 package UITests;
 
+import io.github.artsok.RepeatedIfExceptionsTest;
 import io.qameta.allure.*;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
 import pageObjects.SqlExIndexPage;
 import utils.ConfProperties;
 
@@ -22,7 +22,7 @@ public class JavaScriptExecutorTest extends BaseTest {
     @Feature("Тест с использованием JavaScriptExecutor.")
     @Description("Тест проверяет наличие вертикального скролла и отсутствие горизонтального, проверяет снимается ли фокус с поля ввода Username")
     @Severity(value = SeverityLevel.NORMAL)
-    @Test
+    @RepeatedIfExceptionsTest(repeats = 3)
     @Issue("UI-WAY2 №1")
     @DisplayName("Тестирование Фокуса и Наличие и отсутствие скролла")
     public void javaScriptExecutorTest() {

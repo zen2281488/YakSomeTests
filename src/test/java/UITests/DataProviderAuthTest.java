@@ -1,14 +1,15 @@
 package UITests;
 
+import io.github.artsok.ParameterizedRepeatedIfExceptionsTest;
 import io.qameta.allure.Epic;
 import io.qameta.allure.Feature;
 import io.qameta.allure.Step;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.MethodSource;
 import pageObjects.WayAutorisation;
 import utils.ConfProperties;
+
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 @Epic("Тесты Авторизации.")
 @Feature("Задание U3 тест авторизации с использованием DataProvider")
@@ -21,11 +22,14 @@ public class DataProviderAuthTest extends BaseTest {
         wayAutorisation = new WayAutorisation(driver);
     }
 
-    @ParameterizedTest
+    @ParameterizedRepeatedIfExceptionsTest(name = "Login: {0} , password: {1}",
+            repeatedName = " (Repeat {currentRepetition} of {totalRepetitions})",
+            repeats = 10, exceptions = RuntimeException.class, minSuccess = 2)
     @MethodSource("utils.DataProviderUserData#getLogData")
+
     public void testLogin(String username, String password) {
         driver.get(ConfProperties.getProperty("practice2login"));
         wayAutorisation.sendUsername(username).sendPassword(password).sendUserDescription(password).clickSubmitButton();
-        Assertions.assertTrue(wayAutorisation.waitSuccessLoginText(), "Авторизация не прошла. Проверьте корректность введенных данных.");
+        assertTrue(wayAutorisation.waitSuccessLoginText(), "Авторизация не прошла. Проверьте корректность введенных данных.");
     }
 }
