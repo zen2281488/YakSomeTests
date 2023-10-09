@@ -18,5 +18,6 @@ public class FailedTestExtension implements AfterTestExecutionCallback {
 
             FailedTestRecorder.recordFailedTest(className, methodName);
         }
+
     }
 }

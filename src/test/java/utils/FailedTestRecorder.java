@@ -5,7 +5,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 public class FailedTestRecorder {
-    private static final String FILE_PATH = "failed_tests.txt";
+    private static final String FILE_PATH = "failed_tests.bat";
 
     public static Set<String> getFailedTests() {
         Set<String> failedTests = new HashSet<>();
@@ -21,22 +21,26 @@ public class FailedTestRecorder {
     }
 
     public static void recordFailedTest(String className, String methodName) {
-        String testName = className + "#" + methodName;
+        String methodNameWithoutParentheses = methodName.replaceAll("\\([^()]*\\)", "");
+        String testName = className + "#" + methodNameWithoutParentheses + ",";
         Set<String> currentFailedTests = getFailedTests();
         if (!currentFailedTests.contains(testName)) {
             try (BufferedWriter bw = new BufferedWriter(new FileWriter(FILE_PATH, true))) {
-                bw.write(testName);
-                bw.newLine();
+                BufferedReader br = new BufferedReader(new FileReader(FILE_PATH));
+                String line = br.readLine();
+                if (line != null) {
+                    if (!line.contains(className + "#" + methodNameWithoutParentheses)) {
+                        bw.write(testName);
+                    }
+
+                } else {
+                    bw.write("mvn test -Dtest=" + testName);
+                }
             } catch (IOException e) {
                 e.printStackTrace();
             }
         }
     }
 
-    public static void clearFailedTests() {
-        File file = new File(FILE_PATH);
-        if (file.exists() && file.isFile()) {
-            file.delete();
-        }
-    }
 }
+
