@@ -6,7 +6,7 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 
 public class FailedTestRecorder {
-    private static final String FILE_PATH = "failed_tests.bat";
+    private static final String FILE_PATH = ConfProperties.getProperty("faledTestsBatName");
 
     public static void recordFailedTest(String className, String methodName) throws IOException {
         String methodNameWithoutParentheses = methodName.replaceAll("\\([^()]*\\)", "");
