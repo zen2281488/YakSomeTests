@@ -19,7 +19,7 @@ public class BrowserInit {
             options.addArguments("--headless");
             options.addArguments("window-size=1220,880");
             try {
-                WebDriver driver = new RemoteWebDriver(new URL("http://localhost:4444/wd/hub"), options);
+                WebDriver driver = new RemoteWebDriver(new URL(ConfProperties.getProperty("hubUrl")), options);
                 driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
                 webdriver.set(driver);
             } catch (MalformedURLException e) {
