@@ -12,7 +12,7 @@ public class FailedTestRecorder {
         String methodNameWithoutParentheses = methodName.replaceAll("\\([^()]*\\)", "");
         String testName = className + "#" + methodNameWithoutParentheses + ",";
         String line = Files.readString(Paths.get(FILE_PATH), StandardCharsets.UTF_8);
-        if (!line.contains(className + "#" + methodNameWithoutParentheses) & line != null) {
+        if (line != null && !line.contains(className + "#" + methodNameWithoutParentheses)) {
             Files.writeString(Paths.get(FILE_PATH), testName, StandardCharsets.UTF_8);
         } else {
             Files.writeString(Paths.get(FILE_PATH), "mvn test -Dtest=" + testName, StandardCharsets.UTF_8);
