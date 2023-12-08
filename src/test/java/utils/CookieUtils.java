@@ -4,6 +4,7 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import org.openqa.selenium.Cookie;
 import org.openqa.selenium.WebDriver;
+
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
