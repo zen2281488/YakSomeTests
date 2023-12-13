@@ -1,3 +1,4 @@
+revert
 https://zen2281488.github.io/SDETedu/ Allure Reports
 
 Обучение SDET. Задача U1
