@@ -1,10 +1,10 @@
 package UITests;
 
+import io.github.artsok.RepeatedIfExceptionsTest;
 import io.qameta.allure.*;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
 import pageObjects.Swiper;
 import pageObjects.WayAutojquery;
 import pageObjects.WayIndexPage;
@@ -25,7 +25,7 @@ public class WorkTest extends BaseTest {
     @Feature("Тест существования и отображения элементов, их работоспособности.")
     @Description("Тест проверяет отображение слайдера с баннерами. Свайпает слайдер и проверяет меняется ли класс слайдера на другой, для проверки смены активных слайдов")
     @Severity(value = SeverityLevel.NORMAL)
-    @Test
+    @RepeatedIfExceptionsTest(repeats = 3)
     @Issue("UI-WAY2 №2")
     @DisplayName("Проверка наличия и отображения баннера. Проверка его работоспособности.")
     public void swiperBannerTest() {
@@ -42,7 +42,7 @@ public class WorkTest extends BaseTest {
     @Feature("Тест существования и отображения элементов, их работоспособности.")
     @Description("Тест проверяет наличие Горизонтального меню. Прокручивает страницу вниз, чтобы увидеть следует ли слайдер за пользователем.")
     @Severity(value = SeverityLevel.NORMAL)
-    @Test
+    @RepeatedIfExceptionsTest(repeats = 3)
     @Issue("UI-WAY2 №3")
     @DisplayName("Проверка наличия и отображения горизонтального меню. Проверка работы stick класса слайдера.")
     public void horizontalMenuVisibilityTest() {
@@ -55,7 +55,7 @@ public class WorkTest extends BaseTest {
     @Feature("Тест существования и отображения элементов, их работоспособности.")
     @Description("Тест проверяет отображение слайдера с курсами. Свайпает слайдер и проверяет меняется ли класс слайдера на другой, для проверки смены активных слайдов")
     @Severity(value = SeverityLevel.NORMAL)
-    @Test
+    @RepeatedIfExceptionsTest(repeats = 2)
     @Issue("UI-WAY2 №5")
     @DisplayName("Проверка наличия и отображения слайдера с курсами. Проверка работоспособности слайдера.")
     public void swiperCoursesTest() {
@@ -72,7 +72,7 @@ public class WorkTest extends BaseTest {
     @Feature("Тест работоспособности переходов на другие страницы.")
     @Description("Тест проверяет переходит ли на страницу PractiseSite1 если клинуть по соответствующей ссылке в выпадающем списке в хэдере.")
     @Severity(value = SeverityLevel.NORMAL)
-    @Test
+    @RepeatedIfExceptionsTest(repeats = 3)
     @Issue("UI-WAY2 №7")
     @DisplayName("Проверка перехода на страницу PracticeSite 1")
     public void wayPracticeSiteEntranceTest() {

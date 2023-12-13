@@ -1,18 +1,16 @@
 package UITests;
 
+import io.github.artsok.RepeatedIfExceptionsTest;
 import io.qameta.allure.*;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
 import pageObjects.SeleniumTutorialIndex;
 import pageObjects.WayAutorisation;
 import pageObjects.WayLogin;
 import utils.ConfProperties;
-import utils.TestWatcherPlugin;
 
-@ExtendWith(TestWatcherPlugin.class)
+
 @Epic("Тесты Авторизации.")
 @Feature("Тест авторизации.")
 public class AuthTest extends BaseTest {
@@ -31,7 +29,7 @@ public class AuthTest extends BaseTest {
 
     @Description("Тест проверяет авторизацию на сайте Practice Site 2. Появляется ли текст о успешной авторизации после ввода учетных данных.")
     @Severity(value = SeverityLevel.CRITICAL)
-    @Test
+    @RepeatedIfExceptionsTest(repeats = 3)
     @Issue("UI-WAY2 №8")
     @DisplayName("Проверка авторизации на сайте Practice Site 2")
     public void practiceSiteAuthorizationTest() {
@@ -42,7 +40,7 @@ public class AuthTest extends BaseTest {
 
     @Description("Тест проверяет успешно ли проходит авторизация на сайте Way2 при вводе учетных данных пользователя.")
     @Severity(value = SeverityLevel.CRITICAL)
-    @Test
+    @RepeatedIfExceptionsTest(repeats = 3)
     @Issue("UI-WAY2 №10")
     @DisplayName("Проверка авторизации на сайте Way2")
     public void wayAuthorizationTest() {

@@ -1,17 +1,15 @@
 package UITests;
 
+import io.github.artsok.RepeatedIfExceptionsTest;
 import io.qameta.allure.*;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
 import pageObjects.SqlExIndexPage;
 import utils.ConfProperties;
 import utils.CookieUtils;
-import utils.TestWatcherPlugin;
 
-@ExtendWith(TestWatcherPlugin.class)
+
 @Epic("Тесты Авторизации.")
 @Feature("Тест авторизации.")
 public class CookieAuthTest extends BaseTest {
@@ -24,7 +22,7 @@ public class CookieAuthTest extends BaseTest {
         sqlExIndexPage = new SqlExIndexPage(driver);
     }
 
-    @Test
+    @RepeatedIfExceptionsTest(repeats = 2)
     @DisplayName("Авторизация и сохранение куков в файл,с последующим чтением из него")
     @Severity(SeverityLevel.CRITICAL)
     @Description("Тест авторизации пользователя и сохранение куков в файл, чтение куков из файла при повторном тестировании")
