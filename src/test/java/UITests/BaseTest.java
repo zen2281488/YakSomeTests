@@ -6,6 +6,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.openqa.selenium.WebDriver;
 import utils.BrowserInit;
+import utils.ConfProperties;
 import utils.FailedTestExtension;
 import utils.TestWatcherPlugin;
 
@@ -24,6 +25,6 @@ public class BaseTest {
     @BeforeEach
     @Step("Инициализация Драйвера")
     public void baseBefore() {
-        driver = BrowserInit.getWebdriver();
+        driver = BrowserInit.getWebdriverSelenoid(ConfProperties.getProperty("browserName"), ConfProperties.getProperty("browserMode"));
     }
 }

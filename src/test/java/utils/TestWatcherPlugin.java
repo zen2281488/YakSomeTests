@@ -8,16 +8,16 @@ import java.io.IOException;
 import java.lang.reflect.Field;
 
 
-
 public class TestWatcherPlugin implements TestWatcher {
     private boolean isFirstFailure = true;
+
     @Override
     public void testFailed(ExtensionContext context, Throwable cause) {
         WebDriver driver = getWebDriverFromTestInstance(context.getRequiredTestInstance());
         if (driver != null) {
             ScreenShot.captureScreenshot(driver);
         }
-        if(isFirstFailure){
+        if (isFirstFailure) {
             try {
                 FailedTestRecorder.newFailedTestFile();
                 isFirstFailure = false;
