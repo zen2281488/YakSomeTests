@@ -110,7 +110,7 @@ public class BrowserInit {
 
     public static void setWebdriverOptionsSelenoid(MutableCapabilities options) {
         options.setCapability("selenoid:options", new HashMap<String, Object>() {{
-            put("screenResolution", "1920x1080");
+            put("screenResolution", ConfProperties.getProperty("selenoidWindowResolution"));
         }});
     }
 
