@@ -18,40 +18,52 @@ public class BrowserInit {
     private static final ThreadLocal<WebDriver> webdriver = new ThreadLocal<>();
 
     public static WebDriver getWebdriverSelenoid(String browserName, String browserMode) {
-        switch (browserMode) {
-            case "selenoid":
-                if (browserName.equals("chrome") && webdriver.get() == null) {
-                    setUpRemoteDriver(new ChromeOptions());
-                } else if (browserName.equals("firefox") && webdriver.get() == null) {
-                    setUpRemoteDriver(new FirefoxOptions());
-                } else if (browserName.equals("edge") && webdriver.get() == null) {
-                    setUpRemoteDriver(new EdgeOptions());
-                } else {
-                    throw new RuntimeException("Incorrect BrowserName");
-                }
-                break;
-            case "local":
-                if (browserName.equals("chrome") && webdriver.get() == null) {
-                    System.setProperty("webdriver.chrome.driver", ConfProperties.getProperty("chromedriverLocal"));
-                    webdriver.set(new ChromeDriver(
-                            new ChromeOptions().addArguments("--no-sandbox", "--disable-dev-shm-usage", "window-size=1220,880").setHeadless(true)));
-                } else if (browserName.equals("firefox") && webdriver.get() == null) {
-                    System.setProperty("webdriver.gecko.driver", ConfProperties.getProperty("geckodriverLocal"));
-                    webdriver.set(new FirefoxDriver(
-                            new FirefoxOptions().addArguments("--no-sandbox", "--disable-dev-shm-usage", "window-size=1220,880").setHeadless(true)));
-                } else if (browserName.equals("edge") && webdriver.get() == null) {
-                    System.setProperty("webdriver.edge.driver", ConfProperties.getProperty("edgedriverLocal"));
-                    webdriver.set(new EdgeDriver(
-                            new EdgeOptions().addArguments("--no-sandbox", "--disable-dev-shm-usage", "window-size=1220,880").setHeadless(true)));
-                } else {
-                    throw new RuntimeException("Incorrect BrowserName");
-                }
-            default:
-                throw new RuntimeException("Incorrect WebdriverMode");
+        if (webdriver.get() == null) {
+            switch (browserMode) {
+                case "selenoid":
+                    switch (browserName) {
+                        case "chrome":
+                            setUpRemoteDriver(new ChromeOptions());
+                            break;
+                        case "firefox":
+                            setUpRemoteDriver(new FirefoxOptions());
+                            break;
+                        case "edge":
+                            setUpRemoteDriver(new EdgeOptions());
+                            break;
+                        default:
+                            throw new RuntimeException("Incorrect BrowserName");
+                    }
+                    break;
+
+                case "local":
+                    switch (browserName) {
+                        case "chrome":
+                            System.setProperty("webdriver.chrome.driver", ConfProperties.getProperty("chromedriverLocal"));
+                            webdriver.set(new ChromeDriver(
+                                    new ChromeOptions().addArguments("--no-sandbox", "--disable-dev-shm-usage", "window-size=1220,880").setHeadless(true)));
+                            break;
+                        case "firefox":
+                            System.setProperty("webdriver.gecko.driver", ConfProperties.getProperty("geckodriverLocal"));
+                            webdriver.set(new FirefoxDriver(
+                                    new FirefoxOptions().addArguments("--no-sandbox", "--disable-dev-shm-usage", "window-size=1220,880").setHeadless(true)));
+                            break;
+                        case "edge":
+                            System.setProperty("webdriver.edge.driver", ConfProperties.getProperty("edgedriverLocal"));
+                            webdriver.set(new EdgeDriver(
+                                    new EdgeOptions().addArguments("--no-sandbox", "--Ыdisable-dev-shm-usage", "window-size=1220,880").setHeadless(true)));
+                            break;
+                        default:
+                            throw new RuntimeException("Incorrect BrowserName");
+                    }
+                    break;
+                default:
+                    throw new RuntimeException("Incorrect WebdriverMode");
+            }
+
         }
         return webdriver.get();
     }
-
 
     public static synchronized void closeWebdriver() {
         if (webdriver.get() != null) {
@@ -65,8 +77,7 @@ public class BrowserInit {
             put("screenResolution", ConfProperties.getProperty("selenoidWindowResolution"));
         }});
         try {
-            RemoteWebDriver driver = new RemoteWebDriver(new URL(ConfProperties.getProperty("hubUrl")), options);
-            webdriver.set(driver);
+            webdriver.set(new RemoteWebDriver(new URL(ConfProperties.getProperty("hubUrl")), options));
         } catch (MalformedURLException e) {
             e.printStackTrace();
         }
