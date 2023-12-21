@@ -16,6 +16,7 @@ import java.util.HashMap;
 
 public class BrowserInit {
     private static final ThreadLocal<WebDriver> webdriver = new ThreadLocal<>();
+    static RemoteWebDriver driver;
 
     public static WebDriver getWebdriverSelenoid(String browserName, String browserMode) {
         if (webdriver.get() == null) {
@@ -23,13 +24,13 @@ public class BrowserInit {
                 case "selenoid":
                     switch (browserName) {
                         case "chrome":
-                            setUpRemoteDriver(new ChromeOptions());
+                            driver = setUpRemoteDriver(new ChromeOptions());
                             break;
                         case "firefox":
-                            setUpRemoteDriver(new FirefoxOptions());
+                            driver = setUpRemoteDriver(new FirefoxOptions());
                             break;
                         case "edge":
-                            setUpRemoteDriver(new EdgeOptions());
+                            driver = setUpRemoteDriver(new EdgeOptions());
                             break;
                         default:
                             throw new RuntimeException("Incorrect BrowserName");
@@ -40,18 +41,15 @@ public class BrowserInit {
                     switch (browserName) {
                         case "chrome":
                             System.setProperty("webdriver.chrome.driver", ConfProperties.getProperty("chromedriverLocal"));
-                            webdriver.set(new ChromeDriver(
-                                    new ChromeOptions().addArguments("--no-sandbox", "--disable-dev-shm-usage", "window-size=1220,880").setHeadless(true)));
+                            driver = new ChromeDriver(new ChromeOptions().addArguments("--no-sandbox", "--disable-dev-shm-usage", "window-size=1220,880").setHeadless(true));
                             break;
                         case "firefox":
                             System.setProperty("webdriver.gecko.driver", ConfProperties.getProperty("geckodriverLocal"));
-                            webdriver.set(new FirefoxDriver(
-                                    new FirefoxOptions().addArguments("--no-sandbox", "--disable-dev-shm-usage", "window-size=1220,880").setHeadless(true)));
+                            driver = new FirefoxDriver(new FirefoxOptions().addArguments("--no-sandbox", "--disable-dev-shm-usage", "window-size=1220,880").setHeadless(true));
                             break;
                         case "edge":
                             System.setProperty("webdriver.edge.driver", ConfProperties.getProperty("edgedriverLocal"));
-                            webdriver.set(new EdgeDriver(
-                                    new EdgeOptions().addArguments("--no-sandbox", "--Ыdisable-dev-shm-usage", "window-size=1220,880").setHeadless(true)));
+                            driver = new EdgeDriver(new EdgeOptions().addArguments("--no-sandbox", "--Ыdisable-dev-shm-usage", "window-size=1220,880").setHeadless(true));
                             break;
                         default:
                             throw new RuntimeException("Incorrect BrowserName");
@@ -62,6 +60,7 @@ public class BrowserInit {
             }
 
         }
+        webdriver.set(driver);
         return webdriver.get();
     }
 
@@ -72,14 +71,15 @@ public class BrowserInit {
         }
     }
 
-    private static void setUpRemoteDriver(MutableCapabilities options) {
+    private static RemoteWebDriver setUpRemoteDriver(MutableCapabilities options) {
         options.setCapability("selenoid:options", new HashMap<String, Object>() {{
             put("screenResolution", ConfProperties.getProperty("selenoidWindowResolution"));
         }});
         try {
-            webdriver.set(new RemoteWebDriver(new URL(ConfProperties.getProperty("hubUrl")), options));
+            return new RemoteWebDriver(new URL(ConfProperties.getProperty("hubUrl")), options);
         } catch (MalformedURLException e) {
             e.printStackTrace();
         }
+        return null;
     }
 }
