@@ -25,7 +25,7 @@ public class BrowserInit {
                         if (webdriver.get() == null) {
                             ChromeOptions options = new ChromeOptions();
                             setWebdriverOptionsSelenoid(options);
-                            tryToSetUpRemoteDriver(options);
+                            trySetUpRemoteDriver(options);
                         }
                         return webdriver.get();
 
@@ -34,7 +34,7 @@ public class BrowserInit {
                         if (webdriver.get() == null) {
                             FirefoxOptions options = new FirefoxOptions();
                             setWebdriverOptionsSelenoid(options);
-                            tryToSetUpRemoteDriver(options);
+                            trySetUpRemoteDriver(options);
                         }
                         return webdriver.get();
 
@@ -43,7 +43,7 @@ public class BrowserInit {
                         if (webdriver.get() == null) {
                             EdgeOptions options = new EdgeOptions();
                             setWebdriverOptionsSelenoid(options);
-                            tryToSetUpRemoteDriver(options);
+                            trySetUpRemoteDriver(options);
                         }
                         return webdriver.get();
 
@@ -93,14 +93,14 @@ public class BrowserInit {
         }
     }
 
-    public static void setWebdriverOptionsSelenoid(MutableCapabilities options) {
+    private static void setWebdriverOptionsSelenoid(MutableCapabilities options) {
         options.setCapability("selenoid:options", new HashMap<String, Object>() {{
             put("screenResolution", ConfProperties.getProperty("selenoidWindowResolution"));
         }});
     }
 
 
-    public static void tryToSetUpRemoteDriver(MutableCapabilities options) {
+    private static void trySetUpRemoteDriver(MutableCapabilities options) {
         try {
             RemoteWebDriver driver = new RemoteWebDriver(new URL(ConfProperties.getProperty("hubUrl")), options);
             webdriver.set(driver);
