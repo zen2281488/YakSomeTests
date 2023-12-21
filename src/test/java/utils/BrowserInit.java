@@ -58,9 +58,8 @@ public class BrowserInit {
                 default:
                     throw new RuntimeException("Incorrect WebdriverMode");
             }
-
+            webdriver.set(driver);
         }
-        webdriver.set(driver);
         return webdriver.get();
     }
 
