@@ -25,12 +25,7 @@ public class BrowserInit {
                         if (webdriver.get() == null) {
                             ChromeOptions options = new ChromeOptions();
                             setWebdriverOptionsSelenoid(options);
-                            try {
-                                RemoteWebDriver driver = new RemoteWebDriver(new URL(ConfProperties.getProperty("hubUrl")), options);
-                                webdriver.set(driver);
-                            } catch (MalformedURLException e) {
-                                e.printStackTrace();
-                            }
+                            tryToSetUpRemoteDriver(options);
                         }
                         return webdriver.get();
 
@@ -39,12 +34,7 @@ public class BrowserInit {
                         if (webdriver.get() == null) {
                             FirefoxOptions options = new FirefoxOptions();
                             setWebdriverOptionsSelenoid(options);
-                            try {
-                                RemoteWebDriver driver = new RemoteWebDriver(new URL(ConfProperties.getProperty("hubUrl")), options);
-                                webdriver.set(driver);
-                            } catch (MalformedURLException e) {
-                                e.printStackTrace();
-                            }
+                            tryToSetUpRemoteDriver(options);
                         }
                         return webdriver.get();
 
@@ -53,12 +43,7 @@ public class BrowserInit {
                         if (webdriver.get() == null) {
                             EdgeOptions options = new EdgeOptions();
                             setWebdriverOptionsSelenoid(options);
-                            try {
-                                RemoteWebDriver driver = new RemoteWebDriver(new URL(ConfProperties.getProperty("hubUrl")), options);
-                                webdriver.set(driver);
-                            } catch (MalformedURLException e) {
-                                e.printStackTrace();
-                            }
+                            tryToSetUpRemoteDriver(options);
                         }
                         return webdriver.get();
 
@@ -113,5 +98,16 @@ public class BrowserInit {
             put("screenResolution", ConfProperties.getProperty("selenoidWindowResolution"));
         }});
     }
+
+
+    public static void tryToSetUpRemoteDriver(MutableCapabilities options) {
+        try {
+            RemoteWebDriver driver = new RemoteWebDriver(new URL(ConfProperties.getProperty("hubUrl")), options);
+            webdriver.set(driver);
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+        }
+    }
+
 
 }
