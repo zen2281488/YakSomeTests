@@ -71,30 +71,24 @@ public class BrowserInit {
                     case "chrome":
                         if (webdriver.get() == null) {
                             System.setProperty("webdriver.chrome.driver", ConfProperties.getProperty("chromedriverLocal"));
-                            ChromeOptions options = new ChromeOptions().addArguments("--no-sandbox")
-                                    .addArguments("--disable-dev-shm-usage")
-                                    .addArguments("--headless")
-                                    .addArguments("window-size=1220,880");
+                            ChromeOptions options = new ChromeOptions()
+                                    .addArguments("--no-sandbox", "--disable-dev-shm-usage", "--headless", "window-size=1220,880");
                             webdriver.set(new ChromeDriver(options));
                         }
                         return webdriver.get();
                     case "firefox":
                         if (webdriver.get() == null) {
                             System.setProperty("webdriver.gecko.driver", ConfProperties.getProperty("geckodriverLocal"));
-                            FirefoxOptions options = new FirefoxOptions().addArguments("--no-sandbox")
-                                    .addArguments("--disable-dev-shm-usage")
-                                    .addArguments("--headless")
-                                    .addArguments("window-size=1220,880");
+                            FirefoxOptions options = new FirefoxOptions()
+                                    .addArguments("--no-sandbox", "--disable-dev-shm-usage", "--headless", "window-size=1220,880");
                             webdriver.set(new FirefoxDriver(options));
                         }
                         return webdriver.get();
                     case "edge":
                         if (webdriver.get() == null) {
                             System.setProperty("webdriver.edge.driver", ConfProperties.getProperty("edgedriverLocal"));
-                            EdgeOptions options = new EdgeOptions().addArguments("--no-sandbox")
-                                    .addArguments("--disable-dev-shm-usage")
-                                    .addArguments("--headless")
-                                    .addArguments("window-size=1220,880");
+                            EdgeOptions options = new EdgeOptions()
+                                    .addArguments("--no-sandbox", "--disable-dev-shm-usage", "--headless", "window-size=1220,880");
                             webdriver.set(new EdgeDriver(options));
                         }
                         return webdriver.get();
@@ -119,6 +113,5 @@ public class BrowserInit {
             put("screenResolution", "1920x1080");
         }});
     }
-
 
 }
