@@ -20,70 +20,38 @@ public class BrowserInit {
     public static WebDriver getWebdriverSelenoid(String browserName, String browserMode) {
         switch (browserMode) {
             case "selenoid":
-                switch (browserName) {
-                    case "chrome":
-                        if (webdriver.get() == null) {
-                            ChromeOptions options = new ChromeOptions();
-                            setWebdriverOptionsSelenoid(options);
-                            trySetUpRemoteDriver(options);
-                        }
-                        return webdriver.get();
-
-
-                    case "firefox":
-                        if (webdriver.get() == null) {
-                            FirefoxOptions options = new FirefoxOptions();
-                            setWebdriverOptionsSelenoid(options);
-                            trySetUpRemoteDriver(options);
-                        }
-                        return webdriver.get();
-
-
-                    case "edge":
-                        if (webdriver.get() == null) {
-                            EdgeOptions options = new EdgeOptions();
-                            setWebdriverOptionsSelenoid(options);
-                            trySetUpRemoteDriver(options);
-                        }
-                        return webdriver.get();
-
-                    default:
-                        throw new RuntimeException("Incorrect BrowserName");
+                if (browserName.equals("chrome") && webdriver.get() == null) {
+                    setUpRemoteDriver(new ChromeOptions());
+                } else if (browserName.equals("firefox") && webdriver.get() == null) {
+                    setUpRemoteDriver(new FirefoxOptions());
+                } else if (browserName.equals("edge") && webdriver.get() == null) {
+                    setUpRemoteDriver(new EdgeOptions());
+                } else {
+                    throw new RuntimeException("Incorrect BrowserName");
                 }
-
+                break;
             case "local":
-                switch (browserName) {
-                    case "chrome":
-                        if (webdriver.get() == null) {
-                            System.setProperty("webdriver.chrome.driver", ConfProperties.getProperty("chromedriverLocal"));
-                            ChromeOptions options = new ChromeOptions()
-                                    .addArguments("--no-sandbox", "--disable-dev-shm-usage", "--headless", "window-size=1220,880");
-                            webdriver.set(new ChromeDriver(options));
-                        }
-                        return webdriver.get();
-                    case "firefox":
-                        if (webdriver.get() == null) {
-                            System.setProperty("webdriver.gecko.driver", ConfProperties.getProperty("geckodriverLocal"));
-                            FirefoxOptions options = new FirefoxOptions()
-                                    .addArguments("--no-sandbox", "--disable-dev-shm-usage", "--headless", "window-size=1220,880");
-                            webdriver.set(new FirefoxDriver(options));
-                        }
-                        return webdriver.get();
-                    case "edge":
-                        if (webdriver.get() == null) {
-                            System.setProperty("webdriver.edge.driver", ConfProperties.getProperty("edgedriverLocal"));
-                            EdgeOptions options = new EdgeOptions()
-                                    .addArguments("--no-sandbox", "--disable-dev-shm-usage", "--headless", "window-size=1220,880");
-                            webdriver.set(new EdgeDriver(options));
-                        }
-                        return webdriver.get();
-                    default:
-                        throw new RuntimeException("Incorrect BrowserName");
+                if (browserName.equals("chrome") && webdriver.get() == null) {
+                    System.setProperty("webdriver.chrome.driver", ConfProperties.getProperty("chromedriverLocal"));
+                    webdriver.set(new ChromeDriver(
+                            new ChromeOptions().addArguments("--no-sandbox", "--disable-dev-shm-usage", "window-size=1220,880").setHeadless(true)));
+                } else if (browserName.equals("firefox") && webdriver.get() == null) {
+                    System.setProperty("webdriver.gecko.driver", ConfProperties.getProperty("geckodriverLocal"));
+                    webdriver.set(new FirefoxDriver(
+                            new FirefoxOptions().addArguments("--no-sandbox", "--disable-dev-shm-usage", "window-size=1220,880").setHeadless(true)));
+                } else if (browserName.equals("edge") && webdriver.get() == null) {
+                    System.setProperty("webdriver.edge.driver", ConfProperties.getProperty("edgedriverLocal"));
+                    webdriver.set(new EdgeDriver(
+                            new EdgeOptions().addArguments("--no-sandbox", "--disable-dev-shm-usage", "window-size=1220,880").setHeadless(true)));
+                } else {
+                    throw new RuntimeException("Incorrect BrowserName");
                 }
             default:
                 throw new RuntimeException("Incorrect WebdriverMode");
         }
+        return webdriver.get();
     }
+
 
     public static synchronized void closeWebdriver() {
         if (webdriver.get() != null) {
@@ -92,13 +60,10 @@ public class BrowserInit {
         }
     }
 
-    private static void setWebdriverOptionsSelenoid(MutableCapabilities options) {
+    private static void setUpRemoteDriver(MutableCapabilities options) {
         options.setCapability("selenoid:options", new HashMap<String, Object>() {{
             put("screenResolution", ConfProperties.getProperty("selenoidWindowResolution"));
         }});
-    }
-
-    private static void trySetUpRemoteDriver(MutableCapabilities options) {
         try {
             RemoteWebDriver driver = new RemoteWebDriver(new URL(ConfProperties.getProperty("hubUrl")), options);
             webdriver.set(driver);
@@ -106,5 +71,4 @@ public class BrowserInit {
             e.printStackTrace();
         }
     }
-
 }

@@ -1,4 +1,4 @@
-package ui;
+package tests.ui;
 
 import io.github.artsok.RepeatedIfExceptionsTest;
 import io.qameta.allure.*;

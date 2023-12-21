@@ -1,4 +1,4 @@
-package ui;
+package tests.ui;
 
 import io.github.artsok.ParameterizedRepeatedIfExceptionsTest;
 import io.qameta.allure.Epic;

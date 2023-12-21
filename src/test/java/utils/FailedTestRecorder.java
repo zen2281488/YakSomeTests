@@ -20,8 +20,3 @@ public class FailedTestRecorder {
         Files.write(path, "mvn test -Dtest=".getBytes(StandardCharsets.UTF_8), StandardOpenOption.CREATE, StandardOpenOption.TRUNCATE_EXISTING);
     }
 }
-
-
-
-
-
