@@ -85,7 +85,6 @@ public class BrowserInit {
         }
     }
 
-
     public static synchronized void closeWebdriver() {
         if (webdriver.get() != null) {
             webdriver.get().quit();
@@ -99,7 +98,6 @@ public class BrowserInit {
         }});
     }
 
-
     private static void trySetUpRemoteDriver(MutableCapabilities options) {
         try {
             RemoteWebDriver driver = new RemoteWebDriver(new URL(ConfProperties.getProperty("hubUrl")), options);
@@ -108,6 +106,5 @@ public class BrowserInit {
             e.printStackTrace();
         }
     }
-
 
 }
