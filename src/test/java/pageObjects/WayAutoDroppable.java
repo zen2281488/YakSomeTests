@@ -26,4 +26,7 @@ public class WayAutoDroppable extends BasePage {
         action.dragAndDrop(draggableBox, droppableBox).build().perform();
     }
 
+    public void switchFrame(WebDriver driver){
+        driver.switchTo().frame(iframe);
+    }
 }

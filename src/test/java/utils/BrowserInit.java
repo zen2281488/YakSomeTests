@@ -45,11 +45,11 @@ public class BrowserInit {
                             break;
                         case "firefox":
                             System.setProperty("webdriver.gecko.driver", ConfProperties.getProperty("geckodriverLocal"));
-                            driver = new FirefoxDriver(new FirefoxOptions().addArguments("--no-sandbox", "--disable-dev-shm-usage", "window-size=1220,880").setHeadless(true));
+                            driver = new FirefoxDriver(new FirefoxOptions().addArguments("--no-sandbox", "--disable-dev-shm-usage", "window-size=1220,880").setHeadless(ConfProperties.getBoolProperty("headlessMode")));
                             break;
                         case "edge":
                             System.setProperty("webdriver.edge.driver", ConfProperties.getProperty("edgedriverLocal"));
-                            driver = new EdgeDriver(new EdgeOptions().addArguments("--no-sandbox", "--Ыdisable-dev-shm-usage", "window-size=1220,880").setHeadless(true));
+                            driver = new EdgeDriver(new EdgeOptions().addArguments("--no-sandbox", "--Ыdisable-dev-shm-usage", "window-size=1220,880").setHeadless(ConfProperties.getBoolProperty("headlessMode")));
                             break;
                         default:
                             throw new RuntimeException("Incorrect BrowserName");
