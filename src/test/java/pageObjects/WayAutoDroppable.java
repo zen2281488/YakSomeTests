@@ -1,5 +1,6 @@
 package pageObjects;
 
+import io.qameta.allure.Step;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -21,11 +22,11 @@ public class WayAutoDroppable extends BasePage {
     public String getDroppableBoxText() {
         return droppableBoxText.getText();
     }
-
+    @Step("Drag and drop элемента: перетащить элемент {draggableBox} в элемент {droppableBox}")
     public void dragAndDropBox(){
         action.dragAndDrop(draggableBox, droppableBox).build().perform();
     }
-
+    @Step("Фокус на Iframe")
     public void switchFrame(WebDriver driver){
         driver.switchTo().frame(iframe);
     }
