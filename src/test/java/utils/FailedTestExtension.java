@@ -15,9 +15,7 @@ public class FailedTestExtension implements AfterTestExecutionCallback {
             String methodName = context.getTestMethod()
                     .map(method -> method.getName() + "()")
                     .orElse("unknownMethod()");
-
             FailedTestRecorder.recordFailedTest(className, methodName);
         }
-
     }
 }
