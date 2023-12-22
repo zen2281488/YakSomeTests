@@ -20,7 +20,7 @@ public class DragAndDropTest extends BaseTest {
     }
 
     @RepeatedIfExceptionsTest(repeats = 2)
-    @DisplayName("Тест Drag and Drop элемента на изменение состояния")
+    @DisplayName("Тест Drag and Drop элемента на изменение состояния после совершения действия")
     @Severity(SeverityLevel.CRITICAL)
     @Description("Тест изменения состояния текста div при drag and drop элемента в другой элемент")
     public void testDragAndDrop() {
