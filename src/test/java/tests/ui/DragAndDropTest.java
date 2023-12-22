@@ -1,19 +1,21 @@
 package tests.ui;
 
-
 import io.github.artsok.RepeatedIfExceptionsTest;
-import io.qameta.allure.*;
+import io.qameta.allure.Epic;
+import io.qameta.allure.Step;
+import io.qameta.allure.Severity;
+import io.qameta.allure.SeverityLevel;
+import io.qameta.allure.Description;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
-import org.openqa.selenium.WebElement;
 import pageObjects.WayAutoDroppable;
-import pageObjects.WayIndexPage;
 import utils.ConfProperties;
 
 @Epic("U10. Drag n Drop (IFrame)")
-public class DragNdrop extends BaseTest {
+public class DragAndDropTest extends BaseTest {
     private WayAutoDroppable wayAutoDroppable;
+
     @BeforeEach
     @Step("Инициализация страниц")
     public void before() {
@@ -26,9 +28,9 @@ public class DragNdrop extends BaseTest {
     @Description("Тест изменения состояния текста div при drag and drop элемента в другой элемент")
     public void testDragAndDrop() {
         driver.get(ConfProperties.getProperty("wayAutomationDroppable"));
-        wayAutoDroppable.switchFrame(driver);
+        wayAutoDroppable.action("switchToIframe");
         Assertions.assertEquals("Drop here", wayAutoDroppable.getDroppableBoxText());
-        wayAutoDroppable.dragAndDropBox();
+        wayAutoDroppable.action("dragAndDrop");
         Assertions.assertEquals("Dropped!", wayAutoDroppable.getDroppableBoxText());
     }
 }
