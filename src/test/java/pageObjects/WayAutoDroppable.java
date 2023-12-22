@@ -29,6 +29,8 @@ public class WayAutoDroppable extends BasePage {
 
     @Step("Drag and drop элемента: перетащить элемент {draggableBox} в элемент {droppableBox}")
     public void dragAndDropBox() {
+        browser.switchTo().frame(iframe);
         action.dragAndDrop(draggableBox, droppableBox).build().perform();
+        browser.switchTo().defaultContent();
     }
 }

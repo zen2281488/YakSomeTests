@@ -12,6 +12,7 @@ import utils.ConfProperties;
 @Epic("U10. Drag n Drop (IFrame)")
 public class DragAndDropTest extends BaseTest {
     private WayAutoDroppable wayAutoDroppable;
+
     @BeforeEach
     @Step("Инициализация страниц")
     public void before() {
