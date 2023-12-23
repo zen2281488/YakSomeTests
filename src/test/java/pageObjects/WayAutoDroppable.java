@@ -12,10 +12,13 @@ public class WayAutoDroppable extends BasePage {
 
     @FindBy(css = "#draggable")
     private WebElement draggableBox;
+
     @FindBy(css = "#droppable")
     private WebElement droppableBox;
+
     @FindBy(css = "#example-1-tab-1 > div > iframe")
     public WebElement iframe;
+
     @FindBy(css = "#droppable > p")
     private WebElement droppableBoxText;
 
