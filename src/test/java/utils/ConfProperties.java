@@ -29,4 +29,8 @@ public class ConfProperties {
     public static String getProperty(String key) {
         return PROPERTIES.getProperty(key);
     }
+
+    public static boolean getBoolProperty(String key) {
+        return Boolean.parseBoolean(PROPERTIES.getProperty(key));
+    }
 }

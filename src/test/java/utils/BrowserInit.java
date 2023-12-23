@@ -41,15 +41,15 @@ public class BrowserInit {
                     switch (browserName) {
                         case "chrome":
                             System.setProperty("webdriver.chrome.driver", ConfProperties.getProperty("chromedriverLocal"));
-                            driver = new ChromeDriver(new ChromeOptions().addArguments("--no-sandbox", "--disable-dev-shm-usage", "window-size=1220,880").setHeadless(true));
+                            driver = new ChromeDriver(new ChromeOptions().addArguments("--no-sandbox", "--disable-dev-shm-usage", "window-size=1220,880").setHeadless(ConfProperties.getBoolProperty("headlessMode")));
                             break;
                         case "firefox":
                             System.setProperty("webdriver.gecko.driver", ConfProperties.getProperty("geckodriverLocal"));
-                            driver = new FirefoxDriver(new FirefoxOptions().addArguments("--no-sandbox", "--disable-dev-shm-usage", "window-size=1220,880").setHeadless(true));
+                            driver = new FirefoxDriver(new FirefoxOptions().addArguments("--no-sandbox", "--disable-dev-shm-usage", "window-size=1220,880").setHeadless(ConfProperties.getBoolProperty("headlessMode")));
                             break;
                         case "edge":
                             System.setProperty("webdriver.edge.driver", ConfProperties.getProperty("edgedriverLocal"));
-                            driver = new EdgeDriver(new EdgeOptions().addArguments("--no-sandbox", "--Ыdisable-dev-shm-usage", "window-size=1220,880").setHeadless(true));
+                            driver = new EdgeDriver(new EdgeOptions().addArguments("--no-sandbox", "--Ыdisable-dev-shm-usage", "window-size=1220,880").setHeadless(ConfProperties.getBoolProperty("headlessMode")));
                             break;
                         default:
                             throw new RuntimeException("Incorrect BrowserName");
@@ -73,6 +73,7 @@ public class BrowserInit {
     private static RemoteWebDriver setUpRemoteDriver(MutableCapabilities options) {
         options.setCapability("selenoid:options", new HashMap<String, Object>() {{
             put("screenResolution", ConfProperties.getProperty("selenoidWindowResolution"));
+            put("enableVNC", ConfProperties.getBoolProperty("vncMode"));
         }});
         try {
             return new RemoteWebDriver(new URL(ConfProperties.getProperty("hubUrl")), options);

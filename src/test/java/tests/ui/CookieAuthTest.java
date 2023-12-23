@@ -1,7 +1,12 @@
 package tests.ui;
 
 import io.github.artsok.RepeatedIfExceptionsTest;
-import io.qameta.allure.*;
+import io.qameta.allure.Step;
+import io.qameta.allure.Epic;
+import io.qameta.allure.Severity;
+import io.qameta.allure.SeverityLevel;
+import io.qameta.allure.Description;
+import io.qameta.allure.Feature;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
