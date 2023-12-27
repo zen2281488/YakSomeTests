@@ -85,6 +85,6 @@ public class WorkTest extends BaseTest {
         driver.get(ConfProperties.getProperty("mainTestPage"));
         wayIndexPage.triggerDropdown().practiseSiteButtonClick();
         Assertions.assertTrue(wayAutojquery.bodyDisplayed(), "Содержание страницы не загрузилось.");
-        Assertions.assertEquals(ConfProperties.getProperty("practice1ExpectedUrl"), driver.getCurrentUrl(), "URL Страницы на которую был совершен переход, не совпадает с ожидаемым.");
+        Assertions.assertEquals(ConfProperties.getProperty("mainTestPage") + ConfProperties.getProperty("practice1ExpectedUrl"), driver.getCurrentUrl(), "URL Страницы на которую был совершен переход, не совпадает с ожидаемым.");
     }
 }

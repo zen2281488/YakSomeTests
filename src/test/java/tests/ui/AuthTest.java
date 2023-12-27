@@ -39,7 +39,7 @@ public class AuthTest extends BaseTest {
     @Issue("UI-WAY2 №8")
     @DisplayName("Проверка авторизации на сайте Practice Site 2")
     public void practiceSiteAuthorizationTest() {
-        driver.get(ConfProperties.getProperty("practice2login"));
+        driver.get(ConfProperties.getProperty("mainTestPage") + ConfProperties.getProperty("practice2login"));
         wayAutorisation.sendUsername(ConfProperties.getProperty("p2username")).sendPassword(ConfProperties.getProperty("p2pass")).sendUserDescription(ConfProperties.getProperty("p2username")).clickSubmitButton();
         Assertions.assertTrue(wayAutorisation.waitSuccessLoginText(), "Авторизация не прошла. Проверьте корректность введенных данных.");
     }
