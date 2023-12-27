@@ -14,31 +14,35 @@ public class WayAutoAlerts extends BasePage {
     @FindBy(css = "[href='#example-1-tab-2']")
     private WebElement inputAlertPanel;
 
-    @FindBy(css = "[id=example-1-tab-2] .freme_box .demo-frame")
+    @FindBy(css = "[id=example-1-tab-2] .demo-frame")
     private WebElement inputAlertIframe;
+
     @FindBy(xpath = "//button[contains(text(),'de')]")
     private WebElement inputAlertButton;
 
-    @FindBy(css = "#demo")
+    @FindBy(id = "demo")
     private WebElement alertText;
 
     @Step("Переключение на нужный iframe и кликаем на кнопку вызова ввода текста в алерт")
-    public void clickInputAlertButton() {
+    public WayAutoAlerts clickInputAlertButton() {
         browser.switchTo().frame(inputAlertIframe);
         inputAlertButton.click();
+        return this;
     }
 
     @Step("Переключаемся на панель INPUT ALERTS")
-    public void clickInputAlertsPanel() {
+    public WayAutoAlerts clickInputAlertsPanel() {
         inputAlertPanel.click();
+        return this;
     }
 
     @Step("Отсылаем текст в алерт")
-    public void sendAlertText(String text) {
+    public WayAutoAlerts sendAlertText(String text) {
         Alert alert = browser.switchTo().alert();
         alert.sendKeys(text);
         alert.accept();
         browser.switchTo().defaultContent();
+        return this;
     }
 
     @Step("Получаем текст из тега <p> фрейма")

@@ -29,9 +29,8 @@ public class TabsTest extends BaseTest {
     @Severity(SeverityLevel.CRITICAL)
     @Description("Тест количества вкладок после совершения действий на странице, тест работоспособности ссылки открывающей вкладку")
     public void testTabs() {
-        driver.get(ConfProperties.getProperty("wayAutomationTabs"));
-        wayAutoTabs.clickTabNewWindowHref();
-        wayAutoTabs.switchAndClickTab();
+        driver.get(ConfProperties.getProperty("mainTestPage") + ConfProperties.getProperty("wayAutomationTabs"));
+        wayAutoTabs.clickTabNewWindowHref().switchAndClickTab();
         Assertions.assertEquals(3, wayAutoTabs.getTabsNumber());
     }
 }
