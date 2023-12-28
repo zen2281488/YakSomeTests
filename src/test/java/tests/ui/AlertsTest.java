@@ -1,6 +1,5 @@
 package tests.ui;
 
-
 import io.github.artsok.RepeatedIfExceptionsTest;
 
 import io.qameta.allure.Description;
@@ -30,7 +29,10 @@ public class AlertsTest extends BaseTest {
     @Description("Тест изменения состояния текста в блоке фрейма, при введении текста в поле Алерта, которое появляется при нажатии кнопки.")
     public void testAlertInput() {
         driver.get(ConfProperties.getProperty("mainTestPage") + ConfProperties.getProperty("wayAutomationAlerts"));
-        wayAutoAlerts.clickInputAlertsPanel().clickInputAlertButton().sendAlertText(ConfProperties.getProperty("customAlertText"));
-        Assertions.assertEquals("Hello " + ConfProperties.getProperty("customAlertText") + "! How are you today?", wayAutoAlerts.getAlertText());
+        wayAutoAlerts.clickInputAlertsPanel()
+                .clickInputAlertButton()
+                .sendAlertText(ConfProperties.getProperty("customAlertText"));
+        Assertions.assertEquals("Hello " + ConfProperties.getProperty("customAlertText") + "! How are you today?"
+                , wayAutoAlerts.getAlertText());
     }
 }

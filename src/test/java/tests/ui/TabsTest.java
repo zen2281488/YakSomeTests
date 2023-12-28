@@ -1,6 +1,5 @@
 package tests.ui;
 
-
 import io.github.artsok.RepeatedIfExceptionsTest;
 
 import io.qameta.allure.Description;
@@ -30,7 +29,8 @@ public class TabsTest extends BaseTest {
     @Description("Тест количества вкладок после совершения действий на странице, тест работоспособности ссылки открывающей вкладку")
     public void testTabs() {
         driver.get(ConfProperties.getProperty("mainTestPage") + ConfProperties.getProperty("wayAutomationTabs"));
-        wayAutoTabs.clickTabNewWindowHref().switchAndClickTab();
+        wayAutoTabs.clickTabNewWindowHref()
+                .switchAndClickTab();
         Assertions.assertEquals(3, wayAutoTabs.getTabsNumber());
     }
 }

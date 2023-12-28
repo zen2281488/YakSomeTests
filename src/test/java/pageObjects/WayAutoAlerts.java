@@ -14,10 +14,10 @@ public class WayAutoAlerts extends BasePage {
     @FindBy(css = "[href='#example-1-tab-2']")
     private WebElement inputAlertPanel;
 
-    @FindBy(css = "[id=example-1-tab-2] .demo-frame")
+    @FindBy(css = "#example-1-tab-2 .demo-frame")
     private WebElement inputAlertIframe;
 
-    @FindBy(xpath = "//button[contains(text(),'de')]")
+    @FindBy(css = "body > button")
     private WebElement inputAlertButton;
 
     @FindBy(id = "demo")

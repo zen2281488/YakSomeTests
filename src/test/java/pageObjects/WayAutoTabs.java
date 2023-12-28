@@ -12,7 +12,7 @@ public class WayAutoTabs extends BasePage {
         super(browser);
     }
 
-    @FindBy(css = "[id=example-1-tab-1] .demo-frame")
+    @FindBy(css = "#example-1-tab-1 .demo-frame")
     private WebElement tabNewWindowIframe;
 
     @FindBy(css = "[target='_blank']")
