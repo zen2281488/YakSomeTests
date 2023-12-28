@@ -17,7 +17,7 @@ public class WayAutoAlerts extends BasePage {
     @FindBy(css = "#example-1-tab-2 .demo-frame")
     private WebElement inputAlertIframe;
 
-    @FindBy(css = "body > button")
+    @FindBy(css = "button")
     private WebElement inputAlertButton;
 
     @FindBy(id = "demo")
