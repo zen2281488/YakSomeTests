@@ -28,7 +28,7 @@ public class DragAndDropTest extends BaseTest {
     @Severity(SeverityLevel.CRITICAL)
     @Description("Тест изменения состояния текста div при drag and drop элемента в другой элемент")
     public void testDragAndDrop() {
-        driver.get(ConfProperties.getProperty("wayAutomationDroppable"));
+        driver.get(ConfProperties.getProperty("mainTestPage") + ConfProperties.getProperty("wayAutomationDroppable"));
         Assertions.assertEquals("Drop here", wayAutoDroppable.getDroppableBoxText());
         wayAutoDroppable.dragAndDropBox();
         Assertions.assertEquals("Dropped!", wayAutoDroppable.getDroppableBoxText());

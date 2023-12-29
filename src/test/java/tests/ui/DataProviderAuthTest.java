@@ -28,7 +28,7 @@ public class DataProviderAuthTest extends BaseTest {
     @MethodSource("utils.DataProviderUserData#getLogData")
 
     public void testLogin(String username, String password) {
-        driver.get(ConfProperties.getProperty("practice2login"));
+        driver.get(ConfProperties.getProperty("mainTestPage") + ConfProperties.getProperty("practice2login"));
         wayAutorisation.sendUsername(username).sendPassword(password).sendUserDescription(password).clickSubmitButton();
         assertTrue(wayAutorisation.waitSuccessLoginText(), "Авторизация не прошла. Проверьте корректность введенных данных.");
     }
