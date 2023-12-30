@@ -25,7 +25,9 @@ public class HttpWatchAuth extends BasePage {
 
     @Step("Отправляем логин и пароль в поле авторизации")
     public HttpWatchAuth sendLogPass() {
-        browser.get("https://" + ConfProperties.getProperty("httpwatchLogin") + ":" + ConfProperties.getProperty("httpwatchPassword") + "@www.httpwatch.com/httpgallery/authentication/#showExample10");
+        browser.get("https://" + ConfProperties.getProperty("httpwatchLogin")
+                + ":" + ConfProperties.getProperty("httpwatchPassword")
+                + "@www.httpwatch.com/httpgallery/authentication/#showExample10");
         return this;
     }
 
