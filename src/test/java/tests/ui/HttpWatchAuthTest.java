@@ -23,7 +23,7 @@ public class HttpWatchAuthTest extends BaseTest {
     @Severity(SeverityLevel.CRITICAL)
     @Description("Тестирование авторизации, наличия картинки при ее успехе")
     public void testBasicAuth() {
-        driver.get(ConfProperties.getProperty("mainAuthTestUrl") + ConfProperties.getProperty("authTestPage"));
+        driver.get("https://" + ConfProperties.getProperty("mainAuthTestUrl") + ConfProperties.getProperty("authTestPage"));
         httpWatchAuth.clickDisplayImageButton().sendLogPass();
         Assertions.assertFalse(httpWatchAuth.isSrcAttributePresent());
     }
