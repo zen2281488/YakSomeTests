@@ -23,7 +23,7 @@ public class HttpWatchAuth extends BasePage {
         return this;
     }
 
-    @Step("Существует ли атрибут Src в блоке с картинкой")
+    @Step("Видна ли картинка пользователю")
     public boolean isImageVisible() {
         wait.until(ExpectedConditions.visibilityOf(authImage));
         return true;
