@@ -7,7 +7,6 @@ import io.qameta.allure.Epic;
 import io.qameta.allure.Severity;
 import io.qameta.allure.SeverityLevel;
 import io.qameta.allure.Step;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import pageObjects.HttpWatchAuth;
@@ -32,7 +31,6 @@ public class HttpWatchAuthTest extends BaseTest {
                 + ":" + ConfProperties.getProperty("httpwatchPassword") + "@"
                 + ConfProperties.getProperty("mainAuthTestUrl")
                 + ConfProperties.getProperty("authTestPage"));
-        httpWatchAuth.clickDisplayImageButton();
-        Assertions.assertTrue(httpWatchAuth.isImageVisible(),ConfProperties.getProperty("basicAuthError"));
+        httpWatchAuth.clickDisplayImageButton().isImageVisible();
     }
 }

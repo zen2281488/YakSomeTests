@@ -24,8 +24,8 @@ public class HttpWatchAuth extends BasePage {
     }
 
     @Step("Видна ли картинка пользователю")
-    public boolean isImageVisible() {
+    public HttpWatchAuth isImageVisible() {
         wait.until(ExpectedConditions.visibilityOf(authImage));
-        return true;
+        return this;
     }
 }
