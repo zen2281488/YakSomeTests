@@ -27,7 +27,7 @@ public class HttpWatchAuth extends BasePage {
     public HttpWatchAuth sendLogPass() {
         browser.get("https://" + ConfProperties.getProperty("httpwatchLogin")
                 + ":" + ConfProperties.getProperty("httpwatchPassword") + "@"
-                + ConfProperties.getProperty("mainAuthTestUrl"));
+                + ConfProperties.getProperty("mainAuthTestUrl") + ConfProperties.getProperty("authTestPage"));
         return this;
     }
 
