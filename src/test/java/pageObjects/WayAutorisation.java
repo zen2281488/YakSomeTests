@@ -15,7 +15,7 @@ public class WayAutorisation extends BasePage {
     @FindBy(css = "#password")
     private WebElement passInput;
 
-    @FindBy(css = "#formly_1_input_username_0")
+    @FindBy(id = "formly_1_input_username_0")
     private WebElement usernameDescriptionInput;
 
     @FindBy(css = "p:nth-child(2)")
@@ -31,18 +31,24 @@ public class WayAutorisation extends BasePage {
 
     @Step("Отправка текста в поле Username.")
     public WayAutorisation sendUsername(String text) {
+        wait.until(ExpectedConditions.visibilityOf(usernameInput));
+        usernameInput.clear();
         usernameInput.sendKeys(text);
         return this;
     }
 
     @Step("Отправка текста в поле Password.")
     public WayAutorisation sendPassword(String text) {
+        wait.until(ExpectedConditions.visibilityOf(passInput));
+        passInput.clear();
         passInput.sendKeys(text);
         return this;
     }
 
     @Step("Отправка текста в поле User Description.")
     public WayAutorisation sendUserDescription(String text) {
+        wait.until(ExpectedConditions.visibilityOf(usernameDescriptionInput));
+        usernameDescriptionInput.clear();
         usernameDescriptionInput.sendKeys(text);
         return this;
     }
