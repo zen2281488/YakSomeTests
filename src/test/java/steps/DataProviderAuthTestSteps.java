@@ -27,7 +27,6 @@ public class DataProviderAuthTestSteps {
         browser.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
         browser.manage().window().setSize(new Dimension(1920, 1080));
         wayAutorisation = new WayAutorisation(browser);
-        PageFactory.initElements(browser, this);
     }
 
     @Given("User is on the login page")

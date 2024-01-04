@@ -26,9 +26,7 @@ public class DisplayTestSteps {
         browser = BrowserInit.getWebdriverSelenoid(ConfProperties.getProperty("browserName"), ConfProperties.getProperty("browserMode"));
         browser.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
         browser.manage().window().setSize(new Dimension(1920, 1080));
-        wait = new WebDriverWait(browser, 15);
         wayIndexPage = new WayIndexPage(browser);
-        PageFactory.initElements(browser, this);
     }
 
     @Step("Слайдер курсов существует.")
