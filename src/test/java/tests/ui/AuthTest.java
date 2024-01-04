@@ -41,7 +41,7 @@ public class AuthTest extends BaseTest {
     public void practiceSiteAuthorizationTest() {
         driver.get(ConfProperties.getProperty("mainTestPage") + ConfProperties.getProperty("practice2login"));
         wayAutorisation.sendUsername(ConfProperties.getProperty("p2username")).sendPassword(ConfProperties.getProperty("p2pass")).sendUserDescription(ConfProperties.getProperty("p2username")).clickSubmitButton();
-        Assertions.assertTrue(wayAutorisation.waitSuccessLoginText(), "Авторизация не прошла. Проверьте корректность введенных данных.");
+        wayAutorisation.waitSuccessLoginText();
     }
 
     @Description("Тест проверяет успешно ли проходит авторизация на сайте Way2 при вводе учетных данных пользователя.")

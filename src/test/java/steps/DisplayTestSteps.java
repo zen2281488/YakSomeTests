@@ -1,32 +1,28 @@
 package steps;
 
 
+import io.cucumber.java.After;
 import io.cucumber.java.Before;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.qameta.allure.Step;
-import org.openqa.selenium.Dimension;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.support.PageFactory;
-import org.openqa.selenium.support.ui.WebDriverWait;
 import pageObjects.WayIndexPage;
-import utils.BrowserInit;
+import tests.ui.BaseTestCucumber;
 import utils.ConfProperties;
 
-import java.util.concurrent.TimeUnit;
-
-public class DisplayTestSteps {
-    private WebDriver browser;
-    protected WebDriverWait wait;
+public class DisplayTestSteps extends BaseTestCucumber {
     private WayIndexPage wayIndexPage;
 
     @Before
-    public void setUp() {
-        browser = BrowserInit.getWebdriverSelenoid(ConfProperties.getProperty("browserName"), ConfProperties.getProperty("browserMode"));
-        browser.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-        browser.manage().window().setSize(new Dimension(1920, 1080));
-        wayIndexPage = new WayIndexPage(browser);
+    public void initialize() {
+        setUp();
+        wayIndexPage = new WayIndexPage(driver);
+    }
+
+    @After
+    public void tearDown() {
+        baseAfter();
     }
 
     @Step("Слайдер курсов существует.")
@@ -55,11 +51,11 @@ public class DisplayTestSteps {
 
     @Given("I am on the main page")
     public void openMainPage() {
-        browser.get(ConfProperties.getProperty("mainTestPage"));
+        driver.get(ConfProperties.getProperty("mainTestPage"));
     }
 
     @And("User close the browser")
     public void userClosesTheBrowser() {
-        browser.close();
+        driver.close();
     }
 }

@@ -9,8 +9,6 @@ import org.junit.jupiter.params.provider.MethodSource;
 import pageObjects.WayAutorisation;
 import utils.ConfProperties;
 
-import static org.junit.jupiter.api.Assertions.assertTrue;
-
 @Epic("Тесты Авторизации.")
 @Feature("Задание U3 тест авторизации с использованием DataProvider")
 public class DataProviderAuthTest extends BaseTest {
@@ -29,7 +27,10 @@ public class DataProviderAuthTest extends BaseTest {
 
     public void testLogin(String username, String password) {
         driver.get(ConfProperties.getProperty("mainTestPage") + ConfProperties.getProperty("practice2login"));
-        wayAutorisation.sendUsername(username).sendPassword(password).sendUserDescription(password).clickSubmitButton();
-        assertTrue(wayAutorisation.waitSuccessLoginText(), "Авторизация не прошла. Проверьте корректность введенных данных.");
+        wayAutorisation.sendUsername(username)
+                .sendPassword(password)
+                .sendUserDescription(password)
+                .clickSubmitButton()
+                .waitSuccessLoginText();
     }
 }
