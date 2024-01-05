@@ -1,27 +1,20 @@
 package steps;
 
-import io.cucumber.java.After;
-import io.cucumber.java.Before;
-import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.qameta.allure.Step;
 import pageObjects.WayIndexPage;
-import tests.ui.BaseTestCucumber;
 import utils.ConfProperties;
 
-public class DisplayTestSteps extends BaseTestCucumber {
+public class DisplayTestSteps {
+
     private WayIndexPage wayIndexPage;
 
-    @Before
-    public void initialize() {
-        setUp();
-        wayIndexPage = new WayIndexPage(driver);
-    }
+    private TestContext testContext;
 
-    @After
-    public void tearDown() {
-        baseAfter();
+    public DisplayTestSteps() {
+        this.testContext = new TestContext();
+        wayIndexPage = new WayIndexPage(testContext.getDriver());
     }
 
     @Step("Слайдер курсов существует.")
@@ -50,11 +43,6 @@ public class DisplayTestSteps extends BaseTestCucumber {
 
     @Given("I am on the main page")
     public void openMainPage() {
-        driver.get(ConfProperties.getProperty("mainTestPage"));
-    }
-
-    @And("User close the browser")
-    public void userClosesTheBrowser() {
-        driver.close();
+        testContext.getDriver().get(ConfProperties.getProperty("mainTestPage"));
     }
 }

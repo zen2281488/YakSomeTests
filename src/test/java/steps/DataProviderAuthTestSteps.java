@@ -1,33 +1,25 @@
 package steps;
 
-import io.cucumber.java.After;
-import io.cucumber.java.Before;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.When;
 import io.cucumber.java.en.Then;
-import io.cucumber.java.en.And;
 import pageObjects.WayAutorisation;
-import tests.ui.BaseTestCucumber;
 import utils.ConfProperties;
 
-public class DataProviderAuthTestSteps extends BaseTestCucumber {
+public class DataProviderAuthTestSteps {
 
     private WayAutorisation wayAutorisation;
 
-    @Before
-    public void initialize() {
-        setUp();
-        wayAutorisation = new WayAutorisation(driver);
-    }
+    private TestContext testContext;
 
-    @After
-    public void tearDown() {
-        baseAfter();
+    public DataProviderAuthTestSteps() {
+        this.testContext = new TestContext();
+        wayAutorisation = new WayAutorisation(testContext.getDriver());
     }
 
     @Given("User is on the login page")
     public void userIsOnLoginPage() {
-        driver.get(ConfProperties.getProperty("mainTestPage") + ConfProperties.getProperty("practice2login"));
+        testContext.getDriver().get(ConfProperties.getProperty("mainTestPage") + ConfProperties.getProperty("practice2login"));
     }
 
     @When("User logs in with username {string}, description {string} and password {string}")
@@ -38,10 +30,5 @@ public class DataProviderAuthTestSteps extends BaseTestCucumber {
     @Then("Successful login message is displayed")
     public void successfulLoginMessageIsDisplayed() {
         wayAutorisation.waitSuccessLoginText();
-    }
-
-    @And("User closes the browser")
-    public void userCloseTheBrowser() {
-        driver.close();
     }
 }
