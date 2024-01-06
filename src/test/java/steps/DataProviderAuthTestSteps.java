@@ -8,13 +8,10 @@ import utils.ConfProperties;
 
 public class DataProviderAuthTestSteps {
 
-    private WayAutorisation wayAutorisation;
-
     private TestContext testContext;
 
     public DataProviderAuthTestSteps() {
         this.testContext = new TestContext();
-        wayAutorisation = new WayAutorisation(testContext.getDriver());
     }
 
     @Given("User is on the login page")
@@ -24,11 +21,11 @@ public class DataProviderAuthTestSteps {
 
     @When("User logs in with username {string}, description {string} and password {string}")
     public void userLogsIn(String username, String description, String loginPassword) {
-        wayAutorisation.sendUsername(username).sendPassword(loginPassword).sendUserDescription(description).clickSubmitButton();
+        new WayAutorisation(testContext.getDriver()).sendUsername(username).sendPassword(loginPassword).sendUserDescription(description).clickSubmitButton();
     }
 
     @Then("Successful login message is displayed")
     public void successfulLoginMessageIsDisplayed() {
-        wayAutorisation.waitSuccessLoginText();
+        new WayAutorisation(testContext.getDriver()).waitSuccessLoginText();
     }
 }
