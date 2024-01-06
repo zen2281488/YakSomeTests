@@ -1,3 +1,4 @@
+@all
 Feature: DisplayTest
 
   Scenario: Проверка наличия блока Контактов в Хедере

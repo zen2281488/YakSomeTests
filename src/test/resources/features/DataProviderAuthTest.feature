@@ -1,3 +1,4 @@
+@all
 Feature: DataProvider Auth Test
 
   Scenario Outline: Testing login with different credentials
