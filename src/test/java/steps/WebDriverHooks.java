@@ -12,7 +12,6 @@ public class WebDriverHooks {
 
     private static WebDriver driver;
     public WebDriverHooks() {
-        driver = getDriver();
     }
 
     @Before
