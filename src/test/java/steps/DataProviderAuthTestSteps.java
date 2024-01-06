@@ -8,24 +8,24 @@ import utils.ConfProperties;
 
 public class DataProviderAuthTestSteps {
 
-    private TestContext testContext;
+    private final WebDriverHooks webDriverHooks;
 
     public DataProviderAuthTestSteps() {
-        this.testContext = new TestContext();
+        this.webDriverHooks = new WebDriverHooks();
     }
 
     @Given("User is on the login page")
     public void userIsOnLoginPage() {
-        testContext.getDriver().get(ConfProperties.getProperty("mainTestPage") + ConfProperties.getProperty("practice2login"));
+        webDriverHooks.getDriver().get(ConfProperties.getProperty("mainTestPage") + ConfProperties.getProperty("practice2login"));
     }
 
     @When("User logs in with username {string}, description {string} and password {string}")
     public void userLogsIn(String username, String description, String loginPassword) {
-        new WayAutorisation(testContext.getDriver()).sendUsername(username).sendPassword(loginPassword).sendUserDescription(description).clickSubmitButton();
+        new WayAutorisation(webDriverHooks.getDriver()).sendUsername(username).sendPassword(loginPassword).sendUserDescription(description).clickSubmitButton();
     }
 
     @Then("Successful login message is displayed")
     public void successfulLoginMessageIsDisplayed() {
-        new WayAutorisation(testContext.getDriver()).waitSuccessLoginText();
+        new WayAutorisation(webDriverHooks.getDriver()).waitSuccessLoginText();
     }
 }

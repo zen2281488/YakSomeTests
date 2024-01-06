@@ -8,38 +8,38 @@ import utils.ConfProperties;
 
 public class DisplayTestSteps {
 
-    private TestContext testContext;
+    private final WebDriverHooks webDriverHooks;
 
     public DisplayTestSteps() {
-        this.testContext = new TestContext();
+        this.webDriverHooks = new WebDriverHooks();
     }
 
     @Step("Слайдер курсов существует.")
     @Then("Slider of Courses displayed")
     public boolean sliderCourcesDisplayed() {
-        return new WayIndexPage(testContext.getDriver()).sliderCourcesDisplayed();
+        return new WayIndexPage(webDriverHooks.getDriver()).sliderCourcesDisplayed();
     }
 
     @Step("Футер существует.")
     @Then("Footer should be displayed")
     public boolean footerDisplayed() {
-        return new WayIndexPage(testContext.getDriver()).footerDisplayed();
+        return new WayIndexPage(webDriverHooks.getDriver()).footerDisplayed();
     }
 
     @Step("Блок с сертификатами существует.")
     @Then("Certificates block should be displayed")
     public boolean certificatesBlockDisplayed() {
-        return new WayIndexPage(testContext.getDriver()).certificatesBlockDisplayed();
+        return new WayIndexPage(WebDriverHooks.getDriver()).certificatesBlockDisplayed();
     }
 
     @Step("Блок с контактами существует.")
     @Then("Contacts block displayed")
     public boolean contactsDisplayed() {
-        return new WayIndexPage(testContext.getDriver()).contactsDisplayed();
+        return new WayIndexPage(webDriverHooks.getDriver()).contactsDisplayed();
     }
 
     @Given("I am on the main page")
     public void openMainPage() {
-        testContext.getDriver().get(ConfProperties.getProperty("mainTestPage"));
+        webDriverHooks.getDriver().get(ConfProperties.getProperty("mainTestPage"));
     }
 }

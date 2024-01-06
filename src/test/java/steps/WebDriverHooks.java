@@ -11,6 +11,9 @@ import java.util.concurrent.TimeUnit;
 public class WebDriverHooks {
 
     private static WebDriver driver;
+    public WebDriverHooks() {
+        driver = getDriver();
+    }
 
     @Before
     public void setUp() {
