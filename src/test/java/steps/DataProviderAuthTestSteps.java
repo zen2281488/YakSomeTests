@@ -3,7 +3,7 @@ package steps;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.When;
 import io.cucumber.java.en.Then;
-import pageObjects.WayAutorisation;
+import pageObjects.WayAuthorization;
 import utils.ConfProperties;
 
 import static steps.WebDriverHooks.getDriver;
@@ -17,11 +17,11 @@ public class DataProviderAuthTestSteps {
 
     @When("User logs in with username {string}, description {string} and password {string}")
     public void userLogsIn(String username, String description, String loginPassword) {
-        new WayAutorisation(getDriver()).sendUsername(username).sendPassword(loginPassword).sendUserDescription(description).clickSubmitButton();
+        new WayAuthorization(getDriver()).sendUsername(username).sendPassword(loginPassword).sendUserDescription(description).clickSubmitButton();
     }
 
     @Then("Successful login message is displayed")
     public void successfulLoginMessageIsDisplayed() {
-        new WayAutorisation(getDriver()).waitSuccessLoginText();
+        new WayAuthorization(getDriver()).waitSuccessLoginText();
     }
 }

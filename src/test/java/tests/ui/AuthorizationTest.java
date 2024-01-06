@@ -12,23 +12,23 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import pageObjects.SeleniumTutorialIndex;
-import pageObjects.WayAutorisation;
+import pageObjects.WayAuthorization;
 import pageObjects.WayLogin;
 import utils.ConfProperties;
 
 
 @Epic("Тесты Авторизации.")
 @Feature("Тест авторизации.")
-public class AuthTest extends BaseTest {
+public class AuthorizationTest extends BaseTest {
 
-    private WayAutorisation wayAutorisation;
+    private WayAuthorization wayAuthorization;
     private WayLogin waylogin;
     private SeleniumTutorialIndex seleniumTutorialIndex;
 
     @BeforeEach
     @Step("Инициализация страниц")
     public void before() {
-        wayAutorisation = new WayAutorisation(driver);
+        wayAuthorization = new WayAuthorization(driver);
         waylogin = new WayLogin(driver);
         seleniumTutorialIndex = new SeleniumTutorialIndex(driver);
     }
@@ -40,8 +40,8 @@ public class AuthTest extends BaseTest {
     @DisplayName("Проверка авторизации на сайте Practice Site 2")
     public void practiceSiteAuthorizationTest() {
         driver.get(ConfProperties.getProperty("mainTestPage") + ConfProperties.getProperty("practice2login"));
-        wayAutorisation.sendUsername(ConfProperties.getProperty("p2username")).sendPassword(ConfProperties.getProperty("p2pass")).sendUserDescription(ConfProperties.getProperty("p2username")).clickSubmitButton();
-        wayAutorisation.waitSuccessLoginText();
+        wayAuthorization.sendUsername(ConfProperties.getProperty("p2username")).sendPassword(ConfProperties.getProperty("p2pass")).sendUserDescription(ConfProperties.getProperty("p2username")).clickSubmitButton();
+        wayAuthorization.waitSuccessLoginText();
     }
 
     @Description("Тест проверяет успешно ли проходит авторизация на сайте Way2 при вводе учетных данных пользователя.")

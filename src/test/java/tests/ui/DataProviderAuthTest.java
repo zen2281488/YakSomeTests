@@ -6,18 +6,18 @@ import io.qameta.allure.Feature;
 import io.qameta.allure.Step;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.params.provider.MethodSource;
-import pageObjects.WayAutorisation;
+import pageObjects.WayAuthorization;
 import utils.ConfProperties;
 
 @Epic("Тесты Авторизации.")
 @Feature("Задание U3 тест авторизации с использованием DataProvider")
 public class DataProviderAuthTest extends BaseTest {
-    private WayAutorisation wayAutorisation;
+    private WayAuthorization wayAuthorization;
 
     @BeforeEach
     @Step("Инициализация страниц")
     public void before() {
-        wayAutorisation = new WayAutorisation(driver);
+        wayAuthorization = new WayAuthorization(driver);
     }
 
     @ParameterizedRepeatedIfExceptionsTest(name = "Login: {0} , password: {1}",
@@ -27,7 +27,7 @@ public class DataProviderAuthTest extends BaseTest {
 
     public void testLogin(String username, String password) {
         driver.get(ConfProperties.getProperty("mainTestPage") + ConfProperties.getProperty("practice2login"));
-        wayAutorisation.sendUsername(username)
+        wayAuthorization.sendUsername(username)
                 .sendPassword(password)
                 .sendUserDescription(password)
                 .clickSubmitButton()

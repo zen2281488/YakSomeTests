@@ -6,7 +6,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 
-public class WayAutorisation extends BasePage {
+public class WayAuthorization extends BasePage {
 
     @FindBy(css = "#username")
     private WebElement usernameInput;
@@ -24,12 +24,12 @@ public class WayAutorisation extends BasePage {
     @FindBy(css = ".btn-danger")
     private WebElement loginButton;
 
-    public WayAutorisation(WebDriver browser) {
+    public WayAuthorization(WebDriver browser) {
         super(browser);
     }
 
     @Step("Отправка текста в поле Username.")
-    public WayAutorisation sendUsername(String text) {
+    public WayAuthorization sendUsername(String text) {
         wait.until(ExpectedConditions.visibilityOf(usernameInput));
         usernameInput.clear();
         usernameInput.sendKeys(text);
@@ -37,7 +37,7 @@ public class WayAutorisation extends BasePage {
     }
 
     @Step("Отправка текста в поле Password.")
-    public WayAutorisation sendPassword(String text) {
+    public WayAuthorization sendPassword(String text) {
         wait.until(ExpectedConditions.visibilityOf(passInput));
         passInput.clear();
         passInput.sendKeys(text);
@@ -45,7 +45,7 @@ public class WayAutorisation extends BasePage {
     }
 
     @Step("Отправка текста в поле User Description.")
-    public WayAutorisation sendUserDescription(String text) {
+    public WayAuthorization sendUserDescription(String text) {
         wait.until(ExpectedConditions.visibilityOf(usernameDescriptionInput));
         usernameDescriptionInput.clear();
         usernameDescriptionInput.sendKeys(text);
@@ -53,7 +53,7 @@ public class WayAutorisation extends BasePage {
     }
 
     @Step("Клик по кнопке Submit")
-    public WayAutorisation clickSubmitButton() {
+    public WayAuthorization clickSubmitButton() {
         loginButton.click();
         return this;
     }
