@@ -7,7 +7,6 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.openqa.selenium.Dimension;
 import org.openqa.selenium.WebDriver;
 import utils.BrowserInit;
-import utils.ConfProperties;
 import utils.FailedTestExtension;
 import utils.TestWatcherPlugin;
 
