@@ -18,11 +18,11 @@ public class BrowserInit {
     private static final ThreadLocal<WebDriver> webdriver = new ThreadLocal<>();
     static RemoteWebDriver driver;
 
-    public static WebDriver getWebdriverSelenoid(String browserName, String browserMode) {
+    public static WebDriver getWebdriver() {
         if (webdriver.get() == null) {
-            switch (browserMode) {
+            switch (ConfProperties.getProperty("browserMode")) {
                 case "selenoid":
-                    switch (browserName) {
+                    switch (ConfProperties.getProperty("browserName")) {
                         case "chrome":
                             driver = setUpRemoteDriver(new ChromeOptions());
                             break;
@@ -38,7 +38,7 @@ public class BrowserInit {
                     break;
 
                 case "local":
-                    switch (browserName) {
+                    switch (ConfProperties.getProperty("browserName")) {
                         case "chrome":
                             System.setProperty("webdriver.chrome.driver", ConfProperties.getProperty("chromedriverLocal"));
                             driver = new ChromeDriver(new ChromeOptions().addArguments("--no-sandbox", "--disable-dev-shm-usage", "window-size=1220,880").setHeadless(ConfProperties.getBoolProperty("headlessMode")));

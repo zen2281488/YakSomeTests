@@ -28,7 +28,7 @@ public class BaseTest {
     @BeforeEach
     @Step("Инициализация Драйвера")
     public void baseBefore() {
-        driver = BrowserInit.getWebdriverSelenoid(ConfProperties.getProperty("browserName"), ConfProperties.getProperty("browserMode"));
+        driver = BrowserInit.getWebdriver();
         driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
         driver.manage().window().setSize(new Dimension(1920, 1080));
     }
