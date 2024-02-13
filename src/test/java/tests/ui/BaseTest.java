@@ -7,7 +7,6 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.openqa.selenium.Dimension;
 import org.openqa.selenium.WebDriver;
 import utils.BrowserInit;
-import utils.ConfProperties;
 import utils.FailedTestExtension;
 import utils.TestWatcherPlugin;
 
@@ -28,7 +27,7 @@ public class BaseTest {
     @BeforeEach
     @Step("Инициализация Драйвера")
     public void baseBefore() {
-        driver = BrowserInit.getWebdriverSelenoid(ConfProperties.getProperty("browserName"), ConfProperties.getProperty("browserMode"));
+        driver = BrowserInit.getWebdriver();
         driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
         driver.manage().window().setSize(new Dimension(1920, 1080));
     }
