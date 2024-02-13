@@ -1,5 +1,6 @@
 package utils;
 
+import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.MutableCapabilities;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -59,7 +60,7 @@ public class BrowserInit {
                 case "localwork":
                     switch (ConfProperties.getProperty("browserName")) {
                         case "chrome":
-                            System.setProperty("webdriver.chrome.driver", ConfProperties.getProperty("linuxchrome"));
+                            WebDriverManager.chromedriver().setup();
                             ChromeOptions chromeOptions = new ChromeOptions()
                                     .addArguments("--no-sandbox", "--disable-dev-shm-usage", "window-size=1220,880");
                             if (ConfProperties.getBoolProperty("headlessMode")) {
