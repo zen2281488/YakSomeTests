@@ -60,12 +60,17 @@ public class BrowserInit {
                     switch (ConfProperties.getProperty("browserName")) {
                         case "chrome":
                             System.setProperty("webdriver.chrome.driver", ConfProperties.getProperty("linuxchromedriverLocal"));
-                            driver = new ChromeDriver(new ChromeOptions().addArguments("--no-sandbox", "--disable-dev-shm-usage", "window-size=1220,880").setHeadless(ConfProperties.getBoolProperty("headlessMode")));
+                            ChromeOptions chromeOptions = new ChromeOptions()
+                                    .addArguments("--no-sandbox", "--disable-dev-shm-usage", "window-size=1220,880");
+                            if (ConfProperties.getBoolProperty("headlessMode")) {
+                                chromeOptions.setHeadless(true);
+                            }
+                            driver = new ChromeDriver(chromeOptions);
                             break;
                         default:
                             throw new RuntimeException("Incorrect BrowserName");
                     }
-                        break;
+                    break;
                 default:
                     throw new RuntimeException("Incorrect WebdriverMode");
             }
