@@ -56,10 +56,10 @@ public class BrowserInit {
                     }
                     break;
 
-                case "localworkflow":
+                case "localwork":
                     switch (ConfProperties.getProperty("browserName")) {
                         case "chrome":
-                            System.setProperty("webdriver.chrome.driver", ConfProperties.getProperty("linuxchromedriverLocal"));
+                            System.setProperty("webdriver.chrome.driver", ConfProperties.getProperty("linuxchrome"));
                             ChromeOptions chromeOptions = new ChromeOptions()
                                     .addArguments("--no-sandbox", "--disable-dev-shm-usage", "window-size=1220,880");
                             if (ConfProperties.getBoolProperty("headlessMode")) {
