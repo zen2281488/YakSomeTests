@@ -55,6 +55,17 @@ public class BrowserInit {
                             throw new RuntimeException("Incorrect BrowserName");
                     }
                     break;
+
+                case "localworkflow":
+                    switch (ConfProperties.getProperty("browserName")) {
+                        case "chrome":
+                            System.setProperty("webdriver.chrome.driver", ConfProperties.getProperty("linuxchromedriverLocal"));
+                            driver = new ChromeDriver(new ChromeOptions().addArguments("--no-sandbox", "--disable-dev-shm-usage", "window-size=1220,880").setHeadless(ConfProperties.getBoolProperty("headlessMode")));
+                            break;
+                        default:
+                            throw new RuntimeException("Incorrect BrowserName");
+                    }
+                        break;
                 default:
                     throw new RuntimeException("Incorrect WebdriverMode");
             }
