@@ -17,7 +17,7 @@ jobs:
       - name: Send mail
         uses: dawidd6/action-send-mail@v3
         with:
-          connection_url: smtp://today_na@zenwarrior228.ru:dLP9SDO4rj1k@connect.smtp.bz:587
+          connection_url: smtp://zen@alwaysdata.net:cKn5Jw@KsTc22wa@smtp-zen.alwaysdata.net:587
           subject: GitHub Actions Job Result
           to: today_na@mail.ru
           from: Luke Skywalker <today_na@zenwarrior228.ru>
