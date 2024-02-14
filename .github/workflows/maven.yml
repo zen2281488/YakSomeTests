@@ -69,6 +69,7 @@ jobs:
           PUBLISH_BRANCH: gh-pages
           PUBLISH_DIR: allure-history
   send-email:
+    needs: build
     runs-on: ubuntu-latest
     steps:
       - name: Send mail
