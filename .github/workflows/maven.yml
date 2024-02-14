@@ -19,7 +19,7 @@ jobs:
         with:
           connection_url: smtp://zen@alwaysdata.net:cKn5Jw@KsTc22wa@smtp-zen.alwaysdata.net:587
           subject: GitHub Actions Job Result
-          to: today_na@mail.ru
-          from: Luke Skywalker <today_na@zenwarrior228.ru>
+          to: today.na228@gmail.com
+          from: Luke Skywalker <zen@alwaysdata.net>
           body: |
             Build job of ${{ github.repository }} completed successfully!
