@@ -68,7 +68,9 @@ jobs:
           PERSONAL_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           PUBLISH_BRANCH: gh-pages
           PUBLISH_DIR: allure-history
-
+  send-email:
+    runs-on: ubuntu-latest
+    steps:
       - name: Send mail
         uses: dawidd6/action-send-mail@v3
         with:
@@ -78,4 +80,4 @@ jobs:
           from: Luke Skywalker <zen@alwaysdata.net>
           body: |
             Build job of ${{ github.repository }} completed successfully!
-          attachments: attachments.zip,git.diff,./target/allure-history/last-history*.json
+          attachments: attachments.zip,git.diff,./target/allure-history/last-history/*.json
