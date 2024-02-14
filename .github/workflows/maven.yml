@@ -12,7 +12,6 @@ on:
 
 jobs:
   send-email:
-    needs: build
     runs-on: ubuntu-latest
     steps:
       - name: Send mail
