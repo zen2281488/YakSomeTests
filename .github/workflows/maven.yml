@@ -61,14 +61,6 @@ jobs:
       - name: Compile allure Reports
         run: mvn allure:report
 
-      - name: Deploy report to Github Pages
-        if: always()
-        uses: peaceiris/actions-gh-pages@v2
-        env:
-          PERSONAL_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          PUBLISH_BRANCH: gh-pages
-          PUBLISH_DIR: allure-history
-
       - name: Send mail
         uses: dawidd6/action-send-mail@v3
         with:
@@ -76,6 +68,15 @@ jobs:
           subject: GitHub Actions Job Result
           to: today.na228@gmail.com
           from: Luke Skywalker <zen@alwaysdata.net>
-          attachments: attachments.zip, git.diff, target/allure-history/*
+          ignore_cert: true
+          attachments: attachments.zip, git.diff, target/allure-history/allure-report/*
           body: |
             Build job of ${{ github.repository }} completed successfully!
+
+      - name: Deploy report to Github Pages
+        if: always()
+        uses: peaceiris/actions-gh-pages@v2
+        env:
+          PERSONAL_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          PUBLISH_BRANCH: gh-pages
+          PUBLISH_DIR: allure-history
