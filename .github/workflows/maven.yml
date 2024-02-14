@@ -41,18 +41,21 @@ jobs:
           ref: gh-pages
           path: gh-pages
 
+      - name: Create allure-results directory
+        run: mkdir -p target/allure-results
+
       - name: Allure set up
         uses: simple-elf/allure-report-action@master
         if: always()
         id: allure-report
         with:
-          allure_results: ${project.build.directory}/allure-results
+          allure_results: target/allure-results
           gh_pages: gh-pages
           allure_report: allure-report
           allure_history: allure-history
 
       - name: Set permissions for Allure
-        run: sudo chmod -R 777 ${project.build.directory}/allure-results
+        run: sudo chmod -R 777 target/allure-results
 
       - name: Compile allure Reports
         run: mvn allure:report
