@@ -78,4 +78,4 @@ jobs:
           from: Luke Skywalker <zen@alwaysdata.net>
           body: |
             Build job of ${{ github.repository }} completed successfully!
-          attachments: attachments.zip,git.diff,./target/allure-results*.json
+          attachments: attachments.zip,git.diff,./target/allure-history/last-history*.json
