@@ -69,7 +69,7 @@ jobs:
       - name: Send mail
         uses: dawidd6/action-send-mail@v3
         with:
-          connection_url: smtp://zen@alwaysdata.net:eicMkY@GB8FBA@7@smtp-zen.alwaysdata.net:587
+          connection_url: smtp://${{ secrets.logpass }}@smtp-zen.alwaysdata.net:587
           subject: GitHub Actions Job Result
           to: today_na@tutanota.com
           from: Luke Skywalker <zen@alwaysdata.net>
