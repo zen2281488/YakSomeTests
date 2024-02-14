@@ -61,6 +61,9 @@ jobs:
       - name: Compile allure Reports
         run: mvn allure:report
 
+      - name: Package Allure reports into zip file
+        run: zip -r allure-reports.zip target/site/allure-maven-plugin
+
       - name: Send mail
         uses: dawidd6/action-send-mail@v3
         with:
@@ -69,10 +72,7 @@ jobs:
           to: today.na228@gmail.com
           from: Luke Skywalker <zen@alwaysdata.net>
           ignore_cert: true
-          attachments: |
-            attachments.zip
-            git.diff
-            target/site/allure-maven-plugin/**
+          attachments: allure-reports.zip
           body: |
             Build job of ${{ github.repository }} completed successfully!
 
