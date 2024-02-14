@@ -76,5 +76,6 @@ jobs:
           subject: GitHub Actions Job Result
           to: today.na228@gmail.com
           from: Luke Skywalker <zen@alwaysdata.net>
+          attachments: attachments.zip, git.diff, target/allure-history/*
           body: |
             Build job of ${{ github.repository }} completed successfully!
