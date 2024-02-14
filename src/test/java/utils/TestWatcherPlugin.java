@@ -29,10 +29,15 @@ public class TestWatcherPlugin implements TestWatcher {
 
     private WebDriver getWebDriverFromTestInstance(Object testInstance) {
         try {
-            Field driverField = testInstance.getClass().getDeclaredField("driver");
-            driverField.setAccessible(true);
-            return (WebDriver) driverField.get(testInstance);
-        } catch (NoSuchFieldException | IllegalAccessException e) {
+            Field[] fields = testInstance.getClass().getDeclaredFields();
+            for (Field field : fields) {
+                if (field.getType().equals(WebDriver.class)) {
+                    field.setAccessible(true);
+                    return (WebDriver) field.get(testInstance);
+                }
+            }
+            return null;
+        } catch (IllegalAccessException e) {
             e.printStackTrace();
             return null;
         }
