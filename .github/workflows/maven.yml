@@ -34,7 +34,7 @@ jobs:
           sudo apt-get install -f
 
       - name: Run UI Way2 and Practice1, Practice2 tests
-        run: mvn -B test -Dtest=CookieAuthTest --file pom.xml
+        run: mvn -B test --file pom.xml
 
       - name: Get Allure history
         uses: actions/checkout@v2
