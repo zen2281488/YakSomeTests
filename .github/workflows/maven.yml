@@ -72,7 +72,7 @@ jobs:
           attachments: |
             attachments.zip
             git.diff
-            target/allure-history/**
+            /home/runner/work/YakSomeTests/YakSomeTests/target/site/allure-maven-plugin/**
           body: |
             Build job of ${{ github.repository }} completed successfully!
 
