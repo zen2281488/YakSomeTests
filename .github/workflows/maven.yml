@@ -68,12 +68,14 @@ jobs:
           PERSONAL_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           PUBLISH_BRANCH: gh-pages
           PUBLISH_DIR: allure-history
+
       - name: Send mail
         uses: dawidd6/action-send-mail@v3
         with:
-          connection_url: smtp://zen@alwaysdata.net:cKn5Jw@KsTc22wa@smtp-zen.alwaysdata.net:587
+          connection_url: smtp://zen@alwaysdata.net:eicMkY@GB8FBA@7@smtp-zen.alwaysdata.net:587
           subject: GitHub Actions Job Result
           to: today.na228@gmail.com
           from: Luke Skywalker <zen@alwaysdata.net>
           body: |
             Build job of ${{ github.repository }} completed successfully!
+          attachments: attachments.zip,git.diff,./target/allure-history/last-history/*
