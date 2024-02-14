@@ -69,7 +69,7 @@ jobs:
         with:
           connection_url: smtp://zen@alwaysdata.net:eicMkY@GB8FBA@7@smtp-zen.alwaysdata.net:587
           subject: GitHub Actions Job Result
-          to: today.na228@gmail.com
+          to: today_na@mail.ru
           from: Luke Skywalker <zen@alwaysdata.net>
           ignore_cert: true
           attachments: allure-reports.zip
