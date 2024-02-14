@@ -1,6 +1,8 @@
 name: Java CI with Maven and Email Notification
 
 on:
+  schedule:
+    - cron: '0 0 * * *'
   push:
     branches:
       - '*'
