@@ -45,6 +45,7 @@ jobs:
           path: gh-pages
 
       - name: Create allure-results directory
+        if: always()
         run: mkdir -p target/allure-results
 
       - name: Allure set up
@@ -58,15 +59,19 @@ jobs:
           allure_history: allure-history
 
       - name: Set permissions for Allure
+        if: always()
         run: sudo chmod -R 777 target/allure-results
 
       - name: Compile allure Reports
+        if: always()
         run: mvn allure:report
 
       - name: Package Allure reports into zip file
+        if: always()
         run: zip -r allure-reports.zip target/site/allure-maven-plugin
 
       - name: Send mail
+        if: always()
         uses: dawidd6/action-send-mail@v3
         with:
           connection_url: smtp://${{ secrets.logpass }}@smtp-zen.alwaysdata.net:587
