@@ -1,2 +1,0 @@
-"Status","Start Time","Stop Time","Duration in ms","Parent Suite","Suite","Sub Suite","Test Class","Test Method","Name","Description"
-"passed","Wed Feb 14 21:40:08 GMT 2024","Wed Feb 14 21:40:17 GMT 2024","8336","","tests.ui.CookieAuthTest","","tests.ui.CookieAuthTest","testLoginAndSaveCookiesToFile","Авторизация и сохранение куков в файл,с последующим чтением из него Авторизация и сохранение куков в файл,с последующим чтением из него","Тест авторизации пользователя и сохранение куков в файл, чтение куков из файла при повторном тестировании"
