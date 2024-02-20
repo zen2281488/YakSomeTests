@@ -19,15 +19,12 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v3
 
-      - name: Setup Docker Buildx
-        uses: docker/setup-buildx-action@v1
-        with:
-          dockerfile: Dockerfile
-
-      - name: Build and run Docker container
+      - name: Build and start Docker containers
         run: |
-          docker build -t maven-selenium .
-          docker run --rm maven-selenium
+          docker-compose -f ../docker-compose.yml up --build -d
+
+      - name: Wait for services to be ready
+        run: sleep 30
 
       - name: Get Allure history
         uses: actions/checkout@v2
