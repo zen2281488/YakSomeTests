@@ -18,7 +18,7 @@ import java.util.HashMap;
 public class BrowserInit {
     private static final ThreadLocal<WebDriver> webdriver = new ThreadLocal<>();
     static RemoteWebDriver driver;
-
+    private static ChromeOptions chromeOptions;
     public static WebDriver getWebdriver() {
         if (webdriver.get() == null) {
             switch (ConfProperties.getProperty("browserMode")) {
@@ -59,9 +59,18 @@ public class BrowserInit {
 
                 case "localwork":
                     switch (ConfProperties.getProperty("browserName")) {
-                        case "chrome":
+                        case "chromeActions":
                             WebDriverManager.chromedriver().browserVersion("114.0.5735.90").setup();
-                            ChromeOptions chromeOptions = new ChromeOptions()
+                            chromeOptions = new ChromeOptions()
+                                    .addArguments("--no-sandbox", "--disable-dev-shm-usage", "window-size=1220,880");
+                            if (ConfProperties.getBoolProperty("headlessMode")) {
+                                chromeOptions.setHeadless(true);
+                            }
+                            driver = new ChromeDriver(chromeOptions);
+                            break;
+                        case "chromeDocker":
+                            System.setProperty("webdriver.chrome.driver", "/src/test/resources/drivers/chromedriver");
+                            chromeOptions = new ChromeOptions()
                                     .addArguments("--no-sandbox", "--disable-dev-shm-usage", "window-size=1220,880");
                             if (ConfProperties.getBoolProperty("headlessMode")) {
                                 chromeOptions.setHeadless(true);
@@ -72,6 +81,7 @@ public class BrowserInit {
                             throw new RuntimeException("Incorrect BrowserName");
                     }
                     break;
+
                 default:
                     throw new RuntimeException("Incorrect WebdriverMode");
             }

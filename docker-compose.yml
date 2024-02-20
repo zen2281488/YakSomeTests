@@ -1,20 +1,32 @@
-version: '3'
+version: '3.7'
+
 services:
+  maven:
+    image: maven:3.6.3-jdk-11
+    links:
+      - selenoid
+    volumes:
+      - .:/usr/src/mymaven
+    working_dir: /usr/src/mymaven
+    command: mvn clean test
+    network_mode: bridge
   selenoid:
-    image: "aerokube/selenoid"
+    image: aerokube/selenoid:latest-release
+    volumes:
+      - "/var/run/docker.sock:/var/run/docker.sock"
+      - "./:/etc/selenoid"
+    environment:
+      - OVERRIDE_VIDEO_OUTPUT_DIR=/etc/selenoid/video
+      - OVERRIDE_LOG_OUTPUT_DIR=/etc/selenoid/logs
+    command: ["-conf", "/etc/selenoid/browsers.json", "-video-output-dir", "/etc/selenoid/video", "-log-output-dir", "/etc/selenoid/logs"]
     network_mode: bridge
     ports:
       - "4444:4444"
-    volumes:
-      - "./:/etc/selenoid/"
-      - "/var/run/docker.sock:/var/run/docker.sock"
-      - "/path/to/config/video:/opt/selenoid/video"
-      - "/path/to/config/logs:/opt/selenoid/logs"
   selenoid-ui:
-    image: "aerokube/selenoid-ui"
-    network_mode: bridge
-    links:
-     - selenoid
-    ports:
-     - "8080:8080"
+    image: aerokube/selenoid-ui
     command: ["--selenoid-uri", "http://selenoid:4444"]
+    links:
+      - selenoid
+    ports:
+      - "8080:8080"
+    network_mode: bridge
