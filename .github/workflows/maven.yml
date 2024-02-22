@@ -76,7 +76,9 @@ jobs:
 
       - name: Compile allure Reports
         if: always()
-        run: mvn allure:report
+        run: |
+          chmod -R +w target/allure-results
+          mvn allure:report
 
       - name: Package Allure reports into zip file
         if: always()
