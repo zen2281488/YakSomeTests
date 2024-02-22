@@ -25,7 +25,7 @@ jobs:
 
       - name: Start tests
         run: |
-          docker-compose run maven_1 mvn test
+          docker-compose run maven mvn test
 
       - name: Wait for services to be ready
         run: wait-for-it.sh -t 0 selenoid:4444
