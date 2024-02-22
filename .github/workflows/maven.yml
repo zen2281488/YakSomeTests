@@ -50,8 +50,11 @@ jobs:
         run: |
           wget https://bin.equinox.io/c/4VmDzA7iaHb/ngrok-stable-linux-amd64.zip
           unzip ngrok-stable-linux-amd64.zip
-          ./ngrok http 4444 &
+          ./ngrok http 4444 > /dev/null &
         background: true
+
+      - name: Wait for ngrok tunnel to initialize
+        run: sleep 10s
 
       - name: Get ngrok URL
         id: ngrok
