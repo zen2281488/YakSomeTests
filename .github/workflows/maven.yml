@@ -27,15 +27,15 @@ jobs:
         run: |
           docker ps
 
-      - name: Check containers
+      - name: Check container maven_1
         run: |
           docker logs -f yaksometests_maven_1
 
-      - name: Check containers
+      - name: Check container selenoid-ui
         run: |
           docker logs -f yaksometests_selenoid-ui_1
 
-      - name: Check containers
+      - name: Check container selenoid_1
         run: |
           docker logs -f yaksometests_selenoid_1
           
