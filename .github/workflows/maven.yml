@@ -64,11 +64,6 @@ jobs:
         if: always()
         run: mkdir -p $GITHUB_WORKSPACE/target/allure-results && chmod -R 777 $GITHUB_WORKSPACE/target/allure-results
 
-      - name: Chmod Allure results
-        if: always()
-        run: |
-          chmod -R +w target/allure-results
-
       - name: Allure set up
         uses: simple-elf/allure-report-action@master
         if: always()
