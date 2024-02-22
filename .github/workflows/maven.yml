@@ -22,6 +22,7 @@ jobs:
       - name: Build and start Docker containers
         run: |
           docker-compose -f docker-compose.yml up --build -d
+          docker pull selenoid/vnc_chrome:119.0
 
       - name: Check containers
         run: |
