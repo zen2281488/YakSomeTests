@@ -81,7 +81,7 @@ jobs:
       - name: Compile allure Reports
         if: always()
         run: |
-          mvn allure:report
+          docker-compose run maven mvn allure:report
 
       - name: Package Allure reports into zip file
         if: always()
