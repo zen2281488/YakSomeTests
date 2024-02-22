@@ -46,21 +46,6 @@ jobs:
           chmod +x wait-for-it.sh
           ./wait-for-it.sh -t 0 localhost:4444
 
-      - name: Start ngrok tunnel for Selenoid UI
-        run: |
-          wget https://bin.equinox.io/c/4VmDzA7iaHb/ngrok-stable-linux-amd64.zip
-          unzip ngrok-stable-linux-amd64.zip
-          ./ngrok http 4444 &
-        background: true
-
-      - name: Get ngrok URL
-        id: ngrok
-        run: echo "::set-output name=url::$(curl -sS http://localhost:4040/api/tunnels | jq -r '.tunnels[0].public_url')"
-
-      - name: Display ngrok URL
-        run:
-          echo "Selenoid UI URL: ${{ steps.ngrok.outputs.url }}"
-
       - name: Start tests
         run: |
           docker-compose run maven mvn test
