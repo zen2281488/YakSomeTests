@@ -24,7 +24,9 @@ jobs:
           docker-compose -f docker-compose.yml up --build -d
 
       - name: Wait for services to be ready
-        run: ./wait-for-it.sh -t 0 selenoid:4444
+        run: |
+          chmod +x wait-for-it.sh
+          ./wait-for-it.sh -t 0 selenoid:4444
 
       - name: Start tests
         run: |
