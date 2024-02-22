@@ -62,7 +62,7 @@ jobs:
 
       - name: Create allure-results directory
         if: always()
-        run: mkdir -p target/allure-results
+        run: mkdir -p $GITHUB_WORKSPACE/target/allure-results && chmod -R 777 $GITHUB_WORKSPACE/target/allure-results
 
       - name: Chmod Allure results
         if: always()
