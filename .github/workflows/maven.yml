@@ -64,6 +64,10 @@ jobs:
         if: always()
         run: mkdir -p YakSomeTests/target/allure-results && chmod -R 777 YakSomeTests/target/allure-results
 
+      - name: Set write permissions for allure-results directory
+        if: always()
+        run: chmod -R +w $GITHUB_WORKSPACE/target/allure-results
+
       - name: Allure set up
         uses: simple-elf/allure-report-action@master
         if: always()
