@@ -31,6 +31,15 @@ jobs:
         run: |
           docker logs -f yaksometests_maven_1
 
+      - name: Check containers
+        run: |
+          docker logs -f yaksometests_selenoid-ui_1
+
+      - name: Check containers
+        run: |
+          docker logs -f yaksometests_selenoid_1
+          
+
       - name: Wait for services to be ready
         run: |
           chmod +x wait-for-it.sh
