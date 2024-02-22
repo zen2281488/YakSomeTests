@@ -23,12 +23,14 @@ jobs:
         run: |
           docker-compose -f docker-compose.yml up --build -d
 
+      - name: Wait for services to be ready
+        run: wait-for-it.sh -t 0 selenoid:4444
+
       - name: Start tests
         run: |
           docker-compose run maven mvn test
 
-      - name: Wait for services to be ready
-        run: wait-for-it.sh -t 0 selenoid:4444
+
 
       - name: Get Allure history
         uses: actions/checkout@v2
