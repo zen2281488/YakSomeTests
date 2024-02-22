@@ -22,7 +22,6 @@ jobs:
       - name: Build and start Docker containers
         run: |
           docker-compose -f docker-compose.yml up --build -d
-          docker-compose exec maven mvn test
 
       - name: Wait for services to be ready
         run: wait-for-it.sh -t 0 selenoid:4444
