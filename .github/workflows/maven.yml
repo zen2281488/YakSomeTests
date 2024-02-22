@@ -29,15 +29,15 @@ jobs:
 
       - name: Check container maven_1
         run: |
-          docker logs -f yaksometests_maven_1
+          docker logs yaksometests_maven_1
 
       - name: Check container selenoid-ui
         run: |
-          docker logs -f yaksometests_selenoid-ui_1
+          docker logs yaksometests_selenoid-ui_1
 
       - name: Check container selenoid_1
         run: |
-          docker logs -f yaksometests_selenoid_1
+          docker logs yaksometests_selenoid_1
           
 
       - name: Wait for services to be ready
