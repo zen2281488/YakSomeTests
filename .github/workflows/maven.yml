@@ -24,22 +24,12 @@ jobs:
           docker-compose -f docker-compose.yml up --build -d
           docker pull selenoid/vnc_chrome:119.0
 
-      - name: Check containers
+      - name: Browse containers
         run: |
           docker ps
-
-      - name: Check container maven_1
-        run: |
           docker logs yaksometests_maven_1
-
-      - name: Check container selenoid-ui
-        run: |
           docker logs yaksometests_selenoid-ui_1
-
-      - name: Check container selenoid_1
-        run: |
           docker logs yaksometests_selenoid_1
-          
 
       - name: Wait for services to be ready
         run: |
@@ -60,11 +50,9 @@ jobs:
 
       - name: Create allure-results directory
         if: always()
-        run: mkdir -p YakSomeTests/target/allure-results && chmod -R 777 YakSomeTests/target/allure-results
-
-      - name: Set write permissions for allure-results directory
-        if: always()
-        run: chmod -R +w $GITHUB_WORKSPACE/target/allure-results
+        run: | 
+          mkdir -p YakSomeTests/target/allure-results && chmod -R 777 YakSomeTests/target/allure-results
+          chmod -R +w $GITHUB_WORKSPACE/target/allure-results
 
       - name: Allure set up
         uses: simple-elf/allure-report-action@master
