@@ -19,15 +19,26 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v3
 
-      - name: Set up Docker
-        uses: actions/setup-docker@v2
-        with:
-          dockerfile: Dockerfile
-
-      - name: Build and run Docker container
+      - name: Build and start Docker containers
         run: |
-          docker build -t maven-selenium .
-          docker run --rm maven-selenium
+          docker-compose -f docker-compose.yml up --build -d
+          docker pull selenoid/vnc_chrome:119.0
+
+      - name: Browse containers
+        run: |
+          docker ps
+          docker logs yaksometests_maven_1
+          docker logs yaksometests_selenoid-ui_1
+          docker logs yaksometests_selenoid_1
+
+      - name: Wait for services to be ready
+        run: |
+          chmod +x wait-for-it.sh
+          ./wait-for-it.sh -t 0 localhost:4444
+
+      - name: Start tests
+        run: |
+          docker-compose run maven mvn test
 
       - name: Get Allure history
         uses: actions/checkout@v2
@@ -39,7 +50,8 @@ jobs:
 
       - name: Create allure-results directory
         if: always()
-        run: mkdir -p target/allure-results
+        run: | 
+          mkdir -p YakSomeTests/target/allure-results && chmod -R 777 YakSomeTests/target/allure-results
 
       - name: Allure set up
         uses: simple-elf/allure-report-action@master
@@ -53,7 +65,8 @@ jobs:
 
       - name: Compile allure Reports
         if: always()
-        run: mvn allure:report
+        run: |
+          docker-compose run maven mvn allure:report
 
       - name: Package Allure reports into zip file
         if: always()
